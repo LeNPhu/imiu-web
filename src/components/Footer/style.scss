@@ -1,0 +1,57 @@
+@use "../../assets/scss/" as *;
+
+.footer-container {
+    padding: 20px 100px;
+    background-color: var(--background-color);
+
+
+    .info-container {
+        margin-bottom: 50px;
+
+        @include flex(row, flex-start, flex-start);
+        gap: 20px;
+
+        .info-column {
+            @include flex(column, null, null);
+
+
+            .info-title {
+                font-size: 1.8rem;
+                font-weight: 600;
+                margin-bottom: 20px;
+            }
+
+            a {
+                color: var(--url-color);
+                font-size: 1.5rem;
+                margin-bottom: 5px;
+
+            }
+
+
+        }
+
+        .last {
+            margin-left: auto;
+            direction: rtl;
+
+            a {
+                font-size: 1.8rem;
+                font-weight: 600;
+                margin-bottom: 20px;
+
+            }
+        }
+
+    }
+
+    .copyright-container {
+        @include flex(row, flex-start, flex-start);
+        gap: 40px;
+
+        a {
+            color: var(--url-color);
+        }
+    }
+
+}

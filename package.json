@@ -20,6 +20,7 @@
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
     "react-redux": "^8.0.5",
+    "react-responsive": "^9.0.2",
     "react-router": "^6.11.1",
     "react-script": "^2.0.5",
     "react-spinner": "^0.2.7",
