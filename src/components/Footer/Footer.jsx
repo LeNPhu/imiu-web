@@ -1,38 +1,104 @@
-import { Dropdown } from "antd";
+import { Divider, Dropdown, Menu } from "antd";
 import "./style.scss";
 import React from "react";
 import { useMediaQuery } from "react-responsive";
+
+import { SocialIcon } from "react-social-icons";
 const Footer = () => {
+  const imiu = [
+    {
+      name: "Chúng tôi",
+      url: "#",
+    },
+    {
+      name: "Blog",
+      url: "#",
+    },
+    {
+      name: "Công thức",
+      url: "#",
+    },
+    {
+      name: "Mã giảm giá",
+      url: "#",
+    },
+    {
+      name: "Đầu bếp",
+      url: "#",
+    },
+    {
+      name: "Việt Nam food",
+      url: "",
+    },
+    {
+      name: "Đầu bếp",
+      url: "#",
+    },
+    {
+      name: "Hình thức giao hàng",
+      url: "#",
+    },
+  ];
+  const company = [
+    {
+      name: "iMiu group",
+      url: "#",
+    },
+    {
+      name: "Liên hệ",
+      url: "#",
+    },
+  ];
+  const collaborator = [
+    {
+      name: "Đối tác",
+      url: "#",
+    },
+    {
+      name: "Liên hệ để hợp tác",
+      url: "#",
+    },
+  ];
+  const contact = [
+    {
+      name: "Câu hỏi",
+      url: "#",
+    },
+    {
+      name: "Liên hệ đối tác",
+      url: "#",
+    },
+  ];
+
   const isTablet = useMediaQuery({ query: "(min-width: 1224px)" });
-  console.log(isTablet);
+  //console.log(isTablet);
   if (isTablet)
     return (
       <footer className="footer-container">
         <div className="info-container">
           <div className="info-column">
             <span className="info-title">iMiu</span>
-            <a>Chúng tôi</a>
-            <a>Blog</a>
-            <a>Công thức</a>
-            <a>Mã giảm giá</a>
-            <a>Đầu bếp</a>
-            <a>Việt Nam food</a>
-            <a>Hình thức giao hàng</a>
+            {imiu.map((link) => {
+              return <a href={link.url}>{link.name}</a>;
+            })}
           </div>
           <div className="info-column">
             <span className="info-title">Công ty chúng tôi</span>
-            <a>iMiu group</a>
-            <a>Liên hệ</a>
+            {company.map((link) => {
+              return <a href={link.url}>{link.name}</a>;
+            })}
           </div>
           <div className="info-column">
             <span className="info-title">Đối tác của chúng tôi</span>
-            <a>Đối tác</a>
-            <a>Liên hệ để hợp tác</a>
+            {collaborator.map((link) => {
+              return <a href={link.url}>{link.name}</a>;
+            })}
           </div>
           <div className="info-column">
             <span className="info-title">Liên hệ</span>
-            <a>Câu hỏi</a>
-            <a>Liên hệ đối tác</a>
+            {contact.map((link) => {
+              return <a href={link.url}>{link.name}</a>;
+            })}
           </div>
           <div className="info-column last">
             <a>Tải ngay ứng dụng của chúng tôi</a>
@@ -44,13 +110,77 @@ const Footer = () => {
           <a>Terms and Conditions</a>
           <a>Privacy</a>
           <a>Accessibility</a>
+          <div className="icon-container">
+            <SocialIcon className="icon" url="https://twitter.com" />
+            <SocialIcon className="icon" url="https://www.facebook.com/" />
+          </div>
         </div>
       </footer>
     );
   else
     return (
-      <footer className="footer-container">
-        <p>nhin cc antd sap r</p>
+      <footer className="footer-container tablet">
+        <Menu className="menu" mode="inline">
+          <Menu.SubMenu title="iMiu">
+            {imiu.map((items) => {
+              return (
+                <Menu.Item>
+                  <a href={items.url}>{items.name}</a>
+                </Menu.Item>
+              );
+            })}
+          </Menu.SubMenu>
+          <Divider className="divider" />
+          <Menu.SubMenu title="Công ty chúng tôi">
+            {company.map((items) => {
+              return (
+                <Menu.Item>
+                  <a href={items.url}>{items.name}</a>
+                </Menu.Item>
+              );
+            })}
+          </Menu.SubMenu>
+          <Divider className="divider" />
+
+          <Menu.SubMenu title="Đối tác chúng tôi">
+            {collaborator.map((items) => {
+              return (
+                <Menu.Item>
+                  <a href={items.url}>{items.name}</a>
+                </Menu.Item>
+              );
+            })}
+          </Menu.SubMenu>
+          <Divider className="divider" />
+
+          <Menu.SubMenu title="Liên lạc">
+            {contact.map((items) => {
+              return (
+                <Menu.Item>
+                  <a href={items.url}>{items.name}</a>
+                </Menu.Item>
+              );
+            })}
+          </Menu.SubMenu>
+          <Divider className="divider" />
+        </Menu>
+        <div className="tablet-download">
+          <a>Tải ngay ứng dụng của chúng tôi</a>
+          <br />
+          <span>Kiểm soát bữa ăn của bạn mọi lúc, mọi nơi</span>
+        </div>
+        <div className="tablet-copyright">
+          <div className="tablet-icon">
+            <SocialIcon className="icon" url="https://twitter.com" />
+            <SocialIcon className="icon" url="https://www.facebook.com/" />
+          </div>
+          <div className="copyright-info">
+            <a>Terms and Conditions</a>
+            <a>Privacy</a>
+            <a>Accessibility</a>
+          </div>
+          <span>© iMiu 2023</span>
+        </div>
       </footer>
     );
 };

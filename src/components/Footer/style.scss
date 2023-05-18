@@ -1,9 +1,43 @@
 @use "../../assets/scss/" as *;
 
+.icon {
+    width: 40px !important;
+    height: 40px !important;
+    margin: 15px !important;
+}
+
 .footer-container {
     padding: 20px 100px;
     background-color: var(--background-color);
 
+    a {
+        color: var(--url-color) !important;
+    }
+
+    .menu {
+        width: 100%;
+    }
+
+    .divider {
+        margin: 0px;
+
+    }
+
+    .tablet-download {
+        margin: 20px;
+    }
+
+    .tablet-copyright {
+        @include flex(column, center, center);
+
+        gap: 10px;
+
+        .copyright-info {
+            @include flex(row, center, center);
+            gap: 10px;
+            ;
+        }
+    }
 
     .info-container {
         margin-bottom: 50px;
@@ -46,12 +80,22 @@
     }
 
     .copyright-container {
-        @include flex(row, flex-start, flex-start);
+        @include flex(row, flex-start, center);
         gap: 40px;
 
         a {
             color: var(--url-color);
         }
+
+        .icon-container {
+            margin-left: auto;
+
+
+        }
     }
 
+}
+
+.tablet {
+    padding: 10px 20px;
 }
