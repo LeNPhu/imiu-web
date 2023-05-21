@@ -1,15 +1,39 @@
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-import Landing from "./pages/Landing/Landing";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { adminRouters, publicRouters } from "./config/Routes";
+import ProtectedRoutes from "./config/ProtectedRoutes";
+import PrivateRoutes from "./config/PrivateRoutes";
+import MainLayout from "./pages/MainLayout/MainLayout";
+import AdminLayout from "./pages/AdminLayout/AdminLayout";
 
-function App() {
+const App = () => {
   return (
     <>
-      <Header />
-      <Landing />
-      <Footer />
+      <BrowserRouter>
+        <Routes>
+          {/* <Route element={<ProtectedRoutes />}> */}
+            <Route path="/" element={<MainLayout />}>
+              {publicRouters.map(({ path, element }, index) => {
+                return (
+                  <Route key={index} path={path} element={element}></Route>
+                );
+              })}
+            </Route>
+          {/* </Route> */}
+          <Route element={<PrivateRoutes />}>
+            <Route path="/" element={<AdminLayout />}>
+              {adminRouters.map(({ path, element }, index) => {
+                return (
+                  <Route key={index} path={path} element={element}></Route>
+                );
+              })}
+            </Route>
+          </Route>
+          {/* <Route path="*" element={<Error />} /> */}
+        </Routes>
+      </BrowserRouter>
+      {/* <ToastContainer /> */}
     </>
   );
-}
+};
 
 export default App;

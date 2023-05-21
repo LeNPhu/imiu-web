@@ -2,7 +2,7 @@ import "./style.scss";
 import React from "react";
 import catBackground from "../../assets/images/cat-background.svg";
 import catBread from "../../assets/images/cat-bread.svg";
-import { Button, ConfigProvider } from "antd";
+import { Button } from "antd";
 const Landing = () => {
   return (
     <div className="landing-container">
@@ -16,19 +16,11 @@ const Landing = () => {
             </span>
             <p>Lên thực đơn cho bữa ăn "Healthy" của bạn ngay bây giờ</p>
             <div className="button">
-              <ConfigProvider
-                theme={{
-                  token: {
-                    colorPrimary: " #0CBF1E",
-                  },
-                  componentSize: {},
-                }}
-              >
                 <Button type="primary" value="large">
                   Lên thực đơn ngay
                 </Button>
                 <Button value="large">Khám phá</Button>
-              </ConfigProvider>
+
             </div>
           </div>
         </div>

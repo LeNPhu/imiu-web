@@ -1,7 +1,6 @@
-import { Button, ConfigProvider } from "antd";
+import { Button } from "antd";
 import "./style.scss";
-import React, { useEffect, useState } from "react";
-import CustomButton from "../CustomButton/CustomButton";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const [position, setPosition] = useState(window.pageYOffset);
@@ -28,16 +27,8 @@ const Header = () => {
       <a className="header-item">Các gói dịch vụ</a>
       <a className="header-item">Hướng dẫn sử dụng</a>
       <div className="header-item last">
-        <ConfigProvider
-          theme={{
-            token: {
-              colorPrimary: " #0CBF1E",
-            },
-          }}
-        >
-          <Button type="primary">Lên thực đơn ngay</Button>
-          <Button>Đăng nhập</Button>
-        </ConfigProvider>
+        <Button type="primary">Lên thực đơn ngay</Button>
+        <Button>Đăng nhập</Button>
       </div>
     </header>
   );
