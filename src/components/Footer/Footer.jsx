@@ -70,7 +70,7 @@ const Footer = () => {
     },
   ];
 
-  const isTablet = useMediaQuery({ query: "(min-width: 1224px)" });
+  const isTablet = useMediaQuery({ query: "(min-width: 1024px)" });
   //console.log(isTablet);
   if (isTablet)
     return (
