@@ -30,7 +30,7 @@ const Header = () => {
       <Link to="" className="header-item" >Hướng dẫn sử dụng</Link>
       <div className="header-item last">
         <Button type="primary" onClick={() => navigate("/register")}>Lên thực đơn ngay</Button>
-        <Button  onClick={() => navigate("/login")}>Đăng nhập</Button>
+        <Button onClick={() => navigate("/login")}>Đăng nhập</Button>
       </div>
     </header>
   );
