@@ -74,8 +74,8 @@ const Login = () => {
             </Form.Item>
           </Form>
           <Divider plain > <span className="grey">hoặc</span></Divider>
-          <Button type="primary" icon={<FcGoogle />} size={size}>
-            Download
+          <Button style={{borderColor: '#f8f8f8'}} type="default" icon={<FcGoogle />} block>
+            Đăng nhập với Google
           </Button>
           <div className="login-here">
             <h5>
