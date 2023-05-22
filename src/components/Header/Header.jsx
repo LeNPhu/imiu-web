@@ -1,8 +1,10 @@
 import { Button } from "antd";
 import "./style.scss";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [position, setPosition] = useState(window.pageYOffset);
   const [visible, setVisible] = useState(true);
   useEffect(() => {
@@ -25,10 +27,10 @@ const Header = () => {
       <img className="header-item" src="./src/assets/images/logo-imiu.svg" />
       <a className="header-item">Trang chủ</a>
       <a className="header-item">Các gói dịch vụ</a>
-      <a className="header-item">Hướng dẫn sử dụng</a>
+      <Link to="" className="header-item" >Hướng dẫn sử dụng</Link>
       <div className="header-item last">
-        <Button type="primary">Lên thực đơn ngay</Button>
-        <Button>Đăng nhập</Button>
+        <Button type="primary" onClick={() => navigate("/register")}>Lên thực đơn ngay</Button>
+        <Button  onClick={() => navigate("/login")}>Đăng nhập</Button>
       </div>
     </header>
   );

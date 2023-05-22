@@ -1,0 +1,39 @@
+@use "../../../assets/scss/" as *;
+
+.register-container {
+  @include flex(column, center, center);
+  .register-wrapper {
+    @include flex(null, space-between, center);
+    gap: 2rem;
+    padding: 8rem 0;
+    .form-container {
+      width: 400px;
+      background-color: #f0f3f5;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+        rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+      form {
+        margin-top: 2rem;
+        :where(.css-dev-only-do-not-override-1wxkyvf).ant-form-item {
+          margin-bottom: 15px !important;
+        }
+      }
+      p {
+        font-size: 12px;
+      }
+      .login-here {
+        @include flex(null, center, center);
+        padding-top: 1rem;
+      }
+    }
+    .logo {
+      // width: 200px;
+      @include flex(null, flex-end, null);
+      img {
+        width: 70%;
+      }
+    }
+  }
+}
