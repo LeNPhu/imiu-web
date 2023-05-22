@@ -19,7 +19,7 @@ const App = () => {
               })}
             </Route>
           {/* </Route> */}
-          <Route element={<PrivateRoutes />}>
+          {/* <Route element={<PrivateRoutes />}> */}
             <Route path="/" element={<AdminLayout />}>
               {adminRouters.map(({ path, element }, index) => {
                 return (
@@ -27,7 +27,7 @@ const App = () => {
                 );
               })}
             </Route>
-          </Route>
+          {/* </Route> */}
           {/* <Route path="*" element={<Error />} /> */}
         </Routes>
       </BrowserRouter>
