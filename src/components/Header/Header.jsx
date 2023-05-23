@@ -25,12 +25,25 @@ const Header = () => {
   return (
     <header className={`header-container ${cls}`}>
       <img className="header-item" src="./src/assets/images/logo-imiu.svg" />
-      <a className="header-item">Trang chủ</a>
-      <a className="header-item">Các gói dịch vụ</a>
-      <Link to="" className="header-item" >Hướng dẫn sử dụng</Link>
+      <Link to="" className="header-item">
+        Trang chủ
+      </Link>
+      <Link to="/pricing" className="header-item">
+        Các gói dịch vụ
+      </Link>
+      <Link to="" className="header-item">
+        Hướng dẫn sử dụng
+      </Link>
       <div className="header-item last">
+<<<<<<< Updated upstream
         <Button type="primary" onClick={() => navigate("/register")}>Lên thực đơn ngay</Button>
         <Button  onClick={() => navigate("/login")}>Đăng nhập</Button>
+=======
+        <Button type="primary" onClick={() => navigate("/register")}>
+          Lên thực đơn ngay
+        </Button>
+        <Button onClick={() => navigate("/login")}>Đăng nhập</Button>
+>>>>>>> Stashed changes
       </div>
     </header>
   );
