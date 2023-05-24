@@ -17,10 +17,10 @@ const Landing = () => {
   const navigate = useNavigate();
 
   const handleClickScroll = () => {
-    const element = document.getElementById('second');
+    const element = document.getElementById("second");
     if (element) {
       // 👇 Will scroll smoothly to the top of the next section
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
   return (
@@ -35,10 +35,16 @@ const Landing = () => {
             </span>
             <p>Lên thực đơn cho bữa ăn "Healthy" của bạn ngay bây giờ</p>
             <div className="button">
-              <Button onClick={() => navigate("/register")} type="primary" value="large">
+              <Button
+                onClick={() => navigate("/register")}
+                type="primary"
+                value="large"
+              >
                 Lên thực đơn ngay
               </Button>
-              <Button onClick={handleClickScroll} value="large">Khám phá</Button>
+              <Button onClick={handleClickScroll} value="large">
+                Khám phá
+              </Button>
             </div>
           </div>
         </div>
@@ -112,9 +118,11 @@ const Landing = () => {
                   Chúng tôi mang đến cho các bạn trải nghiệm ẩm thực Việt Nam
                   phong phú mà chưa website nào có từ trước tới nay
                 </p>
-                <Button type="primary" size="large">
-                  Xem thử thực đơn miễn phí ngay
-                </Button>
+                <div style={{width: "100%"}}>
+                  <Button type="primary" size="large">
+                    Xem thử thực đơn miễn phí ngay
+                  </Button>
+                </div>
               </div>
             </Col>
             <Col span={12}>
@@ -177,7 +185,11 @@ const Landing = () => {
             bây giờ
           </p>
           <img src={landingFood} />
-          <Button onClick={() => navigate("/register")} type="primary" size="large">
+          <Button
+            onClick={() => navigate("/register")}
+            type="primary"
+            size="large"
+          >
             Bắt đầu lên thực đơn ngay
           </Button>
         </div>
