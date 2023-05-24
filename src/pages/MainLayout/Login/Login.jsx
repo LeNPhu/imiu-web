@@ -1,13 +1,8 @@
 import "./style.scss";
-import React from 'react'
+import React from "react";
 
 const Login = () => {
   return (
-<<<<<<< Updated upstream
-    <div>Login</div>
-  )
-}
-=======
     <div className="register-container">
       <div className="register-wrapper">
         <div className="form-container">
@@ -101,6 +96,5 @@ const Login = () => {
     </div>
   );
 };
->>>>>>> Stashed changes
 
-export default Login
+export default Login;

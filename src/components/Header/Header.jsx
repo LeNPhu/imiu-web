@@ -35,15 +35,10 @@ const Header = () => {
         Hướng dẫn sử dụng
       </Link>
       <div className="header-item last">
-<<<<<<< Updated upstream
-        <Button type="primary" onClick={() => navigate("/register")}>Lên thực đơn ngay</Button>
-        <Button  onClick={() => navigate("/login")}>Đăng nhập</Button>
-=======
         <Button type="primary" onClick={() => navigate("/register")}>
           Lên thực đơn ngay
         </Button>
         <Button onClick={() => navigate("/login")}>Đăng nhập</Button>
->>>>>>> Stashed changes
       </div>
     </header>
   );
