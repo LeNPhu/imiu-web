@@ -4,13 +4,15 @@ import ProtectedRoutes from "./config/ProtectedRoutes";
 import PrivateRoutes from "./config/PrivateRoutes";
 import MainLayout from "./pages/MainLayout/MainLayout";
 import AdminLayout from "./pages/AdminLayout/AdminLayout";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          {/* <Route element={<ProtectedRoutes />}> */}
+        <ScrollToTop>
+          <Routes>
+            {/* <Route element={<ProtectedRoutes />}> */}
             <Route path="/" element={<MainLayout />}>
               {publicRouters.map(({ path, element }, index) => {
                 return (
@@ -18,8 +20,8 @@ const App = () => {
                 );
               })}
             </Route>
-          {/* </Route> */}
-          {/* <Route element={<PrivateRoutes />}> */}
+            {/* </Route> */}
+            {/* <Route element={<PrivateRoutes />}> */}
             <Route path="/" element={<AdminLayout />}>
               {adminRouters.map(({ path, element }, index) => {
                 return (
@@ -27,9 +29,10 @@ const App = () => {
                 );
               })}
             </Route>
-          {/* </Route> */}
-          {/* <Route path="*" element={<Error />} /> */}
-        </Routes>
+            {/* </Route> */}
+            {/* <Route path="*" element={<Error />} /> */}
+          </Routes>
+        </ScrollToTop>
       </BrowserRouter>
       {/* <ToastContainer /> */}
     </>

@@ -1,7 +1,12 @@
 import "./style.scss";
-import React from "react";
+import React, { useState } from "react";
+import { Button, Checkbox, Divider, Form, Input, Space } from "antd";
+import { Link } from "react-router-dom";
+import logo from "../../../assets/images/imiu-login.png";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
   return (
     <div className="register-container">
       <div className="register-wrapper">

@@ -24,14 +24,16 @@ const Header = () => {
 
   return (
     <header className={`header-container ${cls}`}>
-      <img className="header-item" src="./src/assets/images/logo-imiu.svg" />
-      <Link to="" className="header-item">
+      <Link to="/">
+        <img className="header-item" src="./src/assets/images/logo-imiu.svg" />
+      </Link>
+      <Link to="/" className="header-item">
         Trang chủ
       </Link>
       <Link to="/pricing" className="header-item">
         Các gói dịch vụ
       </Link>
-      <Link to="" className="header-item">
+      <Link to="/how-to-use" className="header-item">
         Hướng dẫn sử dụng
       </Link>
       <div className="header-item last">
