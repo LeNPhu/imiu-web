@@ -11,7 +11,7 @@ const Login = () => {
     <div className="register-container">
       <div className="register-wrapper">
         <div className="form-container">
-          <h2 style={{textAlign: 'center'}}>Đăng nhập</h2>
+          <h2 style={{ textAlign: "center" }}>Đăng nhập</h2>
           <Form
             name="register-form"
             // onFinish={onFinish}
@@ -73,8 +73,16 @@ const Login = () => {
               </Button>
             </Form.Item>
           </Form>
-          <Divider plain > <span className="grey">hoặc</span></Divider>
-          <Button style={{borderColor: '#f8f8f8'}} type="default" icon={<FcGoogle />} block>
+          <Divider plain>
+            {" "}
+            <span className="grey">hoặc</span>
+          </Divider>
+          <Button
+            style={{ borderColor: "#f8f8f8" }}
+            type="default"
+            icon={<FcGoogle />}
+            block
+          >
             Đăng nhập với Google
           </Button>
           <div className="login-here">
