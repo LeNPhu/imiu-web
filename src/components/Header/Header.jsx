@@ -37,10 +37,14 @@ const Header = () => {
         Hướng dẫn sử dụng
       </Link>
       <div className="header-item last">
-        <Button type="primary" onClick={() => navigate("/register")}>
-          Lên thực đơn ngay
-        </Button>
-        <Button onClick={() => navigate("/login")}>Đăng nhập</Button>
+        <Link to="/register">
+          <Button type="primary">
+            <b>Bắt đầu</b>
+          </Button>
+        </Link>
+        <Link to="/login">
+          <Button>Đăng nhập</Button>
+        </Link>
       </div>
     </header>
   );
