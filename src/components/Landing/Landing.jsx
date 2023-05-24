@@ -11,8 +11,18 @@ import trendIcon from "../../assets/images/trend-icon.svg";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 import { Button, Col, Row } from "antd";
 import "animate.css/animate.min.css";
+import { useNavigate } from "react-router";
 
 const Landing = () => {
+  const navigate = useNavigate();
+
+  const handleClickScroll = () => {
+    const element = document.getElementById('second');
+    if (element) {
+      // 👇 Will scroll smoothly to the top of the next section
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <div className="landing-container">
       <section className="container first">
@@ -25,17 +35,17 @@ const Landing = () => {
             </span>
             <p>Lên thực đơn cho bữa ăn "Healthy" của bạn ngay bây giờ</p>
             <div className="button">
-              <Button type="primary" value="large">
+              <Button onClick={() => navigate("/register")} type="primary" value="large">
                 Lên thực đơn ngay
               </Button>
-              <Button value="large">Khám phá</Button>
+              <Button onClick={handleClickScroll} value="large">Khám phá</Button>
             </div>
           </div>
         </div>
       </section>
 
       <AnimationOnScroll animateIn="animate__fadeInLeftBig" animateOnce="true">
-        <section className="container second">
+        <section id="second" className="container second">
           <Row>
             <Col span={12}>
               <div className="center">
@@ -167,7 +177,7 @@ const Landing = () => {
             bây giờ
           </p>
           <img src={landingFood} />
-          <Button type="primary" size="large">
+          <Button onClick={() => navigate("/register")} type="primary" size="large">
             Bắt đầu lên thực đơn ngay
           </Button>
         </div>
