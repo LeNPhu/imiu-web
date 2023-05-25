@@ -1,5 +1,6 @@
 @use "./variables" as *;
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700;900&display=swap');
 
 *,
 ::after,
@@ -21,6 +22,7 @@ body {
   overflow: auto;
   font-family: 'Montserrat', sans-serif;
   letter-spacing: 0.1px;
+  font-weight: 500;
   //font-size: 22px;
   background-color: var(--primary-bg);
 }
@@ -34,6 +36,7 @@ option {
 }
 
 a {
+  color: black;
   text-decoration: none;
   cursor: pointer;
 }
@@ -59,6 +62,11 @@ button {
 .green {
   color: var(--primary-color);
 }
+
 .grey {
   color: var(--grey-color);
+}
+
+.raleway {
+  font-family: 'Raleway', sans-serif;
 }

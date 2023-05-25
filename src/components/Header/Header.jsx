@@ -2,11 +2,22 @@ import { Button } from "antd";
 import "./style.scss";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import userAvatar from "../../assets/images/user-avatar.svg";
+import imiuLogo from "../../assets/images/logo-imiu.svg";
+import Cookies from "js-cookie";
 
 const Header = () => {
   const navigate = useNavigate();
   const [position, setPosition] = useState(window.pageYOffset);
   const [visible, setVisible] = useState(true);
+  const [account, setAccount] = useState(
+    Cookies.get("account") ? JSON.parse(Cookies.get("account")) : null
+  );
+  useEffect(() => {
+    setAccount(
+      Cookies.get("account") ? JSON.parse(Cookies.get("account")) : null
+    );
+  }, [Cookies.get("account")]);
   useEffect(() => {
     const handleScroll = () => {
       let moving = window.pageYOffset;
@@ -24,13 +35,37 @@ const Header = () => {
 
   return (
     <header className={`header-container ${cls}`}>
-      <img className="header-item" src="./src/assets/images/logo-imiu.svg" />
-      <a className="header-item">Trang chủ</a>
-      <a className="header-item">Các gói dịch vụ</a>
-      <Link to="" className="header-item" >Hướng dẫn sử dụng</Link>
+      <Link to="/">
+        <img className="header-item" src={imiuLogo} />
+      </Link>
+      <Link to="/" className="header-item">
+        Trang chủ
+      </Link>
+      <Link to="/pricing" className="header-item">
+        Các gói dịch vụ
+      </Link>
+      <Link to="/how-to-use" className="header-item">
+        Hướng dẫn sử dụng
+      </Link>
       <div className="header-item last">
-        <Button type="primary" onClick={() => navigate("/register")}>Lên thực đơn ngay</Button>
-        <Button  onClick={() => navigate("/login")}>Đăng nhập</Button>
+
+        {account?.accountType === "premium" ? (
+          <>
+            <img className="user-avatar" src={userAvatar} />
+          </>
+        ) : (
+          <>
+            <Link to="/register">
+              <Button type="primary">
+                <b>Bắt đầu</b>
+              </Button>
+            </Link>
+            <Link to="/login">
+              <Button>Đăng nhập</Button>
+            </Link>
+          </>
+        )}
+
       </div>
     </header>
   );
