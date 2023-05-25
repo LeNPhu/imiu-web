@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import pricingBanner from "../../../assets/images/pricing-banner.svg";
-import pricingNoodle from "../../../assets/images/pricing-noodle.svg";
 import { FcCheckmark } from "react-icons/fc";
 import { FcCancel } from "react-icons/fc";
 import "./style.scss";
-import { Button, Col, Row } from "antd";
+import { Button } from "antd";
+import { useNavigate } from "react-router";
+import Cookies from "js-cookie";
+
 const Pricing = () => {
+  const navigate = useNavigate();
+  const [account, setAccount] = useState(
+    Cookies.get("account") ? JSON.parse(Cookies.get("account")) : null
+  );
+
+  console.log("account type", account);
+  const checkUser = (type) => {
+    console.log(type);
+    if (account?.isLogin && type == "free") {
+      navigate("/menu");
+    } else if (account?.isLogin && type == "premium") {
+      navigate("/question");
+    } else {
+      navigate("/login");
+    }
+  };
   return (
     <div className="pricing-container">
       <img className="banner" src={pricingBanner} />
@@ -27,7 +45,9 @@ const Pricing = () => {
           <p>
             <FcCancel /> Không hướng dẫn cách thực hiện
           </p>
-          <Button block>Đăng kí thực đơn ngay bây giờ</Button>
+          <Button onClick={() => checkUser("free")} block type="primary">
+            <b>Bắt đầu</b>
+          </Button>
         </div>
 
         <div className="card">
@@ -48,10 +68,15 @@ const Pricing = () => {
             <FcCheckmark /> Hướng dẫn chi tiết các chuẩn bị và thực hiện từng
             công thức
           </p>
-
-          <Button block type="primary">
-            Bắt đầu dùng thử miễn phí
-          </Button>
+          {account?.accountType === "premium" ? (
+            <Button disabled>
+              <b>Current Plan</b>
+            </Button>
+          ) : (
+            <Button onClick={() => checkUser("premium")} block type="primary">
+              <b>Bắt đầu</b>
+            </Button>
+          )}
         </div>
       </div>
     </div>
