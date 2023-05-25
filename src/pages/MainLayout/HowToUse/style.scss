@@ -1,0 +1,11 @@
+@use "../../../assets/scss/" as *;
+
+.howto-container {
+    padding: 70px 20%;
+
+
+    .ant-steps-item-description {
+        width: 250px;
+
+    }
+}
