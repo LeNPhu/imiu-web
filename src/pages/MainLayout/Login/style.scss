@@ -1,0 +1,6 @@
+@use "../../../assets/scss/" as *;
+
+.remember-me {
+    @include flex(null, space-between, null);
+    padding-bottom: 1rem;
+}
