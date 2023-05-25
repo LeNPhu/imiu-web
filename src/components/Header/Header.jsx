@@ -48,12 +48,6 @@ const Header = () => {
         Hướng dẫn sử dụng
       </Link>
       <div className="header-item last">
-<<<<<<< Updated upstream
-        <Button type="primary" onClick={() => navigate("/register")}>
-          Lên thực đơn ngay
-        </Button>
-        <Button onClick={() => navigate("/login")}>Đăng nhập</Button>
-=======
         {account?.accountType === "premium" ? (
           <>
             <img className="user-avatar" src={userAvatar} />
@@ -70,7 +64,6 @@ const Header = () => {
             </Link>
           </>
         )}
->>>>>>> Stashed changes
       </div>
     </header>
   );
