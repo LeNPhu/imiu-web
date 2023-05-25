@@ -15,6 +15,7 @@ import MealDetail from "./pages/MealDetail/MealDetail";
 import Pricing from "./pages/MainLayout/Pricing/Pricing";
 import Question from "./pages/MainLayout/Question/Question";
 import { Toaster } from "react-hot-toast";
+import AccountDetail from "./pages/MainLayout/SettingLayout/SettingLayout";
 const App = () => {
   return (
     <>
@@ -32,6 +33,10 @@ const App = () => {
               <Route path="meal-detail/:id" element={<MealDetail />}></Route>
               <Route element={<ProtectedRoutes />}>
                 <Route path="question" element={<Question />}></Route>
+                <Route
+                  path="account-detail"
+                  element={<AccountDetail />}
+                ></Route>
               </Route>
             </Route>
             <Route element={<PrivateRoutes />}>
