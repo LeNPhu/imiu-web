@@ -48,10 +48,11 @@ const Header = () => {
         Hướng dẫn sử dụng
       </Link>
       <div className="header-item last">
-
         {account?.accountType === "premium" ? (
           <>
-            <img className="user-avatar" src={userAvatar} />
+            <Link to="/setting">
+              <img className="user-avatar" src={userAvatar} />
+            </Link>
           </>
         ) : (
           <>
@@ -65,7 +66,6 @@ const Header = () => {
             </Link>
           </>
         )}
-
       </div>
     </header>
   );
