@@ -1,0 +1,90 @@
+@use "../../../../assets/scss/" as *;
+
+.account-detail-container {
+    @include flex(column, null, null);
+    gap: 50px;
+
+    .title {
+        font-size: 4rem;
+        font-weight: 700;
+
+
+    }
+
+    .account-detail-item {
+        @include flex(column, null, flex-start);
+        gap: 30px;
+
+        .item-title {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+    }
+
+    .profile {
+
+
+
+        .ant-form {
+            width: 100%;
+
+            .ant-form-item {
+                border-bottom: solid #AEB9BF 1px;
+
+                .ant-form-item-label {
+                    text-align: start;
+                }
+            }
+
+            .last {
+                border-bottom: none;
+            }
+        }
+    }
+
+    .package {
+        .package-container {
+            background-color: white;
+            border-radius: 28px;
+            padding: 8% 5%;
+            filter: drop-shadow(0px 46px 18px rgba(0, 0, 0, 0.01)) drop-shadow(0px 26px 15px rgba(0, 0, 0, 0.03)) drop-shadow(0px 11px 11px rgba(0, 0, 0, 0.04)) drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.05)) drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.05));
+            @include flex(column, null, null);
+            gap: 20px;
+
+            .package-title {
+                font-size: 2rem;
+                text-decoration: underline;
+                font-weight: 700;
+                text-underline-offset: 8px;
+
+
+            }
+
+            .package-content {
+                @include flex(row, null, null);
+
+                gap: 20px;
+
+                .package-time {
+                    font-size: 2rem;
+                    white-space: nowrap;
+                    font-weight: 700;
+
+                }
+
+                .divider {
+                    height: inherit;
+                    border: 1px solid #AEB9BF;
+
+
+                }
+
+                .bold {
+                    font-weight: 700;
+                }
+
+
+            }
+        }
+    }
+}

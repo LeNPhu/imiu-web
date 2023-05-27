@@ -10,30 +10,32 @@ const HowToUse = () => {
   const items = [
     {
       title: "Đăng ký",
-      description:
-        "đăng ký đăng ký đăng ký đăng ký đăng ký đăng ký đăng ký đăng ký đăng ký ",
+      description: "Đăng kí tài khoản I.Miu để sử dụng các dịch vụ",
     },
     {
       title: "Chọn gói",
-      description:
-        "đăng ký đăng ký đăng ký đăng ký đăng ký đăng ký đăng ký đăng ký đăng ký",
+      description: "Chọn gói dịch vụ phù hợp với nhu cầu và tài chính của bạn",
     },
     {
       title: "Chọn món",
-      description:
-        "đăng ký đăng ký đăng ký đăng ký đăng ký đăng ký đăng ký đăng ký đăng ký",
+      description: "Chọn món ăn bạn muốn từ vô số lựa chọn của I.Miu",
     },
   ];
   return (
     <div className="howto-container">
-      <div className="illustration"></div>
+      <div className="raleway title">
+        Hướng dẫn đăng ký sử dụng <span className="green">I.Miu</span>
+      </div>
+      <div className="content">
+        <div className="illustration"></div>
 
-      <Steps
-        direction="vertical"
-        items={items}
-        current={current}
-        onChange={onChange}
-      ></Steps>
+        <Steps
+          direction="vertical"
+          items={items}
+          current={current}
+          onChange={onChange}
+        ></Steps>
+      </div>
     </div>
   );
 };
