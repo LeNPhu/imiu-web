@@ -30,43 +30,71 @@ const Pricing = () => {
       <div className="content">
         <div className="card">
           <p className="card-title">Free</p>
-          <p className="card-price">$0</p>
+          <p className="card-price">Free</p>
           <p className="card-info">dịch vụ miễn phí</p>
           <p>
-            <FcCheckmark /> Số lượng công thức: 10 món, cập nhật hàng tuần
+            <FcCheckmark /> 10 món.
           </p>
           <p>
             <FcCheckmark /> Giá trị dinh dưỡng chi tiết của nguyên liệu trong
-            thực đơn
+            thực đơn.
           </p>
           <p>
-            <FcCheckmark /> Tùy chỉnh chế độ ăn uống
+            <FcCheckmark /> Cách chế biến món ăn.
           </p>
-          <p>
-            <FcCancel /> Không hướng dẫn cách thực hiện
+          <p className="grey">
+            <FcCancel /> Cá nhân hóa thực đơn theo tình trạng sức khỏe.
+          </p>
+          <p className="grey">
+            <FcCancel /> Cho phép lưu lại các món ăn yêu thích.
           </p>
           <Button onClick={() => checkUser("free")} block type="primary">
             <b>Bắt đầu</b>
           </Button>
         </div>
-
         <div className="card">
-          <p className="card-title">Premium</p>
-          <p className="card-price">$100</p>
+          <p className="card-title">Classic</p>
+          <p className="card-price">69.000 ₫ <span className="duration">/ mỗi tháng</span></p>
           <p className="card-info">cho người dùng trả tiền</p>
-          <p>
-            <FcCheckmark /> Số lượng công thức đến 20 món cập nhật hàng tuần
-          </p>
+          <b className="green">
+            <FcCheckmark /> 50 món mỗi tháng.
+          </b>
           <p>
             <FcCheckmark /> Giá trị dinh dưỡng chi tiết của nguyên liệu trong
-            thực đơn
+            thực đơn.
           </p>
           <p>
-            <FcCheckmark /> Tùy chỉnh chế độ ăn uống
+            <FcCheckmark /> Cách chế biến món ăn.
           </p>
           <p>
-            <FcCheckmark /> Hướng dẫn chi tiết các chuẩn bị và thực hiện từng
-            công thức
+            <FcCheckmark /> Cá nhân hóa thực đơn theo tình trạng sức khỏe.
+          </p>
+          <p>
+            <FcCheckmark /> Cho phép lưu lại các món ăn yêu thích.
+          </p>
+          <Button onClick={() => checkUser("free")} block type="primary">
+            <b>Bắt đầu</b>
+          </Button>
+        </div>
+        <div className="card">
+          <p className="card-title">Premium 🎉</p>
+          <p className="card-price">250.000 ₫ <span className="duration green">/ vĩnh viễn</span></p>
+          <p className="card-info">cho người dùng trả tiền</p>
+          <b className="green">
+            <FcCheckmark /> Không giới hạn món ăn.
+          </b>
+          <p>
+            <FcCheckmark /> Giá trị dinh dưỡng chi tiết của nguyên liệu trong
+            thực đơn.
+          </p>
+          <p>
+            <FcCheckmark /> Cách chế biến món ăn.
+          </p>
+          <p>
+          <FcCheckmark /> Cá nhân hóa thực đơn theo tình trạng sức khỏe.
+          </p>
+          <p>
+            <FcCheckmark /> Cho phép lưu lại các món ăn yêu thích.
           </p>
           {account?.accountType === "premium" ? (
             <Button disabled>
