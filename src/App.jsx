@@ -15,6 +15,13 @@ import MealDetail from "./pages/MealDetail/MealDetail";
 import Pricing from "./pages/MainLayout/Pricing/Pricing";
 import Question from "./pages/MainLayout/Question/Question";
 import { Toaster } from "react-hot-toast";
+import SettingLayout from "./pages/MainLayout/SettingLayout/SettingLayout";
+import AccountDetail from "./pages/MainLayout/SettingLayout/AccountDetail/AccountDetail";
+import Favourite from "./pages/MainLayout/SettingLayout/Favourite/Favourite";
+import PaymentInfo from "./pages/MainLayout/SettingLayout/PaymentInfo/PaymentInfo";
+import History from "./pages/MainLayout/SettingLayout/History/History";
+import Profile from "./pages/MainLayout/SettingLayout/Profile/Profile";
+import Security from "./pages/MainLayout/SettingLayout/Security/Security";
 const App = () => {
   return (
     <>
@@ -32,6 +39,14 @@ const App = () => {
               <Route path="meal-detail/:id" element={<MealDetail />}></Route>
               <Route element={<ProtectedRoutes />}>
                 <Route path="question" element={<Question />}></Route>
+                <Route path="setting" element={<SettingLayout />}>
+                  <Route index element={<AccountDetail />}></Route>
+                  <Route path="favourite" element={<Favourite />}></Route>
+                  <Route path="payment-info" element={<PaymentInfo />}></Route>
+                  <Route path="history" element={<History />}></Route>
+                  <Route path="profile" element={<Profile />}></Route>
+                  <Route path="security" element={<Security />}></Route>
+                </Route>
               </Route>
             </Route>
             <Route element={<PrivateRoutes />}>

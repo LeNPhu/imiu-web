@@ -1,0 +1,47 @@
+@use "../../../../assets/scss/" as *;
+
+.favourite-container {
+    @include flex(column, center, center);
+    gap: 50px;
+
+    .favourite-item {
+        width: 75%;
+        background-color: white;
+
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+
+
+        img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .favourite-content {
+            padding: 20px;
+            @include flex(column, null, flex-start);
+            gap: 20px;
+
+            .hof {
+                background-color: #F0AA4A;
+                font-size: 1rem;
+                padding: 3px;
+                border-radius: 3px;
+                color: white;
+            }
+
+            .bold {
+                font-weight: 700;
+            }
+
+            span {
+                font-size: 2.5rem;
+
+            }
+
+            .divider {
+                height: 30px
+            }
+        }
+    }
+}

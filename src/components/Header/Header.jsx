@@ -5,19 +5,19 @@ import { Link, useNavigate } from "react-router-dom";
 import userAvatar from "../../assets/images/user-avatar.svg";
 import imiuLogo from "../../assets/images/logo-imiu.svg";
 import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const navigate = useNavigate();
+  const user = useSelector((store) => store.user);
+
   const [position, setPosition] = useState(window.pageYOffset);
   const [visible, setVisible] = useState(true);
-  const [account, setAccount] = useState(
-    Cookies.get("account") ? JSON.parse(Cookies.get("account")) : null
-  );
+  const [account, setAccount] = useState();
   useEffect(() => {
-    setAccount(
-      Cookies.get("account") ? JSON.parse(Cookies.get("account")) : null
-    );
-  }, [Cookies.get("account")]);
+    setAccount(user);
+    console.log(account);
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       let moving = window.pageYOffset;
@@ -48,10 +48,11 @@ const Header = () => {
         Hướng dẫn sử dụng
       </Link>
       <div className="header-item last">
-
-        {account?.accountType === "premium" ? (
+        {user?.isLogin ? (
           <>
-            <img className="user-avatar" src={userAvatar} />
+            <Link to="/setting">
+              <img className="user-avatar" src={userAvatar} />
+            </Link>
           </>
         ) : (
           <>
@@ -65,7 +66,6 @@ const Header = () => {
             </Link>
           </>
         )}
-
       </div>
     </header>
   );
