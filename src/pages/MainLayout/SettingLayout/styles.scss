@@ -8,5 +8,27 @@
     .content {
         width: 100%;
         padding: 10rem;
+
+
+        @include flex(column, null, null);
+        gap: 50px;
+
+        .title {
+            font-size: 4rem;
+            font-weight: 700;
+
+
+        }
+
+        .content-item {
+            @include flex(column, null, flex-start);
+            gap: 30px;
+
+            .item-title {
+                font-size: 2rem;
+                font-weight: 700;
+            }
+        }
+
     }
 }

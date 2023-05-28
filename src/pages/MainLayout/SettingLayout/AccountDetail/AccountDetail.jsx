@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import "./style.scss";
-import { Button, Col, DatePicker, Divider, Form, Input, Row } from "antd";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Divider,
+  Form,
+  Input,
+  Row,
+  Select,
+} from "antd";
 import { toast } from "react-hot-toast";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
@@ -9,6 +18,20 @@ import { logout } from "../../../../store/userSlice";
 const AccountDetail = () => {
   const dispatch = useDispatch();
   const dateFormat = "DD/MM/YYYY";
+  const options = [
+    {
+      value: "M",
+      label: "Nam",
+    },
+    {
+      value: "F",
+      label: "Nữ",
+    },
+    {
+      value: "O",
+      label: "Khác",
+    },
+  ];
   const [data, setData] = useState([
     {
       name: ["username"],
@@ -21,6 +44,10 @@ const AccountDetail = () => {
     {
       name: ["date-of-birth"],
       value: dayjs("11/03/2002", dateFormat),
+    },
+    {
+      name: ["gender"],
+      value: "Nam",
     },
     {
       name: ["country"],
@@ -36,9 +63,9 @@ const AccountDetail = () => {
     toast.error("error");
   };
   return (
-    <div className="account-detail-container">
+    <>
       <span className="title raleway">Tổng quan về tài khoản</span>
-      <div className="profile account-detail-item">
+      <div className="profile content-item">
         <p className="item-title">Hồ sơ</p>
         <Form
           labelCol={{ span: 12 }}
@@ -74,21 +101,21 @@ const AccountDetail = () => {
           >
             <Input bordered={false} />
           </Form.Item>
-          <Form.Item
-            label="Ngày sinh (dd/mm/yyyy)"
-            name="date-of-birth"
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng nhập ngày sinh của bạn",
-              },
-            ]}
-          >
+          <Form.Item label="Ngày sinh (dd/mm/yyyy)" name="date-of-birth">
             <DatePicker
               format={dateFormat}
               bordered={false}
               style={{ width: "100%" }}
             />
+          </Form.Item>
+          <Form.Item label="Giới tính" name="gender">
+            <Select
+              style={{
+                width: "100%",
+              }}
+              options={options}
+              bordered={false}
+            ></Select>
           </Form.Item>
           <Form.Item
             label="Quốc gia hoặc khu vực"
@@ -110,7 +137,7 @@ const AccountDetail = () => {
           </Form.Item>
         </Form>
       </div>
-      <div className="package account-detail-item">
+      <div className="package content-item">
         <p className="item-title">Gói của bạn</p>
         <div className="package-container">
           <span className="package-title raleway green ">PREMIUM</span>
@@ -160,7 +187,7 @@ const AccountDetail = () => {
         </div>
         <Button type="primary">Thay đổi gói dịch vụ</Button>
       </div>
-      <div className="logout account-detail-item">
+      <div className="logout content-item">
         <p className="item-title">Đăng xuất</p>
         <p>
           Thao tác này sẽ giúp bạn đăng xuất trên tất cả trình phát trên website
@@ -175,7 +202,7 @@ const AccountDetail = () => {
           Đăng xuất
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 

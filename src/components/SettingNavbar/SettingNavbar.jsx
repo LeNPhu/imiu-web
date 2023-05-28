@@ -16,11 +16,7 @@ const SettingNavbar = () => {
       name: "Tổng quan về tài khoản",
       icon: <BsHouseDoorFill />,
     },
-    {
-      path: "/profile",
-      name: "Chỉnh sửa hồ sơ",
-      icon: <FaPenNib />,
-    },
+
     {
       path: "/security",
       name: "Thay đổi mật khẩu",
