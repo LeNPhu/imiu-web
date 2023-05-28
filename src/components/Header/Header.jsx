@@ -16,7 +16,7 @@ const Header = () => {
   useEffect(() => {
     setAccount(user);
     console.log(account);
-  }, user);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {

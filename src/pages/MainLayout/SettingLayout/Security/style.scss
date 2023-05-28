@@ -1,1 +1,17 @@
-@use "../../../../assets/scss/" as *
+@use "../../../../assets/scss/" as *;
+
+.ant-form {
+    width: 100%;
+
+    .ant-form-item {
+        border-bottom: solid #AEB9BF 1px;
+
+        .ant-form-item-label {
+            text-align: start;
+        }
+    }
+
+    .last {
+        border-bottom: none;
+    }
+}
