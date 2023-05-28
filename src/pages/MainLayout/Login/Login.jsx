@@ -4,7 +4,7 @@ import { Button, Checkbox, Divider, Form, Input, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/images/imiu-login.png";
 import { FcGoogle } from "react-icons/fc";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../../../store/userSlice";
 import { auth, provider } from "../../../utils/firebase";
 import { signInWithPopup } from "firebase/auth";
@@ -12,7 +12,6 @@ import { signInWithPopup } from "firebase/auth";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading } = useSelector((state) => state.user);
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -104,7 +103,7 @@ const Login = () => {
             <span className="grey">hoặc</span>
           </Divider>
           <Button
-            loading={loading}
+            // loading={loading}
             onClick={handleSignInWithGoogle}
             style={{ borderColor: "#f8f8f8" }}
             type="default"
