@@ -1,9 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
-import userAPI from "../config/api/userAPI";
 import toast from "react-hot-toast";
-
-const { loginAPI } = userAPI;
 const userSlice = createSlice({
   name: "user",
   initialState: {

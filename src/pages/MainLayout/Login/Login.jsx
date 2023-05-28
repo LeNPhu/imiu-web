@@ -25,7 +25,6 @@ const Login = () => {
             email: data.user.email,
             token: data.user.accessToken,
             withEmail: true,
-            web: true,
           })
         );
         navigate(-1);
@@ -102,7 +101,6 @@ const Login = () => {
             </Form.Item>
           </Form>
           <Divider plain>
-            {" "}
             <span className="grey">hoặc</span>
           </Divider>
           <Button
