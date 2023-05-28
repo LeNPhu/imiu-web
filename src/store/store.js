@@ -1,9 +1,17 @@
-import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "./userSlice";
+import { configureStore } from '@reduxjs/toolkit'
+// import { setupListeners } from '@reduxjs/toolkit/query'
+import { userApi } from './services/user.js'
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    user: userSlice.reducer,
+    [userApi.reducerPath]: userApi.reducer,
   },
-});
-export default store;
+
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(userApi.middleware),
+})
+
+
+// optional, but required for refetchOnFocus/refetchOnReconnect behaviors
+// see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
+// setupListeners(store.dispatch)

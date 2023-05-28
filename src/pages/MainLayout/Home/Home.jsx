@@ -20,7 +20,6 @@ const Home = () => {
   const handleClickScroll = () => {
     const element = document.getElementById("second");
     if (element) {
-      // 👇 Will scroll smoothly to the top of the next section
       element.scrollIntoView({ behavior: "smooth" });
     }
   };

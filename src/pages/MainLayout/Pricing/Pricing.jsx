@@ -13,7 +13,6 @@ const Pricing = () => {
     Cookies.get("account") ? JSON.parse(Cookies.get("account")) : null
   );
 
-  console.log("account type", account);
   const checkUser = (type) => {
     console.log(type);
     if (account?.isLogin && type == "free") {
