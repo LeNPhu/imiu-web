@@ -10,7 +10,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       token: {
         colorPrimary: "#0CBF1E",
         colorTextPlaceholder: "rgba(28, 28, 28, 0.5)",
-        colorBorder: "#1C1C1C",
       },
       componentSize: {},
     }}
