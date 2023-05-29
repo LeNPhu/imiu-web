@@ -68,6 +68,7 @@ const AccountDetail = () => {
       <div className="profile content-item">
         <p className="item-title">Hồ sơ</p>
         <Form
+          className="form-antd"
           labelCol={{ span: 12 }}
           wrapperCol={{ span: 12 }}
           onFinish={onFinish}
@@ -78,6 +79,7 @@ const AccountDetail = () => {
           }}
         >
           <Form.Item
+            className="form-antd-item"
             label="Tên người dùng"
             name="username"
             rules={[
@@ -90,6 +92,7 @@ const AccountDetail = () => {
             <Input bordered={false} />
           </Form.Item>
           <Form.Item
+            className="form-antd-item"
             label="Email"
             name="email"
             rules={[
@@ -101,14 +104,18 @@ const AccountDetail = () => {
           >
             <Input bordered={false} />
           </Form.Item>
-          <Form.Item label="Ngày sinh (dd/mm/yyyy)" name="date-of-birth">
+          <Form.Item
+            className="form-antd-item"
+            label="Ngày sinh (dd/mm/yyyy)"
+            name="date-of-birth"
+          >
             <DatePicker
               format={dateFormat}
               bordered={false}
               style={{ width: "100%" }}
             />
           </Form.Item>
-          <Form.Item label="Giới tính" name="gender">
+          <Form.Item className="form-antd-item" label="Giới tính" name="gender">
             <Select
               style={{
                 width: "100%",
@@ -118,6 +125,7 @@ const AccountDetail = () => {
             ></Select>
           </Form.Item>
           <Form.Item
+            className="form-antd-item"
             label="Quốc gia hoặc khu vực"
             name="country"
             rules={[
@@ -130,7 +138,7 @@ const AccountDetail = () => {
             <Input bordered={false} />
           </Form.Item>
 
-          <Form.Item className="last" wrapperCol={{}}>
+          <Form.Item className="form-antd-item last" wrapperCol={{}}>
             <Button type="primary" htmlType="submit">
               Chỉnh sửa hồ sơ
             </Button>

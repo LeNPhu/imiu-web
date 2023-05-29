@@ -15,6 +15,7 @@ const Security = () => {
     <>
       <span className="title raleway">Thay đổi mật khẩu</span>
       <Form
+        className="form-antd"
         labelCol={{ span: 12 }}
         wrapperCol={{ span: 12 }}
         onFinish={onFinish}
@@ -24,6 +25,7 @@ const Security = () => {
         }}
       >
         <Form.Item
+          className="form-antd-item"
           label="Mật khẩu hiện tại"
           name="current-password"
           rules={[
@@ -42,6 +44,7 @@ const Security = () => {
           />
         </Form.Item>
         <Form.Item
+          className="form-antd-item"
           label="Mật khẩu mới"
           name="new-password"
           rules={[
@@ -61,6 +64,7 @@ const Security = () => {
         </Form.Item>
 
         <Form.Item
+          className="form-antd-item"
           label="Nhập lại mật khẩu mới"
           name="confirm-password"
           dependencies={["password"]}
@@ -91,7 +95,7 @@ const Security = () => {
           />
         </Form.Item>
 
-        <Form.Item className="last" wrapperCol={{}}>
+        <Form.Item className="form-antd-item last" wrapperCol={{}}>
           <Button type="primary" htmlType="submit">
             Đặt mật khẩu mới
           </Button>

@@ -3,9 +3,11 @@
 .meal {
   display: flex;
   flex-direction: column;
+
   .meal__img {
     height: 300px;
     width: 100%;
+
     img {
       width: 0;
       height: 0;
@@ -14,17 +16,20 @@
       object-fit: cover;
     }
   }
+
   .content {
-    height: 100vh;
+
     width: 100%;
     @include flex(null, center, center);
     padding: 0 10rem;
-    position: relative;
+
+
     .meal__content {
-      position: absolute;
+
       translate: 0 -10%;
       width: 1000px;
       height: 100%;
+
       &__description {
         box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
           rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
@@ -34,15 +39,19 @@
         flex-direction: column;
         gap: 1rem;
         border-radius: 15px;
+
         &__flex {
           display: flex;
           justify-content: space-between;
+
           &__summarize {
             width: 65%;
             font-size: 14px;
           }
+
           &__detail {
             width: 30%;
+
             div {
               display: flex;
               justify-content: space-between;
@@ -50,11 +59,13 @@
             }
           }
         }
+
         &__tags {
           display: flex;
           align-items: center;
           gap: 1rem;
           font-size: 14px;
+
           &__item {
             border: 1px solid black;
             padding: 0.5rem;
@@ -62,9 +73,11 @@
           }
         }
       }
+
       &__detail {
         margin-top: 1.5rem;
         display: flex;
+
         &__recipe {
           width: 66.67%;
           box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
@@ -72,7 +85,33 @@
           padding: 3rem 2rem;
           border-radius: 15px;
           background-color: white;
+
+          &__header {
+            @include flex(row, space-between, center);
+
+            &__portion {
+              @include flex(row, null, center);
+              gap: 1.5rem;
+            }
+
+          }
+
+
+
+
+          &__item {
+            padding: 3rem;
+
+            &__row {
+              padding: 1.5rem;
+            }
+          }
+
+
         }
+
+
+
         &__nutrition {
           width: 33.33%;
           box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
@@ -81,7 +120,50 @@
           border-radius: 15px;
           background-color: white;
           margin-left: 1.5rem;
+          @include flex(column, null, null);
+          gap: 0.5rem;
+
+          &__header {
+            @include flex(column, null, null);
+            gap: 0.5rem;
+          }
+
+          &__content {
+            padding: 2rem;
+          }
         }
+      }
+
+      &__recipe {
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+          rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+        padding: 3rem 2rem;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        border-radius: 15px;
+        margin-top: 1.5rem;
+
+        &__image {
+          width: 100%;
+          aspect-ratio: 4/3;
+          border-radius: 10px;
+        }
+
+        &__content {
+          @include flex(column, null, null);
+          gap: 10px;
+
+          &__title {
+            font-size: 1.8rem;
+            font-weight: 600;
+
+          }
+
+        }
+
+
       }
     }
   }
