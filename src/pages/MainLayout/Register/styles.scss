@@ -61,3 +61,7 @@
     }
   }
 }
+.modal-confirmation {
+  @include flex(column, center, center);
+  gap: 1rem;
+}

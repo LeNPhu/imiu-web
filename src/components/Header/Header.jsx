@@ -15,7 +15,6 @@ const Header = () => {
   const [account, setAccount] = useState();
   useEffect(() => {
     setAccount(user);
-    console.log(account);
   }, []);
 
   useEffect(() => {

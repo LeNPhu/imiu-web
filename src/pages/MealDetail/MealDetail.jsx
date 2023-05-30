@@ -196,9 +196,9 @@ const MealDetail = () => {
                   className="meal__content__detail__recipe__item__row"
                   gutter={[16, 24]}
                 >
-                  {ingredients.map((item) => {
+                  {ingredients.map((item, index) => {
                     return (
-                      <Col span={12}>
+                      <Col key={index} span={12}>
                         <p>
                           {item.name}: {item.quantity}
                         </p>
@@ -213,9 +213,9 @@ const MealDetail = () => {
                   className="meal__content__detail__recipe__item__row"
                   gutter={[16, 24]}
                 >
-                  {spices.map((item) => {
+                  {spices.map((item, index) => {
                     return (
-                      <Col span={12}>
+                      <Col key={index} span={12}>
                         <p>
                           {item.name}: {item.quantity}
                         </p>
@@ -275,8 +275,8 @@ const MealDetail = () => {
                         {item.title}
                       </p>
                       <ul>
-                        {item.steps.map((items) => {
-                          return <li>{items.step}</li>;
+                        {item.steps.map((item, index) => {
+                          return <li key={index}>{item.step}</li>;
                         })}
                       </ul>
                     </Col>
