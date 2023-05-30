@@ -22,6 +22,7 @@ import PaymentInfo from "./pages/MainLayout/SettingLayout/PaymentInfo/PaymentInf
 import History from "./pages/MainLayout/SettingLayout/History/History";
 import Profile from "./pages/MainLayout/SettingLayout/Profile/Profile";
 import Security from "./pages/MainLayout/SettingLayout/Security/Security";
+import Verify from "./pages/MainLayout/Verify/Verify";
 const App = () => {
   return (
     <>
@@ -29,6 +30,7 @@ const App = () => {
         <ScrollToTop>
           <Routes>
             <Route path="/" element={<MainLayout />}>
+              <Route path="verify/:id/:expiration" element={<Verify />} />
               <Route index element={<Home />}></Route>
 
               <Route path="login" element={<Login />}></Route>
