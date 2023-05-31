@@ -10,13 +10,14 @@ import { useEffect } from "react";
 const Verify = () => {
   const { id, expiration } = useParams();
   const [verify, { isSuccess, isError }] = useVerifyMutation();
-
+  // const [searchparams] = useSearchParams();
+  // console.log(searchparams.get("email"));
   const token = id + "." + expiration + ".";
   console.log("token", token);
 
   useEffect(() => {
     if (token) {
-        verify(token);
+      verify(token);
     }
   }, [token, verify]);
 

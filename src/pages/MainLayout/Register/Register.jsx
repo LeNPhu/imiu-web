@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./styles.scss";
 import { Button, Form, Input, Modal } from "antd";
 import logo from "../../../assets/images/imiu-register.svg";
@@ -12,7 +12,6 @@ const Register = () => {
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [register, { isLoading, isSuccess }] = useRegisterMutation();
-  const [onOpen, setOnOpen] = useState(isSuccess);
   const onFinish = (values) => {
     console.log("values", values);
     register(values);
