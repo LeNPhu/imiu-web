@@ -1,10 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { toast } from "react-hot-toast";
 
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API + "accounts",
+    baseUrl: import.meta.env.VITE_API + "auth",
     headers: {
       "Content-Type": "application/json",
     },
@@ -17,16 +16,6 @@ export const authApi = createApi({
         method: "POST",
         body: data,
       }),
-      transformResponse: (response) => {
-        if (response.error) {
-          toast.error(response.error.message);
-          throw response.error;
-        } else {
-          toast.success("Registration successful!");
-          return response.data;
-        }
-      },
-      invalidatesTags: ["Auth"],
     }),
     login: builder.mutation({
       query: (data) => ({
@@ -34,25 +23,28 @@ export const authApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Auth"],
+    }),
+    loginWithGoogle: builder.mutation({
+      query: (data) => ({
+        url: "/google-login",
+        method: "POST",
+        body: data,
+      }),
     }),
     verify: builder.mutation({
       query: (token) => ({
         url: `/verify-email?token=${token}`,
       }),
-      transformResponse: (response) => {
-        if (response.error) {
-          toast.error("error", response.error.message);
-          throw response.error;
-        } else {
-          toast.success("Verify successfully!");
-          return response.data;
-        }
-      },
-      invalidatesTags: ["Auth"],
     }),
-  }),
+    email: builder.mutation({
+      query: (data) => ({
+        url: `/email`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+  })
 });
 
-export const { useRegisterMutation, useLoginMutation, useVerifyMutation } =
+export const { useRegisterMutation, useLoginMutation, useLoginWithGoogleMutation, useVerifyMutation, useEmailMutation } =
   authApi;

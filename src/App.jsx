@@ -29,8 +29,8 @@ const App = () => {
       <BrowserRouter>
         <ScrollToTop>
           <Routes>
+            <Route path="verify/:id/:expiration" element={<Verify />} />
             <Route path="/" element={<MainLayout />}>
-              <Route path="verify/:id/:expiration" element={<Verify />} />
               <Route index element={<Home />}></Route>
 
               <Route path="login" element={<Login />}></Route>

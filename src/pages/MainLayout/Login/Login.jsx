@@ -8,29 +8,64 @@ import { useDispatch } from "react-redux";
 import { login } from "../../../store/userSlice";
 import { auth, provider } from "../../../utils/firebase";
 import { signInWithPopup } from "firebase/auth";
+import {
+  useLoginMutation,
+  useLoginWithGoogleMutation,
+} from "../../../store/services/authApi";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [loginWithGoogle, { data: dataGG, isLoading: isLoadingGG, isSuccess: isSuccessGG, error: errorGG } ] =
+    useLoginWithGoogleMutation();
+  const [login, { data, isLoading, isSuccess, error }] = useLoginMutation();
+console.log("data", dataGG);
+console.log("eror", errorGG);
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  useEffect(() => {
+    if (data && data?.data.isVerify) {
+      //Login thanh cong
+      Cookies.set("accessToken", data?.data.accessToken, { expires: 1 / 48 }); //1 tieng
+      Cookies.set("role", data?.data.role, { expires: 1 / 48 }); //1 tieng
+
+      toast.success(data.data?.message)
+    }
+  },[data])
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error.data?.message)
+
+
+
+      //mo form xac thuc tai khoan
+    }
+  },[error])
 
   const handleSignInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((data) => {
         console.log(data);
-        dispatch(
-          login({
-            email: data.user.email,
-            token: data.user.accessToken,
-            withEmail: true,
-          })
-        );
-        navigate(-1);
+
+        loginWithGoogle({
+          accessToken: data._tokenResponse.oauthIdToken,
+        });
       })
       .catch((error) => {
         console.log("error", error);
       });
+  };
+
+  const onFinish = (values) => {
+    Cookies.set("emailTemp", values.email, { expires: 1 / 150, path: "" });
+    login(values)
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("error", errorInfo);
   };
 
   return (
@@ -40,8 +75,8 @@ const Login = () => {
           <h2 style={{ textAlign: "center" }}>Đăng nhập</h2>
           <Form
             name="register-form"
-            // onFinish={onFinish}
-            // onFinishFailed={onFinishFailed}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <Form.Item
@@ -92,7 +127,7 @@ const Login = () => {
                 type="primary"
                 className="register-button"
                 htmlType="submit"
-                // loading={loading}
+                loading={isLoading}
                 size="large"
               >
                 Đăng nhập
@@ -103,7 +138,7 @@ const Login = () => {
             <span className="grey">hoặc</span>
           </Divider>
           <Button
-            // loading={loading}
+            loading={isLoadingGG}
             onClick={handleSignInWithGoogle}
             style={{ borderColor: "#f8f8f8" }}
             type="default"
