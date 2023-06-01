@@ -7,13 +7,24 @@ import des1 from "../../../assets/images/register-des-1.png";
 import des2 from "../../../assets/images/register-des-2.png";
 import des3 from "../../../assets/images/register-des-3.png";
 import { useRegisterMutation } from "../../../store/services/authApi";
+import { toast } from "react-hot-toast";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
 
 const Register = () => {
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [register, { isLoading, isSuccess }] = useRegisterMutation();
+  const [register, { isLoading, isSuccess, error }] = useRegisterMutation();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error.data.message);
+    }
+  }, [error]);
+
   const onFinish = (values) => {
     console.log("values", values);
+    Cookies.set("emailTemp", values.email, { expires: 1 / 150, path: "" });
     register(values);
   };
   const onFinishFailed = (errorInfo) => {
@@ -138,7 +149,13 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <Modal open={isSuccess} centered="true" okText="Tiếp tục" onOk={() => navigate("/login")} cancelButtonProps={{ style: { display: 'none' } }}>
+      <Modal
+        open={isSuccess}
+        centered="true"
+        okText="Tiếp tục"
+        onOk={() => navigate("/login")}
+        cancelButtonProps={{ style: { display: "none" } }}
+      >
         <div className="modal-confirmation">
           <img src={logo} alt="" loading="lazy" />
           <h2>XÁC NHẬN TÀI KHOẢN</h2>
