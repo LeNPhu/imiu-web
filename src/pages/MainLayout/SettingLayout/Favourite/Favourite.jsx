@@ -28,9 +28,9 @@ const Favourite = () => {
           sẽ được hiện thị ở mục này
         </p>
         <div className="favourite-container">
-          {data.map((item) => {
+          {data.map((item, index) => {
             return (
-              <div className="favourite-item">
+              <div key={index} className="favourite-item">
                 <img src={item.image} />
 
                 <div className="favourite-content">

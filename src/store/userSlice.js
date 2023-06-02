@@ -50,17 +50,15 @@ export const login = createAsyncThunk(
   "user/login",
   async (data, { rejectWithValue }) => {
     try {
-      //   const res = await loginAPI(data);
-      //   console.log("res", res);
-      //   if (res.status === 200) {
-      //     toast.success(res.data.message);
-      //     return res;
-      //   } else {
-      //     toast.error(res.data.message);
-      //     return rejectWithValue(res);
-      //   }
-      toast.success("win!");
-      return data;
+        const res = await loginAPI(data);
+        console.log("res", res);
+        if (res.status === 200) {
+          toast.success(res.data.message);
+          return res;
+        } else {
+          toast.error(res.data.message);
+          return rejectWithValue(res);
+        }
     } catch (err) {
       toast.error("Login failed! Check your info again.");
       return rejectWithValue();
