@@ -23,20 +23,12 @@ const Login = () => {
 
   const [
     loginWithGoogle,
-    {
-      data: dataGG,
-      isLoading: isLoadingGG,
-      error: errorGG,
-    },
+    { data: dataGG, isLoading: isLoadingGG, error: errorGG },
   ] = useLoginWithGoogleMutation();
   const [login, { data, isLoading, error }] = useLoginMutation();
   const [
     email,
-    {
-      data: dataEmail,
-      isLoading: isLoadingEmail,
-      error: errorEmail,
-    },
+    { data: dataEmail, isLoading: isLoadingEmail, error: errorEmail },
   ] = useEmailMutation();
 
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -46,7 +38,7 @@ const Login = () => {
       if (data?.data.isVerify) {
         //Login thanh cong
         toast.success(data.message);
-        dispatch(setAuth(data))
+        dispatch(setAuth(data));
       } else {
         //Login thanh cong nhung chua xac thuc tai khoan
         //mo form xac thuc tai khoan
@@ -65,7 +57,7 @@ const Login = () => {
     if (dataGG) {
       Cookies.set("account", JSON.stringify(dataGG?.data), { expires: 1 / 48 });
       toast.success(dataGG.message);
-      
+      dispatch(setAuth(dataGG));
     }
   }, [dataGG]);
 
@@ -87,7 +79,6 @@ const Login = () => {
       toast.error(errorEmail.data?.message);
     }
   }, [errorEmail]);
-
 
   const handleSignInWithGoogle = () => {
     signInWithPopup(auth, provider)
@@ -118,7 +109,7 @@ const Login = () => {
           <div className="form-container">
             <h2 style={{ textAlign: "center" }}>Đăng nhập</h2>
             <Form
-              name="register-form"
+              name="login-form"
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"
@@ -209,9 +200,7 @@ const Login = () => {
         open={isVerifyAccount}
         centered="true"
         okText="Gửi mail xác thực tài khoản"
-        onOk={() => (
-          email({ email: Cookies.get("emailTemp") })
-        )}
+        onOk={() => email({ email: Cookies.get("emailTemp") })}
         cancelButtonProps={{ style: { display: "none" } }}
         confirmLoading={isLoadingEmail}
       >

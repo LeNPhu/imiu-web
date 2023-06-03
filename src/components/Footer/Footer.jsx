@@ -78,26 +78,42 @@ const Footer = () => {
         <div className="info-container">
           <div className="info-column">
             <span className="info-title">iMiu</span>
-            {imiu.map((link) => {
-              return <a href={link.url}>{link.name}</a>;
+            {imiu.map((link, index) => {
+              return (
+                <a href={link.url} key={index}>
+                  {link.name}
+                </a>
+              );
             })}
           </div>
           <div className="info-column">
             <span className="info-title">Công ty chúng tôi</span>
-            {company.map((link) => {
-              return <a href={link.url}>{link.name}</a>;
+            {company.map((link, index) => {
+              return (
+                <a key={index} href={link.url}>
+                  {link.name}
+                </a>
+              );
             })}
           </div>
           <div className="info-column">
             <span className="info-title">Đối tác của chúng tôi</span>
-            {collaborator.map((link) => {
-              return <a href={link.url}>{link.name}</a>;
+            {collaborator.map((link, index) => {
+              return (
+                <a key={index} href={link.url}>
+                  {link.name}
+                </a>
+              );
             })}
           </div>
           <div className="info-column">
             <span className="info-title">Liên hệ</span>
-            {contact.map((link) => {
-              return <a href={link.url}>{link.name}</a>;
+            {contact.map((link, index) => {
+              return (
+                <a key={index} href={link.url}>
+                  {link.name}
+                </a>
+              );
             })}
           </div>
           <div className="info-column last">
@@ -122,19 +138,19 @@ const Footer = () => {
       <footer className="footer-container tablet">
         <Menu className="menu" mode="inline">
           <Menu.SubMenu title="iMiu">
-            {imiu.map((items) => {
+            {imiu.map((items, index) => {
               return (
-                <Menu.Item>
+                <Menu.Ite key={index}>
                   <a href={items.url}>{items.name}</a>
-                </Menu.Item>
+                </Menu.Ite>
               );
             })}
           </Menu.SubMenu>
           <Divider className="divider" />
           <Menu.SubMenu title="Công ty chúng tôi">
-            {company.map((items) => {
+            {company.map((items, index) => {
               return (
-                <Menu.Item>
+                <Menu.Item key={index}>
                   <a href={items.url}>{items.name}</a>
                 </Menu.Item>
               );
@@ -143,9 +159,9 @@ const Footer = () => {
           <Divider className="divider" />
 
           <Menu.SubMenu title="Đối tác chúng tôi">
-            {collaborator.map((items) => {
+            {collaborator.map((items, index) => {
               return (
-                <Menu.Item>
+                <Menu.Item key={index}>
                   <a href={items.url}>{items.name}</a>
                 </Menu.Item>
               );
@@ -154,10 +170,12 @@ const Footer = () => {
           <Divider className="divider" />
 
           <Menu.SubMenu title="Liên lạc">
-            {contact.map((items) => {
+            {contact.map((items, index) => {
               return (
                 <Menu.Item>
-                  <a href={items.url}>{items.name}</a>
+                  <a key={index} href={items.url}>
+                    {items.name}
+                  </a>
                 </Menu.Item>
               );
             })}
