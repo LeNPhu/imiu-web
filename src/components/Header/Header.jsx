@@ -8,14 +8,10 @@ import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  const user = useSelector((store) => store.user);
+  const { role, isVerified } = useSelector((state) => state.auth);
 
   const [position, setPosition] = useState(window.pageYOffset);
   const [visible, setVisible] = useState(true);
-  const [account, setAccount] = useState();
-  useEffect(() => {
-    setAccount(user);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +43,7 @@ const Header = () => {
         Hướng dẫn sử dụng
       </Link>
       <div className="header-item last">
-        {user?.isLogin ? (
+        {role === "CUSTOMER" && isVerified ? (
           <>
             <Link to="/setting">
               <img className="user-avatar" src={userAvatar} />

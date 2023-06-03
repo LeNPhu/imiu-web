@@ -14,7 +14,7 @@ import { toast } from "react-hot-toast";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logout } from "../../../../store/userSlice";
+import { logout } from "../../../../store/authSlice";
 const AccountDetail = () => {
   const dispatch = useDispatch();
   const dateFormat = "DD/MM/YYYY";
@@ -206,7 +206,7 @@ const AccountDetail = () => {
           </Link>{" "}
           để bảo toàn tài khoản của mình.
         </p>
-        <Button onClick={() => dispatch(logout())} type="primary">
+        <Button type="primary" onClick={() => dispatch(logout())}>
           Đăng xuất
         </Button>
       </div>
