@@ -15,23 +15,25 @@ import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import settingLogo from "../../../assets/images/setting-logo.svg";
+import { setAuth } from "../../../store/authSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const [
     loginWithGoogle,
     {
       data: dataGG,
       isLoading: isLoadingGG,
-      isSuccess: isSuccessGG,
       error: errorGG,
     },
   ] = useLoginWithGoogleMutation();
-  const [login, { data, isLoading, isSuccess, error }] = useLoginMutation();
+  const [login, { data, isLoading, error }] = useLoginMutation();
   const [
     email,
     {
       data: dataEmail,
-      isSuccess: isSuccessEmail,
       isLoading: isLoadingEmail,
       error: errorEmail,
     },
@@ -39,21 +41,19 @@ const Login = () => {
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isVerifyAccount, setIsVerifyAccount] = useState(false);
-
-  console.log(JSON.parse(Cookies.get("account")));
   useEffect(() => {
     if (data) {
-      Cookies.set("account", JSON.stringify(data?.data), { expires: 1 / 48 });
       if (data?.data.isVerify) {
         //Login thanh cong
         toast.success(data.message);
+        dispatch(setAuth(data))
       } else {
         //Login thanh cong nhung chua xac thuc tai khoan
         //mo form xac thuc tai khoan
         setIsVerifyAccount(true);
       }
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   useEffect(() => {
     if (error) {
@@ -61,25 +61,19 @@ const Login = () => {
     }
   }, [error]);
 
-  // useEffect(() => {
-  //   if (dataGG) {
-  //     Cookies.set("account", JSON.stringify(data?.data), { expires: 1 / 48 });
-  //     if (data?.data.isVerify) {
-  //       //Login thanh cong
-  //       toast.success(data.message);
-  //     } else {
-  //       //Login thanh cong nhung chua xac thuc tai khoan
-  //       //mo form xac thuc tai khoan
-  //       setIsVerifyAccount(true);
-  //     }
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (dataGG) {
+      Cookies.set("account", JSON.stringify(dataGG?.data), { expires: 1 / 48 });
+      toast.success(dataGG.message);
+      
+    }
+  }, [dataGG]);
 
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error.data?.message);
-  //   }
-  // }, [error]);
+  useEffect(() => {
+    if (errorGG) {
+      toast.error(errorGG.data?.message);
+    }
+  }, [errorGG]);
 
   useEffect(() => {
     if (dataEmail) {
@@ -216,7 +210,6 @@ const Login = () => {
         centered="true"
         okText="Gửi mail xác thực tài khoản"
         onOk={() => (
-          console.log(Cookies.get("emailTemp")),
           email({ email: Cookies.get("emailTemp") })
         )}
         cancelButtonProps={{ style: { display: "none" } }}
