@@ -6,23 +6,23 @@ import "./style.scss";
 import { Button } from "antd";
 import { useNavigate } from "react-router";
 import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
 
 const Pricing = () => {
   const navigate = useNavigate();
-  const [account, setAccount] = useState(
-    Cookies.get("account") ? JSON.parse(Cookies.get("account")) : null
-  );
+  const { role, subscription } = useSelector((state) => state.auth);
+  // console.log("auth", auth);
 
-  const checkUser = (type) => {
-    console.log(type);
-    if (account?.isLogin && type == "free") {
-      navigate("/menu");
-    } else if (account?.isLogin && type == "premium") {
-      navigate("/question");
-    } else {
-      navigate("/login");
-    }
-  };
+  // const checkUser = (type) => {
+  //   console.log(type);
+  //   if (account?.isLogin && type == "free") {
+  //     navigate("/menu");
+  //   } else if (account?.isLogin && type == "premium") {
+  //     navigate("/question");
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // };
   return (
     <div className="pricing-container">
       <img className="banner" src={pricingBanner} />
@@ -47,13 +47,17 @@ const Pricing = () => {
           <p className="grey">
             <FcCancel /> Cho phép lưu lại các món ăn yêu thích.
           </p>
-          <Button onClick={() => checkUser("free")} block type="primary">
-            <b>Bắt đầu</b>
-          </Button>
+          <div className="button">
+            <Button onClick={() => checkUser("free")} block type="primary">
+              <b>Bắt đầu</b>
+            </Button>
+          </div>
         </div>
         <div className="card">
           <p className="card-title">Classic</p>
-          <p className="card-price">69.000 ₫ <span className="duration">/ mỗi tháng</span></p>
+          <p className="card-price">
+            69.000 ₫ <span className="duration">/ mỗi tháng</span>
+          </p>
           <p className="card-info">cho người dùng trả tiền</p>
           <b className="green">
             <FcCheckmark /> 50 món mỗi tháng.
@@ -65,19 +69,23 @@ const Pricing = () => {
           <p>
             <FcCheckmark /> Cách chế biến món ăn.
           </p>
-          <p>
+          <b className="green">
             <FcCheckmark /> Cá nhân hóa thực đơn theo tình trạng sức khỏe.
-          </p>
-          <p>
+          </b>
+          <b className="green">
             <FcCheckmark /> Cho phép lưu lại các món ăn yêu thích.
-          </p>
-          <Button onClick={() => checkUser("free")} block type="primary">
-            <b>Bắt đầu</b>
-          </Button>
+          </b>
+          <div className="button">
+            <Button onClick={() => checkUser("free")} block type="primary">
+              <b>Bắt đầu</b>
+            </Button>
+          </div>
         </div>
         <div className="card">
           <p className="card-title">Premium 🎉</p>
-          <p className="card-price">250.000 ₫ <span className="duration green">/ vĩnh viễn</span></p>
+          <p className="card-price">
+            250.000 ₫ <span className="duration green">/ vĩnh viễn</span>
+          </p>
           <p className="card-info">cho người dùng trả tiền</p>
           <b className="green">
             <FcCheckmark /> Không giới hạn món ăn.
@@ -89,21 +97,23 @@ const Pricing = () => {
           <p>
             <FcCheckmark /> Cách chế biến món ăn.
           </p>
-          <p>
-          <FcCheckmark /> Cá nhân hóa thực đơn theo tình trạng sức khỏe.
-          </p>
-          <p>
+          <b className="green">
+            <FcCheckmark /> Cá nhân hóa thực đơn theo tình trạng sức khỏe.
+          </b>
+          <b className="green">
             <FcCheckmark /> Cho phép lưu lại các món ăn yêu thích.
-          </p>
-          {account?.accountType === "premium" ? (
-            <Button disabled>
-              <b>Current Plan</b>
-            </Button>
-          ) : (
+          </b>
+          <div className="button">
+            {subscription === "premium" ? (
+              <Button disabled>
+                <b>Current Plan</b>
+              </Button>
+            ) : (
             <Button onClick={() => checkUser("premium")} block type="primary">
               <b>Bắt đầu</b>
             </Button>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>

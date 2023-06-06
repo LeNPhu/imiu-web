@@ -2,20 +2,25 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 import { toast } from "react-hot-toast";
 
-const account = Cookies.get('account') ? JSON.parse(Cookies.get('account')) : null;
+const account = Cookies.get("account")
+  ? JSON.parse(Cookies.get("account"))
+  : null;
 console.log("account", account);
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    accessToken: account?.accessToken,
-    role: account?.role,
-    subscription: account?.subcription,
     isVerified: account?.isVerify,
+    role: account?.role,
+    accessToken: account?.accessToken,
+    accountId: account?.id,
+    name: account?.name,
+    subscription: account?.subcription,
+    hasPassword: account?.hasPassword,
   },
   reducers: {
     logout: (state) => {
       Cookies.remove("account");
-      Cookies.remove("emailTemp")
+      Cookies.remove("emailTemp");
       state.accessToken = null;
       state.role = null;
       state.subscription = null;
@@ -24,15 +29,22 @@ const authSlice = createSlice({
     },
     setAuth: (state, action) => {
       console.log("action", action);
-      Cookies.set("account", JSON.stringify(action.payload.data), { expires: 1 / 48 });
+      Cookies.set("account", JSON.stringify(action.payload.data), {
+        expires: 1 / 48,
+      });
 
-      state.accessToken = action.payload.data.accessToken
-      state.role = action.payload.data.role
-      state.subscription = action.payload.data.subcription
-      state.isVerified = action.payload.data.isVerify
-    }
+      state.isVerified = action.payload.data.isVerify;
+      state.role = action.payload.data.role;
+      state.accessToken = action.payload.data.accessToken;
+      state.accountId = action.payload.data.accountId;
+      state.name =
+        action.payload.data.name != ""
+          ? action.payload.data.name
+          : action.payload.data.email;
+      state.subscription = action.payload.data.subcription;
+      state.hasPassword = action.payload.data.hasPassword;
+    },
   },
-  
 });
 
 export const { setAuth, logout } = authSlice.actions;
