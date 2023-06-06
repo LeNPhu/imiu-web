@@ -23,20 +23,12 @@ const Login = () => {
 
   const [
     loginWithGoogle,
-    {
-      data: dataGG,
-      isLoading: isLoadingGG,
-      error: errorGG,
-    },
+    { data: dataGG, isLoading: isLoadingGG, error: errorGG },
   ] = useLoginWithGoogleMutation();
   const [login, { data, isLoading, error }] = useLoginMutation();
   const [
     email,
-    {
-      data: dataEmail,
-      isLoading: isLoadingEmail,
-      error: errorEmail,
-    },
+    { data: dataEmail, isLoading: isLoadingEmail, error: errorEmail },
   ] = useEmailMutation();
 
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -46,7 +38,7 @@ const Login = () => {
       if (data?.data.isVerify) {
         //Login thanh cong
         toast.success(data.message);
-        dispatch(setAuth(data))
+        dispatch(setAuth(data));
       } else {
         //Login thanh cong nhung chua xac thuc tai khoan
         //mo form xac thuc tai khoan
@@ -63,11 +55,10 @@ const Login = () => {
 
   useEffect(() => {
     if (dataGG) {
-      Cookies.set("account", JSON.stringify(dataGG?.data), { expires: 1 / 48 });
       toast.success(dataGG.message);
-      
+      dispatch(setAuth(dataGG));
     }
-  }, [dataGG]);
+  }, [dataGG, dispatch]);
 
   useEffect(() => {
     if (errorGG) {
@@ -88,14 +79,13 @@ const Login = () => {
     }
   }, [errorEmail]);
 
-
   const handleSignInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((data) => {
         console.log(data);
 
         loginWithGoogle({
-          accessToken: data._tokenResponse.oauthIdToken,
+          accessToken: data._tokenResponse.oauthAccessToken,
         });
       })
       .catch((error) => {
@@ -209,9 +199,7 @@ const Login = () => {
         open={isVerifyAccount}
         centered="true"
         okText="Gửi mail xác thực tài khoản"
-        onOk={() => (
-          email({ email: Cookies.get("emailTemp") })
-        )}
+        onOk={() => email({ email: Cookies.get("emailTemp") })}
         cancelButtonProps={{ style: { display: "none" } }}
         confirmLoading={isLoadingEmail}
       >

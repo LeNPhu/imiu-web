@@ -24,6 +24,7 @@ import VerifiedRoutes from "./routes/VerifiedRoutes";
 import AdminRoutes from "./routes/AdminRoutes";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import { Toaster } from "react-hot-toast";
+import Payment from "./pages/MainLayout/Payment/Payment";
 const App = () => {
   return (
     <>
@@ -45,6 +46,7 @@ const App = () => {
 
               <Route element={<VerifiedRoutes />}>
                 {/* Verified users only */}
+                <Route path="payment" element={<Payment />} />
                 <Route path="question" element={<Question />} />
                 <Route path="setting" element={<SettingLayout />}>
                   <Route index element={<AccountDetail />} />
