@@ -5,15 +5,14 @@ import { toast } from "react-hot-toast";
 const account = Cookies.get("account")
   ? JSON.parse(Cookies.get("account"))
   : null;
-console.log("account", account);
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     isVerified: account?.isVerify,
     role: account?.role,
     accessToken: account?.accessToken,
-    accountId: account?.id,
-    name: account?.name,
+    accountId: account?.accountId,
+    email: account?.email,
     subscription: account?.subcription,
     hasPassword: account?.hasPassword,
   },
@@ -21,10 +20,13 @@ const authSlice = createSlice({
     logout: (state) => {
       Cookies.remove("account");
       Cookies.remove("emailTemp");
-      state.accessToken = null;
-      state.role = null;
-      state.subscription = null;
       state.isVerified = false;
+      state.role = null;
+      state.accessToken = null;
+      state.accountId = null;
+      state.email = null;
+      state.subscription = null;
+      state.hasPassword = null;
       toast.success("Đăng xuất thành công");
     },
     setAuth: (state, action) => {
@@ -37,10 +39,7 @@ const authSlice = createSlice({
       state.role = action.payload.data.role;
       state.accessToken = action.payload.data.accessToken;
       state.accountId = action.payload.data.accountId;
-      state.name =
-        action.payload.data.name != ""
-          ? action.payload.data.name
-          : action.payload.data.email;
+      state.email = action.payload.data.email;
       state.subscription = action.payload.data.subcription;
       state.hasPassword = action.payload.data.hasPassword;
     },

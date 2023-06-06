@@ -26,6 +26,7 @@ import ProtectedRoutes from "./routes/ProtectedRoutes";
 import { Toaster } from "react-hot-toast";
 import Payment from "./pages/MainLayout/Payment/Payment";
 const App = () => {
+
   return (
     <>
       <BrowserRouter>

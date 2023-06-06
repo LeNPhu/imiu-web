@@ -13,8 +13,11 @@ import { Button, Col, Row } from "antd";
 import "animate.css/animate.min.css";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const auth = useSelector((state) => state.auth);
+  console.log("auth", auth);
   const navigate = useNavigate();
 
   const handleClickScroll = () => {
