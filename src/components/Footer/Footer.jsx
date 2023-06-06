@@ -80,7 +80,7 @@ const Footer = () => {
             <span className="info-title">iMiu</span>
             {imiu.map((link, index) => {
               return (
-                <a href={link.url} key={index}>
+                <a href={link.url} key={index + link.name}>
                   {link.name}
                 </a>
               );
@@ -90,7 +90,7 @@ const Footer = () => {
             <span className="info-title">Công ty chúng tôi</span>
             {company.map((link, index) => {
               return (
-                <a key={index} href={link.url}>
+                <a key={index + link.name} href={link.url}>
                   {link.name}
                 </a>
               );
@@ -100,7 +100,7 @@ const Footer = () => {
             <span className="info-title">Đối tác của chúng tôi</span>
             {collaborator.map((link, index) => {
               return (
-                <a key={index} href={link.url}>
+                <a key={index + link.name} href={link.url}>
                   {link.name}
                 </a>
               );
@@ -110,7 +110,7 @@ const Footer = () => {
             <span className="info-title">Liên hệ</span>
             {contact.map((link, index) => {
               return (
-                <a key={index} href={link.url}>
+                <a key={index + link.name} href={link.url}>
                   {link.name}
                 </a>
               );
@@ -137,20 +137,20 @@ const Footer = () => {
     return (
       <footer className="footer-container tablet">
         <Menu className="menu" mode="inline">
-          <Menu.SubMenu title="iMiu">
+          <Menu.SubMenu title="iMiu" key={1}>
             {imiu.map((items, index) => {
               return (
-                <Menu.Ite key={index}>
+                <Menu.Item key={index + items.name}>
                   <a href={items.url}>{items.name}</a>
-                </Menu.Ite>
+                </Menu.Item>
               );
             })}
           </Menu.SubMenu>
           <Divider className="divider" />
-          <Menu.SubMenu title="Công ty chúng tôi">
+          <Menu.SubMenu title="Công ty chúng tôi" key={2}>
             {company.map((items, index) => {
               return (
-                <Menu.Item key={index}>
+                <Menu.Item key={index + items.name}>
                   <a href={items.url}>{items.name}</a>
                 </Menu.Item>
               );
@@ -158,10 +158,10 @@ const Footer = () => {
           </Menu.SubMenu>
           <Divider className="divider" />
 
-          <Menu.SubMenu title="Đối tác chúng tôi">
+          <Menu.SubMenu title="Đối tác chúng tôi" key={3}>
             {collaborator.map((items, index) => {
               return (
-                <Menu.Item key={index}>
+                <Menu.Item key={index + items.name}>
                   <a href={items.url}>{items.name}</a>
                 </Menu.Item>
               );
@@ -169,13 +169,11 @@ const Footer = () => {
           </Menu.SubMenu>
           <Divider className="divider" />
 
-          <Menu.SubMenu title="Liên lạc">
+          <Menu.SubMenu title="Liên lạc" key={4}>
             {contact.map((items, index) => {
               return (
-                <Menu.Item>
-                  <a key={index} href={items.url}>
-                    {items.name}
-                  </a>
+                <Menu.Item key={index + items.name}>
+                  <a href={items.url}>{items.name}</a>
                 </Menu.Item>
               );
             })}
