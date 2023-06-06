@@ -108,7 +108,7 @@ const Login = () => {
           <div className="form-container">
             <h2 style={{ textAlign: "center" }}>Đăng nhập</h2>
             <Form
-              name="register-form"
+              name="login-form"
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"
