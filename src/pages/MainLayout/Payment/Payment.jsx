@@ -5,29 +5,44 @@ import { useEffect } from "react";
 import { FcCheckmark } from "react-icons/fc";
 import { FcCancel } from "react-icons/fc";
 import { IoRefresh } from "react-icons/io5";
-import { useGetQrCodeQuery } from "../../../store/services/paymentApi";
+import {
+  useGetQrCodeQuery,
+  usePaymentMutation,
+} from "../../../store/services/paymentApi";
 import Loading from "../../../components/Loading/Loading";
 import { useSelector } from "react-redux";
 import { Button, Space } from "antd";
+import { toast } from "react-hot-toast";
 
 const Payment = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { accountId } = useSelector((state) => state.auth);
-  console.log("accountId", accountId);
-  const { data, error, isLoading, refetch } = useGetQrCodeQuery({
+  const { data, isLoading, refetch } = useGetQrCodeQuery({
     accountId: accountId,
     subscriptionId: location.state?.subId,
   });
+  const [payment, { isSuccess, error, isLoading: paymentLoading }] =
+    usePaymentMutation();
   const { email } = useSelector((state) => state.auth);
-  console.log("location", location);
-  console.log("data", data);
   useEffect(() => {
     if (location.state?.from === "pricing") {
     } else {
       navigate(-1);
     }
   }, [location, navigate]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/question", { state: { from: "payment" } });
+    }
+  }, [isSuccess, navigate]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error?.data.message);
+    }
+  }, [error]);
 
   if (isLoading) {
     return <Loading />;
@@ -50,30 +65,66 @@ const Payment = () => {
             </div>
           </div>
           <div className="card">
-            <p className="card-title">Premium 🎉</p>
+            <p className="card-title">
+              {location.state?.item.name == "Premium"
+                ? "Premium 🎉"
+                : location.state?.item.name}
+            </p>
             <p className="card-price">
-              250.000 ₫ <span className="duration green">/ vĩnh viễn</span>
+              {location.state?.item.value == 0
+                ? "Free"
+                : `${new Intl.NumberFormat("en-US")
+                    .format(location.state?.item.value)
+                    .replace(",", ".")} ₫`}
+              <span
+                className={`duration ${
+                  location.state?.item.duration === "vĩnh viễn" &&
+                  location.state?.item.value != 0
+                    ? "green"
+                    : ""
+                }`}
+              >
+                {location.state?.item.value != 0
+                  ? ` / ${location.state?.item.duration}`
+                  : ""}
+              </span>
             </p>
-            <p className="card-info">cho người dùng trả tiền</p>
-            <b className="green">
-              <FcCheckmark /> Không giới hạn món ăn.
-            </b>
-            <p>
-              <FcCheckmark /> Giá trị dinh dưỡng chi tiết của nguyên liệu trong
-              thực đơn.
+            <p className="card-info">
+              {location.state?.item.value == 0
+                ? "dịch vụ miễn phí"
+                : "cho người dùng trả phí"}
             </p>
-            <p>
-              <FcCheckmark /> Cách chế biến món ăn.
-            </p>
-            <b className="green">
-              <FcCheckmark /> Cá nhân hóa thực đơn theo tình trạng sức khỏe.
-            </b>
-            <b className="green">
-              <FcCheckmark /> Cho phép lưu lại các món ăn yêu thích.
-            </b>
+            {location.state?.item.subscriptionDetails?.map((item) => {
+              return (
+                <>
+                  {item.status == true ? (
+                    <p className="">
+                      <FcCheckmark /> {item.detail}
+                    </p>
+                  ) : (
+                    <p className="grey">
+                      <FcCancel /> {item.detail}
+                    </p>
+                  )}
+                </>
+              );
+            })}
+          </div>
+        </div>
+        <div className="payment__detail-qr">
+          <div className="img-container">
+            <img src={data?.data.qrCode} alt="" />
           </div>
           <div className="space">
             <Button
+              loading={paymentLoading}
+              onClick={() =>
+                payment({
+                  accountId: accountId,
+                  subscriptionId: location.state?.subId,
+                  transactionCode: data?.data.transactionCode,
+                })
+              }
               style={{
                 width: "80%",
               }}
@@ -90,9 +141,6 @@ const Payment = () => {
               <IoRefresh />
             </Button>
           </div>
-        </div>
-        <div className="payment__detail-qr">
-          <img src={data?.data.qrCode} alt="" />
         </div>
       </div>
     </div>

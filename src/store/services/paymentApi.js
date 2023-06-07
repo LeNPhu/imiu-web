@@ -24,7 +24,14 @@ export const paymentApi = createApi({
         body: data,
       }),
     }),
+    payment: builder.mutation({
+      query: (data) => ({
+        url: "/plans",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetQrCodeQuery } = paymentApi;
+export const { useGetQrCodeQuery, usePaymentMutation } = paymentApi;

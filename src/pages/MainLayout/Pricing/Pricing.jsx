@@ -12,13 +12,11 @@ import Loading from "../../../components/Loading/Loading";
 const Pricing = () => {
   const navigate = useNavigate();
   const { isVerified, subscription } = useSelector((state) => state.auth);
-  const { data, error, isLoading } = useSubscriptionsQuery();
-  console.log("sub", subscription);
-  console.log("data", data);
+  const { data, isLoading } = useSubscriptionsQuery();
 
-  const checkUser = (type, subId) => {
-    console.log(type);
-    var state = { state: { from: 'pricing',subId: subId }}
+  const checkUser = (type, subId, item) => {
+    console.log("item", item);
+    var state = { state: { from: 'pricing', subId: subId, item: item } };
     if (isVerified && type == "Free") {
       navigate("/menu", state);
     } else if (isVerified) {
@@ -80,7 +78,7 @@ const Pricing = () => {
               })}
 
               <div className="button">
-                <Button disabled={item.name == subscription} onClick={() => checkUser(subscription, item.id)} block type="primary">
+                <Button disabled={item.name == subscription} onClick={() => checkUser(item.name, item.id, item)} block type="primary">
                   <b>Bắt đầu</b>
                 </Button>
               </div>
