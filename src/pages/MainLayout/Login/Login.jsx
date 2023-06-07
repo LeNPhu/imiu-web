@@ -55,11 +55,10 @@ const Login = () => {
 
   useEffect(() => {
     if (dataGG) {
-      Cookies.set("account", JSON.stringify(dataGG?.data), { expires: 1 / 48 });
       toast.success(dataGG.message);
       dispatch(setAuth(dataGG));
     }
-  }, [dataGG]);
+  }, [dataGG, dispatch]);
 
   useEffect(() => {
     if (errorGG) {
@@ -86,7 +85,7 @@ const Login = () => {
         console.log(data);
 
         loginWithGoogle({
-          accessToken: data._tokenResponse.oauthIdToken,
+          accessToken: data._tokenResponse.oauthAccessToken,
         });
       })
       .catch((error) => {

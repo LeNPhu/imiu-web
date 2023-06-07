@@ -3,7 +3,7 @@ import questionImg from "../../../assets/images/imiu-question.svg";
 import { Button, InputNumber, Popconfirm, message } from "antd";
 import "./styles.scss";
 import { useGetQuestionQuery } from "../../../store/services/questionApi";
-import { useCreateAnswerMutation } from "../../../store/services/customerAnswer";
+import { useCreateAnswerMutation } from "../../../store/services/customerAnswerApi";
 
 const Question = () => {
   const questions = useGetQuestionQuery()?.data?.data;

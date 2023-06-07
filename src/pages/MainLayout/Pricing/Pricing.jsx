@@ -1,110 +1,90 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import pricingBanner from "../../../assets/images/pricing-banner.svg";
 import { FcCheckmark } from "react-icons/fc";
 import { FcCancel } from "react-icons/fc";
 import "./style.scss";
 import { Button } from "antd";
 import { useNavigate } from "react-router";
-import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
+import { useSubscriptionsQuery } from "../../../store/services/subscriptionApi";
+import Loading from "../../../components/Loading/Loading";
 
 const Pricing = () => {
   const navigate = useNavigate();
-  const [account, setAccount] = useState(
-    Cookies.get("account") ? JSON.parse(Cookies.get("account")) : null
-  );
+  const { isVerified, subscription } = useSelector((state) => state.auth);
+  const { data, isLoading } = useSubscriptionsQuery();
 
-  const checkUser = (type) => {
-    console.log(type);
-    if (account?.isLogin && type == "free") {
-      navigate("/menu");
-    } else if (account?.isLogin && type == "premium") {
-      navigate("/question");
+  const checkUser = (type, subId, item) => {
+    console.log("item", item);
+    var state = { state: { from: 'pricing', subId: subId, item: item } };
+    if (isVerified && type == "Free") {
+      navigate("/menu", state);
+    } else if (isVerified) {
+      navigate("/payment", state);
     } else {
       navigate("/login");
     }
   };
+
+  if (isLoading) {
+    return <Loading/>
+  }
   return (
     <div className="pricing-container">
       <img className="banner" src={pricingBanner} />
       <div className="content">
-        <div className="card">
-          <p className="card-title">Free</p>
-          <p className="card-price">Free</p>
-          <p className="card-info">dịch vụ miễn phí</p>
-          <p>
-            <FcCheckmark /> 10 món.
-          </p>
-          <p>
-            <FcCheckmark /> Giá trị dinh dưỡng chi tiết của nguyên liệu trong
-            thực đơn.
-          </p>
-          <p>
-            <FcCheckmark /> Cách chế biến món ăn.
-          </p>
-          <p className="grey">
-            <FcCancel /> Cá nhân hóa thực đơn theo tình trạng sức khỏe.
-          </p>
-          <p className="grey">
-            <FcCancel /> Cho phép lưu lại các món ăn yêu thích.
-          </p>
-          <Button onClick={() => checkUser("free")} block type="primary">
-            <b>Bắt đầu</b>
-          </Button>
-        </div>
-        <div className="card">
-          <p className="card-title">Classic</p>
-          <p className="card-price">69.000 ₫ <span className="duration">/ mỗi tháng</span></p>
-          <p className="card-info">cho người dùng trả tiền</p>
-          <b className="green">
-            <FcCheckmark /> 50 món mỗi tháng.
-          </b>
-          <p>
-            <FcCheckmark /> Giá trị dinh dưỡng chi tiết của nguyên liệu trong
-            thực đơn.
-          </p>
-          <p>
-            <FcCheckmark /> Cách chế biến món ăn.
-          </p>
-          <p>
-            <FcCheckmark /> Cá nhân hóa thực đơn theo tình trạng sức khỏe.
-          </p>
-          <p>
-            <FcCheckmark /> Cho phép lưu lại các món ăn yêu thích.
-          </p>
-          <Button onClick={() => checkUser("free")} block type="primary">
-            <b>Bắt đầu</b>
-          </Button>
-        </div>
-        <div className="card">
-          <p className="card-title">Premium 🎉</p>
-          <p className="card-price">250.000 ₫ <span className="duration green">/ vĩnh viễn</span></p>
-          <p className="card-info">cho người dùng trả tiền</p>
-          <b className="green">
-            <FcCheckmark /> Không giới hạn món ăn.
-          </b>
-          <p>
-            <FcCheckmark /> Giá trị dinh dưỡng chi tiết của nguyên liệu trong
-            thực đơn.
-          </p>
-          <p>
-            <FcCheckmark /> Cách chế biến món ăn.
-          </p>
-          <p>
-          <FcCheckmark /> Cá nhân hóa thực đơn theo tình trạng sức khỏe.
-          </p>
-          <p>
-            <FcCheckmark /> Cho phép lưu lại các món ăn yêu thích.
-          </p>
-          {account?.accountType === "premium" ? (
-            <Button disabled>
-              <b>Current Plan</b>
-            </Button>
-          ) : (
-            <Button onClick={() => checkUser("premium")} block type="primary">
-              <b>Bắt đầu</b>
-            </Button>
-          )}
-        </div>
+        {data?.data.map((item, index) => {
+          return (
+            <div key={index} className="card">
+              <p className="card-title">
+                {item.name == "Premium" ? "Premium 🎉" : item.name}
+              </p>
+              <p className="card-price">
+                {item.value == 0
+                  ? "Free"
+                  : `${new Intl.NumberFormat("en-US")
+                      .format(item.value)
+                      .replace(",", ".")} ₫`}
+                <span
+                  className={`duration ${
+                    item.duration === "vĩnh viễn" && item.value != 0
+                      ? "green"
+                      : ""
+                  }`}
+                >
+                  {item.value != 0 ? ` / ${item.duration}` : ""}
+                </span>
+              </p>
+              <p className="card-info">
+                {item.value == 0
+                  ? "dịch vụ miễn phí"
+                  : "cho người dùng trả phí"}
+              </p>
+              {item.subscriptionDetails?.map((item) => {
+                return (
+                  <>
+                    {item.status == true ? (
+                      <p className="">
+                        <FcCheckmark /> {item.detail}
+                      </p>
+                    ) : (
+                      <p className="grey">
+                        <FcCancel /> {item.detail}
+                      </p>
+                    )}
+                    
+                  </>
+                );
+              })}
+
+              <div className="button">
+                <Button disabled={item.name == subscription} onClick={() => checkUser(item.name, item.id, item)} block type="primary">
+                  <b>Bắt đầu</b>
+                </Button>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
