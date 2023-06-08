@@ -16,6 +16,13 @@ export const customerAnswerApi = createApi({
         body: data,
       }),
     }),
+    getAnswer: builder.mutation({
+      query: (data) => ({
+        url: `/get?id=${data}`,
+        method: "POST",
+      }),
+    }),
   }),
 });
-export const { useCreateAnswerMutation } = customerAnswerApi;
+export const { useCreateAnswerMutation, useGetAnswerMutation } =
+  customerAnswerApi;
