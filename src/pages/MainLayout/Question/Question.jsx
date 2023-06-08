@@ -3,31 +3,44 @@ import questionImg from "../../../assets/images/imiu-question.svg";
 import { Button, InputNumber, Popconfirm, message } from "antd";
 import "./styles.scss";
 import { useGetQuestionQuery } from "../../../store/services/questionApi";
-import { useCreateAnswerMutation } from "../../../store/services/customerAnswer";
+import {
+  useCreateAnswerMutation,
+  useGetAnswerMutation,
+} from "../../../store/services/customerAnswerApi";
 
 const Question = () => {
+  const aId = "0822c29b-02f3-447d-ba1c-08db643874fb";
   const questions = useGetQuestionQuery()?.data?.data;
   const [answer, setAnswer] = useState([]);
+
   const [createAnswer, { data, isLoading, error }] = useCreateAnswerMutation();
-  console.log(questions);
+  const [
+    getAnswer,
+    { data: dataGet, isLoading: isLoadingGet, error: errorGet },
+  ] = useGetAnswerMutation();
+
+  useEffect(() => {
+    getAnswer(aId).then((result) =>
+      result?.data?.data ? setAnswer(result?.data?.data) : setAnswer([])
+    );
+  }, []);
+
   console.log(answer);
   const confirm = (e) => {
-    console.log(e);
     createAnswer(answer);
     message.success("Click on Yes");
   };
   const cancel = (e) => {
-    console.log(e);
     message.error("Click on No");
   };
   const handleAnswer = (a, q) => {
     const answerList = {
       value: 0,
       answerId: a.id,
-      accountId: "0822C29B-02F3-447D-BA1C-08DB643874FB",
+      accountId: aId,
     };
     if (answer.some((element) => element.answerId == answerList.answerId)) {
-      let newarray = answer.filter(
+      let newarray = answer?.filter(
         (element) => element.answerId != answerList.answerId
       );
 
@@ -40,10 +53,10 @@ const Question = () => {
     const answerList = {
       value: 1,
       answerId: a.id,
-      accountId: "0822C29B-02F3-447D-BA1C-08DB643874FB",
+      accountId: aId,
     };
     if (answer.some((element) => element.value == answerList.value)) {
-      let newarray = answer.filter(
+      let newarray = answer?.filter(
         (element) => element.value != answerList.value
       );
 
@@ -57,10 +70,10 @@ const Question = () => {
     const answerList = {
       value: event,
       answerId: id,
-      accountId: "0822C29B-02F3-447D-BA1C-08DB643874FB",
+      accountId: aId,
     };
     if (answer.some((element) => element.answerId == answerList.answerId)) {
-      let newarray = answer.filter(
+      let newarray = answer?.filter(
         (element) => element.answerId != answerList.answerId
       );
 
@@ -70,7 +83,12 @@ const Question = () => {
       setAnswer((current) => [...current, answerList]);
     }
   };
-
+  const initValue = (id) => {
+    if (answer?.some((element) => element.answerId == id)) {
+      console.log(answer.find((element) => element.answerId == id).value);
+      return answer.find((element) => element.answerId == id).value;
+    }
+  };
   return (
     <div className="question">
       <div className="question__wrapper">
@@ -91,7 +109,7 @@ const Question = () => {
                         return (
                           <Button
                             type={
-                              answer.some(
+                              answer?.some(
                                 (element) => element.answerId == answers.id
                               )
                                 ? "primary"
@@ -111,6 +129,10 @@ const Question = () => {
                           <InputNumber
                             min={500}
                             max={700}
+                            value={initValue(
+                              item.answers.find((item) => item.content == "Min")
+                                .id
+                            )}
                             onChange={(value) =>
                               handleChange(
                                 value,
@@ -124,6 +146,10 @@ const Question = () => {
                           <InputNumber
                             min={700}
                             max={1200}
+                            value={initValue(
+                              item.answers.find((item) => item.content == "Max")
+                                .id
+                            )}
                             onChange={(value) =>
                               handleChange(
                                 value,
@@ -141,7 +167,7 @@ const Question = () => {
                         return (
                           <Button
                             type={
-                              answer.some(
+                              answer?.some(
                                 (element) => element.answerId == answers.id
                               )
                                 ? "primary"
