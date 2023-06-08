@@ -6,7 +6,7 @@ import { useGetQuestionQuery } from "../../../store/services/questionApi";
 import {
   useCreateAnswerMutation,
   useGetAnswerMutation,
-} from "../../../store/services/customerAnswerAPI";
+} from "../../../store/services/customerAnswerApi";
 
 const Question = () => {
   const aId = "0822c29b-02f3-447d-ba1c-08db643874fb";
