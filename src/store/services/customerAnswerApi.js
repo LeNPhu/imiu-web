@@ -19,7 +19,7 @@ export const customerAnswerApi = createApi({
     getAnswer: builder.mutation({
       query: (data) => ({
         url: `/get?id=${data}`,
-        method: "POST",
+        method: "GET",
       }),
     }),
   }),
