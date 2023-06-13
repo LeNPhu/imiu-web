@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const customerAnswerApi = createApi({
   reducerPath: "customerAnswerApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API + "customeranswer",
+    baseUrl: import.meta.env.VITE_API + "customer-answers",
     headers: {
       "Content-Type": "application/json",
     },
@@ -11,12 +11,12 @@ export const customerAnswerApi = createApi({
   endpoints: (builder) => ({
     createAnswer: builder.mutation({
       query: (data) => ({
-        url: "/create",
         method: "POST",
-        body: data,
+        body: data.answer,
+        url: `/update?accountId=${data.id}`,
       }),
     }),
-    getAnswer: builder.mutation({
+    getAnswer: builder.query({
       query: (data) => ({
         url: `/get?id=${data}`,
         method: "GET",
@@ -24,5 +24,4 @@ export const customerAnswerApi = createApi({
     }),
   }),
 });
-export const { useCreateAnswerMutation, useGetAnswerMutation } =
-  customerAnswerApi;
+export const { useCreateAnswerMutation, useGetAnswerQuery } = customerAnswerApi;

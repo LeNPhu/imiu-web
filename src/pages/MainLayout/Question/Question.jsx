@@ -5,29 +5,24 @@ import "./styles.scss";
 import { useGetQuestionQuery } from "../../../store/services/questionApi";
 import {
   useCreateAnswerMutation,
-  useGetAnswerMutation,
+  useGetAnswerQuery,
 } from "../../../store/services/customerAnswerApi";
+import { useSelector } from "react-redux";
 
 const Question = () => {
-  const aId = "0822c29b-02f3-447d-ba1c-08db643874fb";
+  const uId = useSelector((store) => store.auth.accountId);
+
   const questions = useGetQuestionQuery()?.data?.data;
   const [answer, setAnswer] = useState([]);
-
+  const userAns = useGetAnswerQuery(uId)?.data?.data;
   const [createAnswer, { data, isLoading, error }] = useCreateAnswerMutation();
-  const [
-    getAnswer,
-    { data: dataGet, isLoading: isLoadingGet, error: errorGet },
-  ] = useGetAnswerMutation();
 
   useEffect(() => {
-    getAnswer(aId).then((result) =>
-      result?.data?.data ? setAnswer(result?.data?.data) : setAnswer([])
-    );
-  }, []);
-
+    setAnswer(userAns);
+  }, [questions]);
   console.log(answer);
   const confirm = (e) => {
-    createAnswer(answer);
+    createAnswer({ answer, id: uId });
     message.success("Click on Yes");
   };
   const cancel = (e) => {
@@ -37,7 +32,7 @@ const Question = () => {
     const answerList = {
       value: 0,
       answerId: a.id,
-      accountId: aId,
+      accountId: uId,
     };
     if (answer.some((element) => element.answerId == answerList.answerId)) {
       let newarray = answer?.filter(
@@ -53,7 +48,7 @@ const Question = () => {
     const answerList = {
       value: 1,
       answerId: a.id,
-      accountId: aId,
+      accountId: uId,
     };
     if (answer.some((element) => element.value == answerList.value)) {
       let newarray = answer?.filter(
@@ -70,7 +65,7 @@ const Question = () => {
     const answerList = {
       value: event,
       answerId: id,
-      accountId: aId,
+      accountId: uId,
     };
     if (answer.some((element) => element.answerId == answerList.answerId)) {
       let newarray = answer?.filter(
