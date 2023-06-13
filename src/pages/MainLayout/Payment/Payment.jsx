@@ -10,11 +10,13 @@ import {
   usePaymentMutation,
 } from "../../../store/services/paymentApi";
 import Loading from "../../../components/Loading/Loading";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Space } from "antd";
 import { toast } from "react-hot-toast";
+import { setSubscription } from "../../../store/authSlice";
 
 const Payment = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const { accountId } = useSelector((state) => state.auth);
@@ -34,9 +36,10 @@ const Payment = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      dispatch(setSubscription({ subscription: location.state?.item.name }));
       navigate("/question", { state: { from: "payment" } });
     }
-  }, [isSuccess, navigate]);
+  }, [dispatch, isSuccess, location, navigate]);
 
   useEffect(() => {
     if (error) {

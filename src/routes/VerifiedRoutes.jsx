@@ -5,8 +5,6 @@ import { Outlet, useNavigate } from "react-router";
 const VerifiedRoutes = () => {
   const navigate = useNavigate();
   const { role, isVerified } = useSelector((state) => state.auth);
-  console.log("role", role);
-  console.log("isVerified", isVerified);
 
   useEffect(() => {
     if (!isVerified) {

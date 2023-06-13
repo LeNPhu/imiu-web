@@ -28,7 +28,6 @@ const Question = () => {
   console.log(answer);
   const confirm = (e) => {
     createAnswer(answer);
-    message.success("Click on Yes");
   };
   const cancel = (e) => {
     message.error("Click on No");

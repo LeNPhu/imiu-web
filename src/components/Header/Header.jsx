@@ -64,6 +64,9 @@ const Header = () => {
       <Link to="/how-to-use" className="header-item">
         Hướng dẫn sử dụng
       </Link>
+      <Link to="/menu" className="header-item">
+        Menu
+      </Link>
       <div className="header-item last">
         {role === "CUSTOMER" && isVerified ? (
           <>

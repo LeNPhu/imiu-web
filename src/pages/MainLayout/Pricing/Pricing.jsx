@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import pricingBanner from "../../../assets/images/pricing-banner.svg";
 import { FcCheckmark } from "react-icons/fc";
 import { FcCancel } from "react-icons/fc";
@@ -13,10 +13,10 @@ const Pricing = () => {
   const navigate = useNavigate();
   const { isVerified, subscription } = useSelector((state) => state.auth);
   const { data, isLoading } = useSubscriptionsQuery();
-
+  console.log("subscription", subscription);
   const checkUser = (type, subId, item) => {
     console.log("item", item);
-    var state = { state: { from: 'pricing', subId: subId, item: item } };
+    var state = { state: { from: "pricing", subId: subId, item: item } };
     if (isVerified && type == "Free") {
       navigate("/menu", state);
     } else if (isVerified) {
@@ -27,7 +27,7 @@ const Pricing = () => {
   };
 
   if (isLoading) {
-    return <Loading/>
+    return <Loading />;
   }
   return (
     <div className="pricing-container">
@@ -72,15 +72,24 @@ const Pricing = () => {
                         <FcCancel /> {item.detail}
                       </p>
                     )}
-                    
                   </>
                 );
               })}
 
               <div className="button">
-                <Button disabled={item.name == subscription} onClick={() => checkUser(item.name, item.id, item)} block type="primary">
-                  <b>Bắt đầu</b>
-                </Button>
+                {item.name == subscription?.name ? (
+                  <Button disabled block type="primary">
+                    <b>Bạn đang dùng gói này</b>
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => checkUser(item.name, item.id, item)}
+                    block
+                    type="primary"
+                  >
+                    <b>Bắt đầu</b>
+                  </Button>
+                )}
               </div>
             </div>
           );
