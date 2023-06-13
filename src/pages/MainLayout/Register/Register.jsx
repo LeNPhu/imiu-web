@@ -1,26 +1,62 @@
 import React, { useState } from "react";
 import "./styles.scss";
-import { Button, Form, Input, Modal } from "antd";
+import { Button, Divider, Form, Input, Modal } from "antd";
 import logo from "../../../assets/images/imiu-register.svg";
 import { Link, useNavigate } from "react-router-dom";
 import des1 from "../../../assets/images/register-des-1.png";
 import des2 from "../../../assets/images/register-des-2.png";
 import des3 from "../../../assets/images/register-des-3.png";
-import { useRegisterMutation } from "../../../store/services/authApi";
+import { useLoginWithGoogleMutation, useRegisterMutation } from "../../../store/services/authApi";
 import { toast } from "react-hot-toast";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import { FcGoogle } from "react-icons/fc";
+import { setAuth } from "../../../store/authSlice";
+import { useDispatch } from "react-redux";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../../../utils/firebase";
 
 const Register = () => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [register, { isLoading, isSuccess, error }] = useRegisterMutation();
+  const [
+    loginWithGoogle,
+    { data: dataGG, isLoading: isLoadingGG, error: errorGG },
+  ] = useLoginWithGoogleMutation();
+  useEffect(() => {
+    if (dataGG) {
+      toast.success(dataGG.message);
+      dispatch(setAuth(dataGG));
+    }
+  }, [dataGG, dispatch]);
 
+  useEffect(() => {
+    if (errorGG) {
+      toast.error(errorGG.data?.message);
+    }
+  }, [errorGG]);
   useEffect(() => {
     if (error) {
       toast.error(error.data.message);
     }
   }, [error]);
+
+  const handleSignInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((data) => {
+        console.log(data);
+
+        loginWithGoogle({
+          accessToken: data._tokenResponse.oauthAccessToken,
+        });
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
 
   const onFinish = (values) => {
     console.log("values", values);
@@ -102,6 +138,19 @@ const Register = () => {
               Khi bấm đăng kí, bạn đồng ý nhận emails quảng cáo và chấp nhận
               Chính sách và Điều khoản. Có thể hủy đăng kí bất cứ lúc nào.
             </p>
+            <Divider plain>
+              <span className="grey">hoặc</span>
+            </Divider>
+            <Button
+              loading={isLoadingGG}
+              onClick={handleSignInWithGoogle}
+              style={{ borderColor: "#f8f8f8" }}
+              type="default"
+              icon={<FcGoogle />}
+              block
+            >
+              Đăng nhập với Google
+            </Button>
             <div className="login-here">
               <h5>
                 Đã có tài khoản ?{" "}

@@ -13,7 +13,9 @@ const authSlice = createSlice({
     accessToken: account?.accessToken,
     accountId: account?.accountId,
     email: account?.email,
-    subscription: account?.subcription,
+    subscription: Cookies.get("subscription")
+      ? Cookies.get("subscription")
+      : null,
     hasPassword: account?.hasPassword,
   },
   reducers: {
@@ -34,6 +36,9 @@ const authSlice = createSlice({
       Cookies.set("account", JSON.stringify(action.payload.data), {
         expires: 1 / 48,
       });
+      Cookies.set("subscription", action.payload.data.subcription, {
+        expires: 1 / 48,
+      });
 
       state.isVerified = action.payload.data.isVerify;
       state.role = action.payload.data.role;
@@ -43,8 +48,15 @@ const authSlice = createSlice({
       state.subscription = action.payload.data.subcription;
       state.hasPassword = action.payload.data.hasPassword;
     },
+    setSubscription: (state, action) => {
+      console.log(action);
+      Cookies.set("subscription", action.payload.subscription, {
+        expires: 1 / 48,
+      });
+      state.subscription = action.payload.subscription;
+    },
   },
 });
 
-export const { setAuth, logout } = authSlice.actions;
+export const { setAuth, logout, setSubscription } = authSlice.actions;
 export default authSlice;
