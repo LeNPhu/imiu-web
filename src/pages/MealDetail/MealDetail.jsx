@@ -7,7 +7,7 @@ import { useGetMealDetailQuery } from "../../store/services/menuApi";
 const MealDetail = () => {
   const id = "58DC67AC-57BA-4641-81B6-A9B56DBEC796";
   const detail = useGetMealDetailQuery(id)?.data?.data;
-  console.log(detail);
+
   const [portion, setPortion] = useState(1);
   const handleChange = (e) => {
     setPortion(e.target.value);
