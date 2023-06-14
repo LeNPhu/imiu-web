@@ -2,19 +2,22 @@
 
 .meal-item {
   height: 280px;
+  min-width: 250px;
   width: 250px;
   padding: 1.5rem;
-  // background-color: aqua;
+  background-color: var(--primary-bg);
   border-radius: 15px;
-  border: 2px solid #e1e1e1;
   @include flex(column, null, center);
   gap: 1rem;
   overflow: hidden;
-
+  box-shadow: 0px 46px 18px rgba(0, 0, 0, 0.01), 0px 26px 15px rgba(0, 0, 0, 0.03), 0px 11px 11px rgba(0, 0, 0, 0.04), 0px 3px 6px rgba(0, 0, 0, 0.05), 0px 0px 0px rgba(0, 0, 0, 0.05);
+  &:hover {
+    border: 2px solid var(--primary-color);
+    cursor: pointer;
+  }
   &__img {
     height: 150px;
     width: 100%;
-    background-color: violet;
     overflow: hidden;
     border-radius: 15px;
     img {
