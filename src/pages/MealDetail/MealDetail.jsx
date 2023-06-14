@@ -1,140 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.scss";
-import { Col, Radio, Row } from "antd";
+import { Col, Radio, Row, Tag } from "antd";
 import { Link } from "react-router-dom";
+import { useGetMealDetailQuery } from "../../store/services/menuApi";
+
 const MealDetail = () => {
-  const recipe = [
-    {
-      image:
-        "https://upload.wikimedia.org/wikipedia/commons/b/b0/C%C6%A1m_T%E1%BA%A5m%2C_Da_Nang%2C_Vietnam.jpg",
-      title: "Ướp sườn nướng",
-      steps: [
-        {
-          step: "Sườn cốt lết rửa sạch, chia sườn thành từng lát dầy khoảng gần 1cm. Thấm cho sườn khô ráo rồi đem ướp.",
-        },
-        {
-          step: "Gia vị ướp sườn: 01 muỗng canh nước tương + 01 muỗng canh mật ong + 01 muỗng canh dầu hào + 01 muỗng canh nước mắm + 02 muỗng canh dầu ăn + ½ muỗng canh dầu mè + 03 muỗng canh sữa tươi + 01 muỗng canh tỏi bằm + 1/2 muỗng cà phê tiêu xay + ½ muỗng cà phê ngũ vị hương + 01 lon nước ngọt coca",
-        },
-        {
-          step: "Cho sườn vào hỗn hợp gia vị ướp để tủ lạnh ngăn mát qua một ngày cho thịt thấm gia vị.Cho sườn vào hỗn hợp gia vị ướp để tủ lạnh ngăn mát qua một ngày cho thịt thấm gia vị.",
-        },
-      ],
-    },
-    {
-      image:
-        "https://upload.wikimedia.org/wikipedia/commons/b/b0/C%C6%A1m_T%E1%BA%A5m%2C_Da_Nang%2C_Vietnam.jpg",
-      title: "Ướp sườn nướng",
-      steps: [
-        {
-          step: "Sườn cốt lết rửa sạch, chia sườn thành từng lát dầy khoảng gần 1cm. Thấm cho sườn khô ráo rồi đem ướp.",
-        },
-        {
-          step: "Gia vị ướp sườn: 01 muỗng canh nước tương + 01 muỗng canh mật ong + 01 muỗng canh dầu hào + 01 muỗng canh nước mắm + 02 muỗng canh dầu ăn + ½ muỗng canh dầu mè + 03 muỗng canh sữa tươi + 01 muỗng canh tỏi bằm + 1/2 muỗng cà phê tiêu xay + ½ muỗng cà phê ngũ vị hương + 01 lon nước ngọt coca",
-        },
-        {
-          step: "Cho sườn vào hỗn hợp gia vị ướp để tủ lạnh ngăn mát qua một ngày cho thịt thấm gia vị.Cho sườn vào hỗn hợp gia vị ướp để tủ lạnh ngăn mát qua một ngày cho thịt thấm gia vị.",
-        },
-      ],
-    },
-  ];
-  const nutrition = ["Gỏi"];
-  const ingredients = [
-    {
-      quantity: "500",
-      name: "Thịt sườn cốt lết",
-      unit: "g",
-    },
-    {
-      quantity: "500 gram",
-      name: "Thịt nạc heo xay",
-    },
-    {
-      quantity: "300 gram",
-      name: "Gạo tấm",
-    },
-    {
-      quantity: "500 gram",
-      name: "Thịt sườn cốt lết",
-    },
-    {
-      quantity: "500 gram",
-      name: "Thịt nạc heo xay",
-    },
-    {
-      quantity: "300 gram",
-      name: "Gạo tấm",
-    },
-  ];
-  const spices = [
-    {
-      quantity: "10 gram",
-      name: "Mật ong",
-    },
-    {
-      quantity: "10 gram",
-      name: "Dầu hào",
-    },
-    {
-      quantity: "10 gram",
-      name: "Nước mắm",
-    },
-    {
-      quantity: "10 gram",
-      name: "Mật ong",
-    },
-    {
-      quantity: "10 gram",
-      name: "Dầu hào",
-    },
-    {
-      quantity: "10 gram",
-      name: "Nước mắm",
-    },
-  ];
+  const id = "58DC67AC-57BA-4641-81B6-A9B56DBEC796";
+  const detail = useGetMealDetailQuery(id)?.data?.data;
+  console.log(detail);
+  const [portion, setPortion] = useState(1);
+  const handleChange = (e) => {
+    setPortion(e.target.value);
+  };
   return (
     <div className="meal">
       <div className="meal__img">
-        <img
-          src="https://img.hellofresh.com/q_30,w_1920,f_auto,c_limit,fl_lossy/hellofresh_s3/image/643eddbd9acf36d68c0aa18b-7adf9c42.jpg"
-          alt=""
-        />
+        <img src="" alt="" />
       </div>
       <div className="content">
         <div className="meal__content">
           <div className="meal__content__description">
-            <h2>Cơm tấm sườn bì chả</h2>
+            <h2>{detail?.name}</h2>
             <div className="meal__content__description__flex">
               <div className="meal__content__description__flex__summarize">
-                Cơm tấm - Một trong những món được gọi là đặc trưng của ẩm thực
-                Sài Gòn. Hạt tấm nhuyễn, khi thành cơm phải hội tụ đủ yếu tố tơi
-                và ráo. Sườn ướp kỹ đậm đà, không được để quá khô, cũng không
-                được mất đi vẻ óng ả của miếng thịt. Nói thì khó vậy thôi, khi
-                đã có định lượng thì dễ làm như chơi. Nói đến đặc trưng khi
-                chiêu đãi thì cơm tấm là lựa chọn đúng đắn cho dịp cuối tuần
-                chiêu đãi bạn bè và đổi vị cho cả gia đình!
+                {detail?.summary}
               </div>
               <div className="meal__content__description__flex__detail">
                 <div>
                   <b>Thời gian nấu ăn</b>
-                  <p>2 tiếng</p>
+                  <p>{detail?.cookingTime} phút</p>
                 </div>
                 <div>
                   <b>Độ khó</b>
-                  <p>Khó</p>
+                  <p>
+                    {(() => {
+                      switch (detail?.difficulty) {
+                        case 1:
+                          return "Dễ";
+                        case 2:
+                          return "Vừa";
+                        case 3:
+                          return "Khó";
+                        default:
+                          return "Không xác định";
+                      }
+                    })()}
+                  </p>
                 </div>
               </div>
             </div>
             <div className="meal__content__description__tags">
               <b>Tag:</b>
-              <div className="meal__content__description__tags__item">Tim</div>
-              <div className="meal__content__description__tags__item">Gan</div>
-            </div>
-            <div className="meal__content__description__tags">
-              <b>Chất gây dị ứng</b>
-              <div className="meal__content__description__tags__item">Cá</div>
-              <div className="meal__content__description__tags__item">
-                Trứng
-              </div>
+              {detail?.mealTags?.map((item, index) => {
+                return (
+                  <Tag color="#0CBF1E" key={index}>
+                    {item.name}
+                  </Tag>
+                );
+              })}
             </div>
           </div>
           <div className="meal__content__detail">
@@ -143,7 +66,11 @@ const MealDetail = () => {
                 <h3>Công thức</h3>
                 <div className="meal__content__detail__recipe__header__portion">
                   <p>Khẩu phần ăn</p>
-                  <Radio.Group defaultValue={1} buttonStyle="solid">
+                  <Radio.Group
+                    defaultValue={portion}
+                    buttonStyle="solid"
+                    onChange={handleChange}
+                  >
                     <Radio.Button value={1}>1</Radio.Button>
                     <Radio.Button value={2}>2</Radio.Button>
                     <Radio.Button value={3}>3</Radio.Button>
@@ -160,28 +87,11 @@ const MealDetail = () => {
                   className="meal__content__detail__recipe__item__row"
                   gutter={[16, 24]}
                 >
-                  {ingredients.map((item, index) => {
+                  {detail?.mealIngredients.map((item, index) => {
                     return (
                       <Col key={index} span={12}>
                         <p>
-                          {item.name}: {item.quantity}
-                        </p>
-                      </Col>
-                    );
-                  })}
-                </Row>
-              </div>
-              <div className="meal__content__detail__recipe__item">
-                <h4>Gia vị</h4>
-                <Row
-                  className="meal__content__detail__recipe__item__row"
-                  gutter={[16, 24]}
-                >
-                  {spices.map((item, index) => {
-                    return (
-                      <Col key={index} span={12}>
-                        <p>
-                          {item.name}: {item.quantity}
+                          {item.name}: {item.quantity * portion} {item.unit}
                         </p>
                       </Col>
                     );
@@ -198,14 +108,22 @@ const MealDetail = () => {
                 gutter={[16, 20]}
                 className="meal__content__detail__nutrition__content"
               >
-                {nutrition.map((item) => {
+                {detail?.nutritionFacts.map((item, index) => {
                   return (
                     <>
-                      <Col span={12} style={{ fontWeight: "700" }}>
+                      <Col
+                        key={index + "name"}
+                        span={12}
+                        style={{ fontWeight: "700" }}
+                      >
                         {item.name}
                       </Col>
-                      <Col span={12} style={{ textAlign: "end" }}>
-                        {item.amount}
+                      <Col
+                        key={index + "value"}
+                        span={12}
+                        style={{ textAlign: "end" }}
+                      >
+                        {item.value} {item.code}
                       </Col>
                     </>
                   );
@@ -225,24 +143,21 @@ const MealDetail = () => {
           <div className="meal__content__recipe">
             <h3>Các bước tiến hành</h3>
             <Row gutter={[24, 24]}>
-              {recipe.map((item) => {
+              {detail?.directions.map((item, index) => {
                 return (
                   <>
-                    <Col span={8}>
-                      <img
-                        className="meal__content__recipe__image"
-                        src={item.image}
-                      />
-                    </Col>
-                    <Col span={16} className="meal__content__recipe__content">
+                    <Col
+                      key={index}
+                      span={24}
+                      className="meal__content__recipe__content"
+                    >
                       <p className="meal__content__recipe__content__title">
-                        {item.title}
+                        Bước {item.stepNumber}:
                       </p>
-                      <ul>
-                        {item.steps.map((item, index) => {
-                          return <li key={index}>{item.step}</li>;
-                        })}
-                      </ul>
+
+                      <li className="meal__content__recipe__content__detail">
+                        {item.instruction}
+                      </li>
                     </Col>
                   </>
                 );

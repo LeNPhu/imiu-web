@@ -18,16 +18,21 @@ export const menuApi = createApi({
   tagTypes: ["menu"],
   endpoints: (builder) => ({
     getMenu: builder.query({
-      query: (data) => (
-        console.log("data", data),
-        {
+      query: (data) =>
+        //console.log("data", data),
+        ({
           url: "",
           method: "POST",
           body: data,
-        }
-      ),
+        }),
+    }),
+    getMealDetail: builder.query({
+      query: (id) => ({
+        url: `?mealId=${id}`,
+        method: "GET",
+      }),
     }),
   }),
 });
 
-export const { useGetMenuQuery } = menuApi;
+export const { useGetMenuQuery, useGetMealDetailQuery } = menuApi;

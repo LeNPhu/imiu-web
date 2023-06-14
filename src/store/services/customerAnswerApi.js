@@ -13,12 +13,12 @@ export const customerAnswerApi = createApi({
       query: (data) => ({
         method: "POST",
         body: data.answer,
-        url: `/update?accountId=${data.id}`,
+        url: `?accountId=${data.id}`,
       }),
     }),
     getAnswer: builder.query({
       query: (data) => ({
-        url: `/get?id=${data}`,
+        url: `?id=${data}`,
         method: "GET",
       }),
     }),
