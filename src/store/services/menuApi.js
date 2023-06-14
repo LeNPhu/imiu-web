@@ -25,13 +25,20 @@ export const menuApi = createApi({
           body: data,
         }
       ),
-      providesTags: ['menu']
+      providesTags: ["menu"],
     }),
     getTags: builder.query({
       query: () => "tags",
-      providesTags: ['tags']
+      providesTags: ["tags"],
+    }),
+    getMealDetail: builder.query({
+      query: (id) => ({
+        url: `meals?mealId=${id}`,
+        method: "GET",
+      }),
     }),
   }),
 });
 
-export const { useGetMenuQuery, useGetTagsQuery } = menuApi;
+export const { useGetMenuQuery, useGetTagsQuery, useGetMealDetailQuery } =
+  menuApi;
