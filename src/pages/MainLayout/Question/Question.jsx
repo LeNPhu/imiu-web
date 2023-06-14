@@ -23,11 +23,8 @@ const Question = () => {
   console.log(answer);
   const confirm = (e) => {
     createAnswer({ answer, id: uId });
-    message.success("Click on Yes");
   };
-  const cancel = (e) => {
-    message.error("Click on No");
-  };
+  const cancel = (e) => {};
   const handleAnswer = (a, q) => {
     const answerList = {
       value: 0,

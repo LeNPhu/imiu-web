@@ -37,48 +37,12 @@ const MealDetail = () => {
       ],
     },
   ];
-  const nutrition = [
-    {
-      name: "Năng lượng (kJ)",
-      amount: "0kJ",
-    },
-    {
-      name: "Calories",
-      amount: "1000 kcal",
-    },
-    {
-      name: "Chất béo ",
-      amount: "40 g",
-    },
-    {
-      name: "Chất béo bão hoà",
-      amount: "59 g",
-    },
-    {
-      name: "Lượng đường",
-      amount: "8 g",
-    },
-    {
-      name: "Chất xơ",
-      amount: "100 g",
-    },
-    {
-      name: "Chất đạm",
-      amount: "45 g",
-    },
-    {
-      name: "Cholesterol",
-      amount: "95 mg",
-    },
-    {
-      name: "Natri",
-      amount: "900 mg",
-    },
-  ];
+  const nutrition = ["Gỏi"];
   const ingredients = [
     {
-      quantity: "500 gram",
+      quantity: "500",
       name: "Thịt sườn cốt lết",
+      unit: "g",
     },
     {
       quantity: "500 gram",
