@@ -20,7 +20,6 @@ export const store = configureStore({
     [paymentApi.reducerPath]: paymentApi.reducer,
     [subscriptionApi.reducerPath]: subscriptionApi.reducer,
     [menuApi.reducerPath]: menuApi.reducer,
-
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -32,7 +31,6 @@ export const store = configureStore({
       paymentApi.middleware,
       subscriptionApi.middleware,
       menuApi.middleware
-
     ),
 });
 
