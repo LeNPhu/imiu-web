@@ -135,6 +135,7 @@ const Menu = () => {
                 </Checkbox.Group>
               </div>
               <div className="menu-content__wrapper">
+                {data?.data.length == 0 ? <p>Không có dữ liệu.</p> : ""}
                 {data?.data.map((item, index) => {
                   return (
                     <div key={index} className="menu-content__item">

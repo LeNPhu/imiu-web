@@ -13,7 +13,6 @@
   &-content {
     @include flex(column, center, center);
     gap: 3rem;
-    width: 100%;
     padding: 5rem 0;
     @include tablet {
       padding: 5rem 10rem;
@@ -23,7 +22,6 @@
       text-align: center;
     }
     &__container {
-
       display: flex;
     }
     &__filter {
@@ -47,6 +45,8 @@
       padding: 2rem;
       @include flex(column, null, null);
       gap: 1.5rem;
+      min-width: 850px;
+      width: 850px;
     }
     &__item {
       display: flex;
@@ -54,14 +54,7 @@
       gap: 1rem;
       &__header {
         @include flex(null, space-between, null);
-        .view-all {
-          color: var(--url-color);
-          text-decoration: underline;
-          cursor: pointer;
-          &:hover {
-            color: var(--primary-color);
-          }
-        }
+        
       }
       &__list {
         display: flex;

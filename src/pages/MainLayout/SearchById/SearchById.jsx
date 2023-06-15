@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router";
 import { useGetMenuQuery } from "../../../store/services/menuApi";
 import Loading from "../../../components/Loading/Loading";
@@ -10,14 +10,15 @@ const SearchById = () => {
   const { id, name } = useParams();
   const tags = [{ id: id, name: name }];
   const { accountId } = useSelector((state) => state.auth);
-  console.log("id: ", id, "name: ", name);
+  const [pageSize, setPageSize] = useState(5);
+  console.log("id: ",pageSize);
   const { data, isLoading } = useGetMenuQuery({
     customerId: accountId ? accountId : "",
     name: "",
     difficulty: [],
     tags: tags,
     pageNumber: 1,
-    pageSize: 20,
+    pageSize: pageSize,
   });
   console.log(data);
   return (
@@ -32,10 +33,15 @@ const SearchById = () => {
               {data?.data[0]?.data.map((item, index) => {
                 return <MealItem key={index} item={item} />;
               })}
-              {data?.data[0]?.data.map((item, index) => {
-                return <MealItem key={index} item={item} />;
-              })}
             </div>
+          </div>
+          <div className="more">
+            <p
+              className="view-all"
+              onClick={() => setPageSize(pageSize + 5)}
+            >
+              Xem thêm
+            </p>
           </div>
         </div>
       )}
