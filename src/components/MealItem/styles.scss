@@ -1,18 +1,29 @@
 @use "../../assets/scss/" as *;
 
+
 .meal-item {
+  position: relative;
   height: 280px;
   min-width: 250px;
   width: 250px;
   padding: 1.5rem;
   background-color: var(--primary-bg);
-  border-radius: 15px;
+  border-radius: 0 0 15px 15px;
   @include flex(column, null, center);
   gap: 1rem;
   overflow: hidden;
   box-shadow: 0px 46px 18px rgba(0, 0, 0, 0.01), 0px 26px 15px rgba(0, 0, 0, 0.03), 0px 11px 11px rgba(0, 0, 0, 0.04), 0px 3px 6px rgba(0, 0, 0, 0.05), 0px 0px 0px rgba(0, 0, 0, 0.05);
+  .select-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .mark-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
   &:hover {
-    border: 2px solid var(--primary-color);
     cursor: pointer;
   }
   &__img {
@@ -26,6 +37,7 @@
       object-fit: cover;
     }
   }
+  
   &__content {
     height: 100px;
     @include flex(column, space-between, null);

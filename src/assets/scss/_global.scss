@@ -70,3 +70,12 @@ button {
 .raleway {
   font-family: 'Raleway', sans-serif;
 }
+
+.view-all {
+  color: var(--url-color);
+  text-decoration: underline;
+  cursor: pointer;
+  &:hover {
+    color: var(--primary-color);
+  }
+}
