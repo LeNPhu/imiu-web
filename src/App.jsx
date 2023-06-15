@@ -25,6 +25,7 @@ import AdminRoutes from "./routes/AdminRoutes";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import { Toaster } from "react-hot-toast";
 import Payment from "./pages/MainLayout/Payment/Payment";
+import SearchById from "./pages/MainLayout/SearchById/SearchById";
 const App = () => {
 
   return (
@@ -44,6 +45,7 @@ const App = () => {
               <Route path="how-to-use" element={<HowToUse />} />
               <Route path="menu" element={<Menu />} />
               <Route path="meal-detail/:id" element={<MealDetail />} />
+              <Route path="search-by-id/:id/:name" element={<SearchById />} />
 
               <Route element={<VerifiedRoutes />}>
                 {/* Verified users only */}

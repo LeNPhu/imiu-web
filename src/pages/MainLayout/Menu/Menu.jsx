@@ -11,8 +11,10 @@ import banner from "../../../assets/images/imiu-menu.png";
 import { Checkbox, Col, Input } from "antd";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 const { Search } = Input;
 const Menu = () => {
+  const navigate = useNavigate();
   const difficulty = [
     {
       id: 1,
@@ -40,7 +42,7 @@ const Menu = () => {
     customerId: accountId ? accountId : "",
     name: searchString,
     difficulty: dif,
-    tags: tags,
+    tags: tags ? tags : [],
     pageNumber: 1,
     pageSize: 3,
   });
@@ -52,7 +54,7 @@ const Menu = () => {
     if (dataTag) {
       setTags(dataTag.data);
     }
-  }, [dataTag])
+  }, [dataTag]);
   const onSearch = (value) => {
     setSearchString(value);
   };
@@ -61,10 +63,14 @@ const Menu = () => {
     console.log("checked = ", checkedValues);
   };
   const onChangeDifficulty = (checkedValues) => {
-    setDif(checkedValues)
+    setDif(checkedValues);
     console.log("checked = ", checkedValues);
   };
-  
+
+  const handleViewAll = (id, name) => {
+    navigate(`/search-by-id/${id}/${name}`);
+  }
+
   return (
     <div className="menu">
       <div className="menu-banner">
@@ -92,7 +98,7 @@ const Menu = () => {
                   }}
                   onChange={onChangeDifficulty}
                   className="checkbox-list"
-                  defaultValue={difficulty.map(item => item.id)}
+                  defaultValue={difficulty.map((item) => item.id)}
                 >
                   {difficulty.map((item, index) => {
                     return (
@@ -100,7 +106,6 @@ const Menu = () => {
                         key={index}
                         value={item.id}
                         className="checkbox-item"
-                        
                       >
                         {item.name}
                       </Checkbox>
@@ -114,7 +119,7 @@ const Menu = () => {
                   }}
                   onChange={onChange}
                   className="checkbox-list"
-                  defaultValue={dataTag?.data.map(item => item)}
+                  defaultValue={dataTag?.data.map((item) => item)}
                 >
                   {dataTag?.data.map((item, index) => {
                     return (
@@ -133,7 +138,10 @@ const Menu = () => {
                 {data?.data.map((item, index) => {
                   return (
                     <div key={index} className="menu-content__item">
-                      <h3>Món {item.tag}</h3>
+                      <div className="menu-content__item__header">
+                        <h3>Món {item.tag}</h3>
+                        <p className="view-all" onClick={() => handleViewAll(item.tagId, item.tag)}>Xem tất cả</p>
+                      </div>
                       <div className="menu-content__item__list">
                         {item.data.map((item, index) => {
                           return <MealItem key={index} item={item} />;

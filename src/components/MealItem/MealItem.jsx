@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./styles.scss";
-import { Divider } from "antd";
+import { Button, Divider } from "antd";
+import { FaStar, FaRegStar } from "react-icons/fa";
 
 const MealItem = ({ item }) => {
   const [name, setName] = useState(item.name);
@@ -45,7 +46,11 @@ const MealItem = ({ item }) => {
             <p>Độ khó</p>
             <h5 className="value">
               {difficulty.map((i) => {
-                return <>{i.value == item.difficulty ? i.name : ""}</>;
+                return (
+                  <div key={i.id}>
+                    {i.value == item.difficulty ? i.name : ""}
+                  </div>
+                );
               })}
             </h5>
           </div>
@@ -55,6 +60,14 @@ const MealItem = ({ item }) => {
             <h5 className="value">{item.calories}</h5>
           </div>
         </div>
+      </div>
+      <div className="select-button">
+        <Button type="primary" style={{ fontWeight: "bold" }}>
+          Chọn
+        </Button>
+      </div>
+      <div className="mark-button">
+        <Button icon={<FaStar />} style={{ color: "yellow" }}/>
       </div>
     </div>
   );

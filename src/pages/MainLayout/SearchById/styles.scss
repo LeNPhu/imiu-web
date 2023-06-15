@@ -1,0 +1,14 @@
+@use "../../../assets/scss/" as *;
+
+.search {
+    padding: 5rem 8rem;
+    &-content {
+        @include flex(column, center, null);
+        gap: 1rem;
+        &-list {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+    }
+}
