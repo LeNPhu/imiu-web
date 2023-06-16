@@ -12,6 +12,7 @@ import { Checkbox, Col, Input } from "antd";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import CustomPagination from "../../../components/CustomPagination/CustomPagination";
 const { Search } = Input;
 const Menu = () => {
   const navigate = useNavigate();
@@ -38,18 +39,16 @@ const Menu = () => {
   const [searchString, setSearchString] = useState("");
   const [tags, setTags] = useState();
   const [dif, setDif] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
   const { data, isLoading } = useGetMenuQuery({
     customerId: accountId ? accountId : "",
     name: searchString,
     difficulty: dif,
     tags: tags ? tags : [],
-    pageNumber: 1,
+    pageNumber: pageNumber,
     pageSize: 3,
   });
-  console.log(dataTag?.data);
   console.log("data", data);
-  console.log("tags", tags);
-  console.log("dif", dif);
   useEffect(() => {
     if (dataTag) {
       setTags(dataTag.data);
@@ -69,7 +68,7 @@ const Menu = () => {
 
   const handleViewAll = (id, name) => {
     navigate(`/search-by-id/${id}/${name}`);
-  }
+  };
 
   return (
     <div className="menu">
@@ -135,13 +134,23 @@ const Menu = () => {
                 </Checkbox.Group>
               </div>
               <div className="menu-content__wrapper">
+                <CustomPagination
+                  // onChange={() => setPageNumber()}
+                  currentPage={pageNumber}
+                  totalPage={data?.metaData.totalPage}
+                />
                 {data?.data.length == 0 ? <p>Không có dữ liệu.</p> : ""}
                 {data?.data.map((item, index) => {
                   return (
                     <div key={index} className="menu-content__item">
                       <div className="menu-content__item__header">
                         <h3>Món {item.tag}</h3>
-                        <p className="view-all" onClick={() => handleViewAll(item.tagId, item.tag)}>Xem tất cả</p>
+                        <p
+                          className="view-all"
+                          onClick={() => handleViewAll(item.tagId, item.tag)}
+                        >
+                          Xem tất cả
+                        </p>
                       </div>
                       <div className="menu-content__item__list">
                         {item.data.map((item, index) => {
