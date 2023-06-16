@@ -9,6 +9,7 @@ import { paymentApi } from "./services/paymentApi.js";
 import { subscriptionApi } from "./services/subscriptionApi.js";
 import { customerAnswerApi } from "./services/customerAnswerApi.js";
 import { menuApi } from "./services/menuApi.js";
+import { accountApi } from "./services/accountApi.js";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,8 @@ export const store = configureStore({
     [paymentApi.reducerPath]: paymentApi.reducer,
     [subscriptionApi.reducerPath]: subscriptionApi.reducer,
     [menuApi.reducerPath]: menuApi.reducer,
+    [accountApi.reducerPath]: accountApi.reducer,
+
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -30,7 +33,8 @@ export const store = configureStore({
       customerAnswerApi.middleware,
       paymentApi.middleware,
       subscriptionApi.middleware,
-      menuApi.middleware
+      menuApi.middleware,
+      accountApi.middleware
     ),
 });
 

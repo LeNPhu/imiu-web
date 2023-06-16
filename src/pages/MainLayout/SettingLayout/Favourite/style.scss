@@ -1,8 +1,7 @@
 @use "../../../../assets/scss/" as *;
 
 .favourite-container {
-    @include flex(column, center, center);
-    gap: 50px;
+    @include flex(null, center, center);
 
     .favourite-item {
         width: 75%;
