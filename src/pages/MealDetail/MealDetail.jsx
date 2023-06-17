@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./styles.scss";
+import { useParams } from "react-router";
 import { Col, Radio, Row, Tag } from "antd";
 import { Link } from "react-router-dom";
 import { useGetMealDetailQuery } from "../../store/services/menuApi";
 
 const MealDetail = () => {
-  const id = "58DC67AC-57BA-4641-81B6-A9B56DBEC796";
+  const { id } = useParams();
   const detail = useGetMealDetailQuery(id)?.data?.data;
-
   const [portion, setPortion] = useState(1);
   const handleChange = (e) => {
     setPortion(e.target.value);

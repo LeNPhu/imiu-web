@@ -82,8 +82,6 @@ const Login = () => {
   const handleSignInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((data) => {
-        console.log(data);
-
         loginWithGoogle({
           accessToken: data._tokenResponse.oauthAccessToken,
         });

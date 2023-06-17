@@ -26,7 +26,6 @@ const Verify = () => {
   const emailTemp =  Cookies.get("emailTemp")
 
   const token = id + "." + expiration + ".";
-  console.log("token", token);
 
   useEffect(() => {
     if (token) {

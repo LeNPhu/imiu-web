@@ -6,8 +6,10 @@ import { useAddFavouriteMutation, useMealSelectionsMutation } from "../../store/
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const MealItem = ({ item }) => {
+  const navigate = useNavigate()
   const { accountId } = useSelector((state) => state.auth);
 
   const [name, setName] = useState(item.name);
@@ -43,7 +45,8 @@ const MealItem = ({ item }) => {
       toast.success("Đã thêm vào món yêu thích");
     }
   }, [isSuccessF]);
-  const handleMealSelection = async () => {
+  const handleMealSelection = async (e) => {
+    e.stopPropagation();
     if (accountId) {
       await mealSelections({
         id: accountId,
@@ -53,7 +56,9 @@ const MealItem = ({ item }) => {
       toast.error("Bạn phải đăng nhập để thực hiện chức năng này")
     }
   };
-  const handleMealFavourite = async () => {
+  const handleMealFavourite = async (e) => {
+    e.stopPropagation();
+
     if (accountId) {
       await addFavourite({
         id: accountId,
@@ -63,11 +68,14 @@ const MealItem = ({ item }) => {
       toast.error("Bạn phải đăng nhập để thực hiện chức năng này")
     }
   };
+  const handleViewDetail = (id) => {
+    navigate(`/meal-detail/${id}`);
+  };
   return (
-    <div className="meal-item">
+    <div className="meal-item" onClick={() => handleViewDetail(item.id)}>
       <div className="meal-item__img">
         <img
-          src="https://www.eatingwell.com/thmb/kaFmgjg8ydpS6bAq4Eli_WKJPL0=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ChickenFajitaCasserole-RM-0119-2000-bb08653878fb4bd29ece7674ad8bf1ab.jpg"
+          src={item.imageUrl}
           alt=""
         />
       </div>

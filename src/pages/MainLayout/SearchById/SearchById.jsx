@@ -11,7 +11,6 @@ const SearchById = () => {
   const tags = [{ id: id, name: name }];
   const { accountId } = useSelector((state) => state.auth);
   const [pageSize, setPageSize] = useState(5);
-  console.log("id: ",pageSize);
   const { data, isLoading } = useGetMenuQuery({
     customerId: accountId ? accountId : "",
     name: "",
@@ -20,7 +19,6 @@ const SearchById = () => {
     pageNumber: 1,
     pageSize: pageSize,
   });
-  console.log(data);
   return (
     <div>
       {isLoading ? (

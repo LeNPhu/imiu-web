@@ -13,9 +13,7 @@ const Pricing = () => {
   const navigate = useNavigate();
   const { isVerified, subscription } = useSelector((state) => state.auth);
   const { data, isLoading } = useSubscriptionsQuery();
-  console.log("subscription", subscription);
   const checkUser = (type, subId, item) => {
-    console.log("item", item);
     var state = { state: { from: "pricing", subId: subId, item: item } };
     if (isVerified && type == "Free") {
       navigate("/menu", state);
