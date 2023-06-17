@@ -127,8 +127,11 @@ const Footer = () => {
           <a>Privacy</a>
           <a>Accessibility</a>
           <div className="icon-container">
-            <SocialIcon className="icon" url="https://twitter.com" />
-            <SocialIcon className="icon" url="https://www.facebook.com/" />
+            <SocialIcon className="footer-icon" url="https://twitter.com" />
+            <SocialIcon
+              className="footer-icon"
+              url="https://www.facebook.com/"
+            />
           </div>
         </div>
       </footer>
@@ -187,8 +190,11 @@ const Footer = () => {
         </div>
         <div className="tablet-copyright">
           <div className="tablet-icon">
-            <SocialIcon className="icon" url="https://twitter.com" />
-            <SocialIcon className="icon" url="https://www.facebook.com/" />
+            <SocialIcon className="footer-icon" url="https://twitter.com" />
+            <SocialIcon
+              className="footer-icon"
+              url="https://www.facebook.com/"
+            />
           </div>
           <div className="copyright-info">
             <a>Terms and Conditions</a>

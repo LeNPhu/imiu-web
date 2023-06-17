@@ -52,9 +52,7 @@ const SettingNavbar = () => {
             key={index}
             to={`/setting${item.path}`}
             // what the fuck
-            className={
-              "navbar-item " + (active === index ? "active" : undefined)
-            }
+            className={"navbar-item "}
             onClick={handleClick}
           >
             <div className="item-icon">{item.icon}</div>

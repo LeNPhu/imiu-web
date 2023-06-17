@@ -19,11 +19,11 @@ const Favourite = () => {
     if (data) {
       setPageNumber(data.metaData.currentPage);
     }
-  }, [data])
+  }, [data]);
   return (
     <>
       <span className="title raleway">Món ăn yêu thích</span>
-      <div className="profile content-item">
+      <div className=" content-item">
         <p className="item-title">
           Những món ăn bạn đã đánh dấu<span className="green"> yêu thích </span>
           sẽ được hiện thị ở mục này
@@ -32,12 +32,14 @@ const Favourite = () => {
           <Loading />
         ) : (
           <>
-            <CustomPagination
-              onChange={(page) => setPageNumber(page)}
-              currentPage={pageNumber}
-              totalPage={data?.metaData.totalPage}
-            />
-            <div className="favourite-container">
+            <div className="pagination">
+              <CustomPagination
+                onChange={(page) => setPageNumber(page)}
+                currentPage={pageNumber}
+                totalPage={data?.metaData.totalPage}
+              />
+            </div>
+            <div className="favourite-content">
               {data?.data.map((item, index) => {
                 return <MealItem key={index} item={item} />;
               })}

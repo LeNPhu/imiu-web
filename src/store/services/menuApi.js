@@ -10,13 +10,11 @@ export const menuApi = createApi({
   }),
   endpoints: (builder) => ({
     getMenu: builder.query({
-      query: (data) => (
-        {
-          url: "meals",
-          method: "POST",
-          body: data,
-        }
-      ),
+      query: (data) => ({
+        url: "meals",
+        method: "POST",
+        body: data,
+      }),
       providesTags: ["menu"],
     }),
     getTags: builder.query({
@@ -25,7 +23,7 @@ export const menuApi = createApi({
     }),
     getMealDetail: builder.query({
       query: (id) => ({
-        url: `meals?mealId=${id}`,
+        url: `meals/${id}`,
         method: "GET",
       }),
     }),
