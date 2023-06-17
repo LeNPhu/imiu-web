@@ -123,7 +123,7 @@ const MealDetail = () => {
                         span={12}
                         style={{ textAlign: "end" }}
                       >
-                        {item.value} {item.code}
+                        {item.value} {item.unit}
                       </Col>
                     </>
                   );
