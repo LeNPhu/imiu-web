@@ -34,7 +34,6 @@ const Menu = () => {
     },
   ];
   const { accountId } = useSelector((state) => state.auth);
-  console.log("accountid", accountId);
   const { data: dataTag } = useGetTagsQuery();
   const [searchString, setSearchString] = useState("");
   const [tags, setTags] = useState();
@@ -48,7 +47,6 @@ const Menu = () => {
     pageNumber: pageNumber,
     pageSize: 3,
   });
-  console.log("data", data);
   useEffect(() => {
     if (dataTag) {
       setTags(dataTag.data);
@@ -64,11 +62,9 @@ const Menu = () => {
   };
   const onChange = (checkedValues) => {
     setTags(checkedValues);
-    console.log("checked = ", checkedValues);
   };
   const onChangeDifficulty = (checkedValues) => {
     setDif(checkedValues);
-    console.log("checked = ", checkedValues);
   };
 
   const handleViewAll = (id, name) => {
@@ -158,8 +154,8 @@ const Menu = () => {
                         </p>
                       </div>
                       <div className="menu-content__item__list">
-                        {item.data.map((item, index) => {
-                          return <MealItem key={index} item={item} />;
+                        {item.data.map((item) => {
+                          return <MealItem key={item.id} item={item} />;
                         })}
                       </div>
                     </div>

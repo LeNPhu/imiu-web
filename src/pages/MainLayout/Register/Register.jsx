@@ -47,8 +47,6 @@ const Register = () => {
   const handleSignInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((data) => {
-        console.log(data);
-
         loginWithGoogle({
           accessToken: data._tokenResponse.oauthAccessToken,
         });
@@ -59,7 +57,6 @@ const Register = () => {
   };
 
   const onFinish = (values) => {
-    console.log("values", values);
     Cookies.set("emailTemp", values.email, { expires: 1 / 150, path: "" });
     register(values);
   };

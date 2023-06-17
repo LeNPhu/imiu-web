@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 
 const Home = () => {
   const auth = useSelector((state) => state.auth);
-  console.log("auth", auth);
+
   const navigate = useNavigate();
 
   const handleClickScroll = () => {
