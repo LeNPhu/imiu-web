@@ -7,13 +7,6 @@ export const menuApi = createApi({
     headers: {
       "Content-Type": "application/json",
     },
-    prepareHeaders: (headers, { getState }) => {
-      //   const token = useSelector((state) => state.auth);
-      //   if (token) {
-      //     headers.set("authorization", `Bearer ${token}`);
-      //   }
-      //   return headers;
-    },
   }),
   endpoints: (builder) => ({
     getMenu: builder.query({

@@ -77,7 +77,7 @@ const Pricing = () => {
               })}
 
               <div className="button">
-                {item.name == subscription?.name ? (
+                {item.name == subscription ? (
                   <Button disabled block type="primary">
                     <b>Bạn đang dùng gói này</b>
                   </Button>

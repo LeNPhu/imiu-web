@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { selectToken } from "../authSlice";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -42,6 +43,14 @@ export const authApi = createApi({
         method: "POST",
         body: data,
       }),
+      prepareHeaders: (headers, { getState }) => {
+        const token = selectToken(getState());
+        console.log("token", token);
+        if (token) {
+          headers.set("authorization", `Bearer ${token}`);
+        }
+        return headers;
+      },
     }),
   })
 });
