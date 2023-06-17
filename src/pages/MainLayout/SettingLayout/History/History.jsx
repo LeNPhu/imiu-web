@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.scss";
+import "../Favourite/style.scss";
 import { useGetSelectedQuery } from "../../../../store/services/accountApi";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -23,7 +23,7 @@ const History = () => {
   return (
     <>
       <span className="title raleway">Món ăn đã áp dụng</span>
-      <div className="profile content-item">
+      <div className=" content-item">
         <p className="item-title">
           Những món ăn bạn đã áp dụng hoặc đã xem qua sẽ được hiện thị ở mục
           này.
@@ -32,12 +32,14 @@ const History = () => {
           <Loading />
         ) : (
           <>
-            <CustomPagination
-              onChange={(page) => setPageNumber(page)}
-              currentPage={pageNumber}
-              totalPage={data?.metaData.totalPage}
-            />
-            <div className="favourite-container">
+            <div className="pagination">
+              <CustomPagination
+                onChange={(page) => setPageNumber(page)}
+                currentPage={pageNumber}
+                totalPage={data?.metaData.totalPage}
+              />
+            </div>
+            <div className="favourite-content">
               {data?.data.map((item, index) => {
                 return <MealItem key={index} item={item} />;
               })}

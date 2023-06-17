@@ -8,18 +8,26 @@ import {
   useGetAnswerQuery,
 } from "../../../store/services/customerAnswerApi";
 import { useSelector } from "react-redux";
+import Loading from "../../../components/Loading/Loading";
+import { toast } from "react-hot-toast";
 
 const Question = () => {
   const uId = useSelector((store) => store.auth.accountId);
 
-  const questions = useGetQuestionQuery()?.data?.data;
+  const { data: questions, isLoading: isLoadingQuestion } =
+    useGetQuestionQuery();
   const [answer, setAnswer] = useState([]);
   const userAns = useGetAnswerQuery(uId)?.data?.data;
   const [createAnswer, { data, isLoading, error }] = useCreateAnswerMutation();
 
   useEffect(() => {
-    setAnswer(userAns);
+    userAns ? setAnswer(userAns) : null;
   }, [questions]);
+  useEffect(() => {
+    if (data) {
+      toast.success("Cập nhật thành công");
+    }
+  });
   const confirm = (e) => {
     createAnswer({ answer, id: uId });
   };
@@ -79,6 +87,9 @@ const Question = () => {
       return answer.find((element) => element.answerId == id).value;
     }
   };
+  if (isLoadingQuestion) {
+    return <Loading />;
+  }
   return (
     <div className="question">
       <div className="question__wrapper">
@@ -87,7 +98,7 @@ const Question = () => {
           nhé
         </h2>
 
-        {questions?.map((item) => {
+        {questions?.data?.map((item) => {
           return (
             <div key={item.index} className="question__item">
               <h5>{item.content}</h5>

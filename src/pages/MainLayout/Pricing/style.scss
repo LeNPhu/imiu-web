@@ -10,8 +10,9 @@
     @include flex(null, center, center);
     padding: 100px 15rem;
     gap: 2.5rem;
+
     @include tablet {
-        flex-direction: column;
+      flex-direction: column;
     }
 
     .card {
@@ -25,6 +26,7 @@
       min-width: 350px;
       gap: 15px;
       position: relative;
+
       .card-title {
         font-size: 2.5rem;
         font-weight: 700;
@@ -33,6 +35,7 @@
       .card-price {
         font-size: 3.5rem;
         font-weight: 800;
+
         .duration {
           font-size: 20px;
         }
@@ -43,6 +46,7 @@
         margin-bottom: 2rem;
         font-weight: 400;
       }
+
       .button {
         @include flex(null, center, center);
         position: absolute;

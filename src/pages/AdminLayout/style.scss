@@ -30,7 +30,7 @@
         .logout-container {
             margin-top: auto;
             display: flex;
-            color: var(--third-color);
+            color: #ffff;
             background-color: var(--primary-color);
             padding: 12px 14px;
             font-size: 1.65rem;
@@ -38,15 +38,19 @@
             overflow: hidden;
             transition: 0.3s;
             cursor: pointer;
+            border: solid 1px var(--primary-color);
 
             &:hover {
                 color: var(--primary-color);
                 background-color: var(--fourth-color);
+                border: solid 1px var(--primary-color);
             }
 
             .icon {
+
                 font-size: 1.9rem;
                 margin-right: 1rem;
+                @include flex(null, center, center);
             }
         }
     }

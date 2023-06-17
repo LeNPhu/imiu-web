@@ -1,7 +1,7 @@
 @use "../../../assets/scss/" as *;
 
 .setting-container {
-    padding: 0px 9%;
+    padding-left: 9%;
     @include flex(row, null, null);
     background-color: #FFF7E7;
 

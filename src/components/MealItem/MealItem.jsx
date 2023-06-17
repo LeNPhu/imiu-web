@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import "./styles.scss";
 import { Button, Divider } from "antd";
 import { FaStar, FaRegStar } from "react-icons/fa";
-import { useAddFavouriteMutation, useMealSelectionsMutation } from "../../store/services/accountApi";
+import {
+  useAddFavouriteMutation,
+  useMealSelectionsMutation,
+} from "../../store/services/accountApi";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const MealItem = ({ item }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { accountId } = useSelector((state) => state.auth);
 
   const [name, setName] = useState(item.name);
@@ -38,7 +41,7 @@ const MealItem = ({ item }) => {
     if (isSuccess) {
       toast.success("Đã thêm món vào thực đơn hôm nay");
     }
-  }, [ isSuccess]);
+  }, [isSuccess]);
   useEffect(() => {
     if (isSuccessF) {
       setIsFavourite(!isFavourite);
@@ -53,7 +56,7 @@ const MealItem = ({ item }) => {
         mealId: item.id,
       });
     } else {
-      toast.error("Bạn phải đăng nhập để thực hiện chức năng này")
+      toast.error("Bạn phải đăng nhập để thực hiện chức năng này");
     }
   };
   const handleMealFavourite = async (e) => {
@@ -65,7 +68,7 @@ const MealItem = ({ item }) => {
         mealId: item.id,
       });
     } else {
-      toast.error("Bạn phải đăng nhập để thực hiện chức năng này")
+      toast.error("Bạn phải đăng nhập để thực hiện chức năng này");
     }
   };
   const handleViewDetail = (id) => {
@@ -74,10 +77,7 @@ const MealItem = ({ item }) => {
   return (
     <div className="meal-item" onClick={() => handleViewDetail(item.id)}>
       <div className="meal-item__img">
-        <img
-          src={item.imageUrl}
-          alt=""
-        />
+        <img src={item.imageUrl} alt="" />
       </div>
       <div className="meal-item__content">
         <div className="name">

@@ -1,40 +1,46 @@
 import React, { useState } from "react";
 import "./styles.scss";
 import { useParams } from "react-router";
-import { Col, Radio, Row, Tag } from "antd";
+import { Button, Col, Divider, Radio, Row, Tag } from "antd";
 import { Link } from "react-router-dom";
 import { useGetMealDetailQuery } from "../../store/services/menuApi";
+import Loading from "../../components/Loading/Loading";
+import { FaRegStar, FaStar } from "react-icons/fa";
 
 const MealDetail = () => {
   const { id } = useParams();
-  const detail = useGetMealDetailQuery(id)?.data?.data;
+  const { data, isLoading } = useGetMealDetailQuery(id);
   const [portion, setPortion] = useState(1);
+  console.log(data);
   const handleChange = (e) => {
     setPortion(e.target.value);
   };
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="meal">
       <div className="meal__img">
-        <img src="" alt="" />
+        <img src={data?.data?.imageUrl} alt="" />
       </div>
       <div className="content">
         <div className="meal__content">
           <div className="meal__content__description">
-            <h2>{detail?.name}</h2>
+            <h2>{data?.data?.name}</h2>
             <div className="meal__content__description__flex">
               <div className="meal__content__description__flex__summarize">
-                {detail?.summary}
+                {data?.data?.summary}
               </div>
               <div className="meal__content__description__flex__detail">
                 <div>
                   <b>Thời gian nấu ăn</b>
-                  <p>{detail?.cookingTime} phút</p>
+                  <p>{data?.data?.cookingTime} phút</p>
                 </div>
                 <div>
                   <b>Độ khó</b>
                   <p>
                     {(() => {
-                      switch (detail?.difficulty) {
+                      switch (data?.data?.difficulty) {
                         case 1:
                           return "Dễ";
                         case 2:
@@ -51,7 +57,7 @@ const MealDetail = () => {
             </div>
             <div className="meal__content__description__tags">
               <b>Tag:</b>
-              {detail?.mealTags?.map((item, index) => {
+              {data?.data?.mealTags?.map((item, index) => {
                 return (
                   <Tag color="#0CBF1E" key={index}>
                     {item.name}
@@ -87,7 +93,7 @@ const MealDetail = () => {
                   className="meal__content__detail__recipe__item__row"
                   gutter={[16, 24]}
                 >
-                  {detail?.mealIngredients.map((item, index) => {
+                  {data?.data?.mealIngredients.map((item, index) => {
                     return (
                       <Col key={index} span={12}>
                         <p>
@@ -108,7 +114,7 @@ const MealDetail = () => {
                 gutter={[16, 20]}
                 className="meal__content__detail__nutrition__content"
               >
-                {detail?.nutritionFacts.map((item, index) => {
+                {data?.data?.nutritionFacts.map((item, index) => {
                   return (
                     <>
                       <Col
@@ -123,7 +129,7 @@ const MealDetail = () => {
                         span={12}
                         style={{ textAlign: "end" }}
                       >
-                        {item.value} {item.unit}
+                        {item.value} {item.code}
                       </Col>
                     </>
                   );
@@ -143,7 +149,7 @@ const MealDetail = () => {
           <div className="meal__content__recipe">
             <h3>Các bước tiến hành</h3>
             <Row gutter={[24, 24]}>
-              {detail?.directions.map((item, index) => {
+              {data?.data?.directions.map((item, index) => {
                 return (
                   <>
                     <Col
@@ -159,6 +165,7 @@ const MealDetail = () => {
                         {item.instruction}
                       </li>
                     </Col>
+                    <Divider />
                   </>
                 );
               })}

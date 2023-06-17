@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { HiOutlineLogout } from "react-icons/hi";
 import "./style.scss";
 import logoImiu from "../../assets/images/logo-imiu.svg";
+import { logout } from "../../store/authSlice";
 const AdminLayout = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();

@@ -1,10 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { MdDashboard, MdRoomService } from "react-icons/md";
-import { FaMoneyBill, FaBuilding, FaUserAlt } from "react-icons/fa";
-import { BsFillPeopleFill } from "react-icons/bs";
-import { HiHome } from "react-icons/hi";
-import { IoNewspaperSharp } from "react-icons/io5";
+import { MdDashboard } from "react-icons/md";
+import { FaMoneyBill, FaUser } from "react-icons/fa";
+
 import "./style.scss";
 const routes = [
   {
@@ -14,12 +12,12 @@ const routes = [
   },
   {
     path: "/admin/user",
-    name: "Contract",
-    icon: <IoNewspaperSharp />,
+    name: "Users",
+    icon: <FaUser />,
   },
   {
-    path: "/admin/bill",
-    name: "Bill",
+    path: "/admin/transaction",
+    name: "Transactions",
     icon: <FaMoneyBill />,
   },
 ];

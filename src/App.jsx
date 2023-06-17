@@ -26,8 +26,8 @@ import ProtectedRoutes from "./routes/ProtectedRoutes";
 import { Toaster } from "react-hot-toast";
 import Payment from "./pages/MainLayout/Payment/Payment";
 import SearchById from "./pages/MainLayout/SearchById/SearchById";
+import Transaction from "./pages/AdminLayout/Transaction/Transaction";
 const App = () => {
-
   return (
     <>
       <BrowserRouter>
@@ -67,6 +67,7 @@ const App = () => {
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminDashboard />} />
                 <Route path="user" element={<User />} />
+                <Route path="transaction" element={<Transaction />} />
               </Route>
             </Route>
             {/* <Route path="*" element={<Error />} /> */}

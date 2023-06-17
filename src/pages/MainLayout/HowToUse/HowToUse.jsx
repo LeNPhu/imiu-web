@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import "./style.scss";
 import { Steps } from "antd";
+import step1 from "../../../assets/images/howtouse-step1.png";
+import step2 from "../../../assets/images/howtouse-step2.png";
+import step3 from "../../../assets/images/howtouse-step3.png";
 const HowToUse = () => {
+  const images = [step1, step2, step3];
   const [current, setCurrent] = useState(0);
   const onChange = (value) => {
     setCurrent(value);
+    console.log(value);
   };
   const items = [
     {
@@ -26,7 +31,9 @@ const HowToUse = () => {
         Hướng dẫn đăng ký sử dụng <span className="green">I.Miu</span>
       </div>
       <div className="content">
-        <div className="illustration"></div>
+        <div className="illustration">
+          <img src={images[current]} />
+        </div>
 
         <Steps
           direction="vertical"
