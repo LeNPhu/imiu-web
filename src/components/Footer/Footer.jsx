@@ -71,7 +71,7 @@ const Footer = () => {
   ];
 
   const isTablet = useMediaQuery({ query: "(min-width: 1024px)" });
-  //console.log(isTablet);
+
   if (isTablet)
     return (
       <footer className="footer-container">

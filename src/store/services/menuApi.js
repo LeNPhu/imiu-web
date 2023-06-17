@@ -11,7 +11,6 @@ export const menuApi = createApi({
   endpoints: (builder) => ({
     getMenu: builder.query({
       query: (data) => (
-        console.log("qr", data),
         {
           url: "meals",
           method: "POST",

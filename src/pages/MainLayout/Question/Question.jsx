@@ -20,7 +20,6 @@ const Question = () => {
   useEffect(() => {
     setAnswer(userAns);
   }, [questions]);
-  console.log(answer);
   const confirm = (e) => {
     createAnswer({ answer, id: uId });
   };
@@ -77,7 +76,6 @@ const Question = () => {
   };
   const initValue = (id) => {
     if (answer?.some((element) => element.answerId == id)) {
-      console.log(answer.find((element) => element.answerId == id).value);
       return answer.find((element) => element.answerId == id).value;
     }
   };
