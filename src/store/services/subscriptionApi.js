@@ -7,13 +7,6 @@ export const subscriptionApi = createApi({
     headers: {
       "Content-Type": "application/json",
     },
-    prepareHeaders: (headers, { getState }) => {
-      //   const token = useSelector((state) => state.auth);
-      //   if (token) {
-      //     headers.set("authorization", `Bearer ${token}`);
-      //   }
-      //   return headers;
-    },
   }),
   tagTypes: ["subscription"],
   endpoints: (builder) => ({

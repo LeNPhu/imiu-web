@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { selectToken } from "../authSlice";
 
 export const accountApi = createApi({
   reducerPath: "accountApi",
@@ -6,6 +7,14 @@ export const accountApi = createApi({
     baseUrl: import.meta.env.VITE_API + "accounts",
     headers: {
       "Content-Type": "application/json",
+    },
+    prepareHeaders: (headers, { getState }) => {
+      const token = selectToken(getState());
+      console.log("token", token);
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+      return headers;
     },
   }),
   tagTypes: ["Account"],

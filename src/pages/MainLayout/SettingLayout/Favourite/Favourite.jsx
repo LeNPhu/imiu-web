@@ -5,15 +5,21 @@ import { useGetFavouriteQuery } from "../../../../store/services/accountApi";
 import { useSelector } from "react-redux";
 import CustomPagination from "../../../../components/CustomPagination/CustomPagination";
 import { useState } from "react";
+import Loading from "../../../../components/Loading/Loading";
+import { useEffect } from "react";
 const Favourite = () => {
   const { accountId } = useSelector((state) => state.auth);
   const [pageNumber, setPageNumber] = useState(1);
   const { data, isLoading } = useGetFavouriteQuery({
     id: accountId,
-    pageNumber: 1,
+    pageNumber: pageNumber,
     pageSize: 6,
   });
-  console.log("data", data);
+  useEffect(() => {
+    if (data) {
+      setPageNumber(data.metaData.currentPage);
+    }
+  }, [data])
   return (
     <>
       <span className="title raleway">Món ăn yêu thích</span>
@@ -22,16 +28,22 @@ const Favourite = () => {
           Những món ăn bạn đã đánh dấu<span className="green"> yêu thích </span>
           sẽ được hiện thị ở mục này
         </p>
-        <CustomPagination
-          // onChange={() => setPageNumber()}
-          currentPage={pageNumber}
-          totalPage={data?.metaData.totalPage}
-        />
-        <div className="favourite-container">
-          {data?.data.map((item, index) => {
-            return <MealItem key={index} item={item} />;
-          })}
-        </div>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <CustomPagination
+              onChange={(page) => setPageNumber(page)}
+              currentPage={pageNumber}
+              totalPage={data?.metaData.totalPage}
+            />
+            <div className="favourite-container">
+              {data?.data.map((item, index) => {
+                return <MealItem key={index} item={item} />;
+              })}
+            </div>
+          </>
+        )}
       </div>
     </>
   );

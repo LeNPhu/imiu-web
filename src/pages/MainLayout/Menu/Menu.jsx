@@ -54,6 +54,11 @@ const Menu = () => {
       setTags(dataTag.data);
     }
   }, [dataTag]);
+  useEffect(() => {
+    if (data) {
+      setPageNumber(data.metaData.currentPage);
+    }
+  }, [data])
   const onSearch = (value) => {
     setSearchString(value);
   };
@@ -135,7 +140,7 @@ const Menu = () => {
               </div>
               <div className="menu-content__wrapper">
                 <CustomPagination
-                  // onChange={() => setPageNumber()}
+                  onChange={(page) => setPageNumber(page)}
                   currentPage={pageNumber}
                   totalPage={data?.metaData.totalPage}
                 />

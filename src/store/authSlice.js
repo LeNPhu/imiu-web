@@ -36,7 +36,7 @@ const authSlice = createSlice({
       Cookies.set("account", JSON.stringify(action.payload.data), {
         expires: 1 / 48,
       });
-      Cookies.set("subscription", action.payload.data.subcription, {
+      Cookies.set("subscription", action.payload.data.subcription.name, {
         expires: 1 / 48,
       });
 
@@ -45,7 +45,7 @@ const authSlice = createSlice({
       state.accessToken = action.payload.data.accessToken;
       state.accountId = action.payload.data.accountId;
       state.email = action.payload.data.email;
-      state.subscription = action.payload.data.subcription;
+      state.subscription = action.payload.data.subcription.name;
       state.hasPassword = action.payload.data.hasPassword;
     },
     setSubscription: (state, action) => {
@@ -59,4 +59,5 @@ const authSlice = createSlice({
 });
 
 export const { setAuth, logout, setSubscription } = authSlice.actions;
+export const selectToken = (state) => state.auth.accessToken;
 export default authSlice;

@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { selectToken } from "../authSlice";
 
 export const paymentApi = createApi({
   reducerPath: "paymentApi",
@@ -8,11 +9,12 @@ export const paymentApi = createApi({
       "Content-Type": "application/json",
     },
     prepareHeaders: (headers, { getState }) => {
-      //   const token = useSelector((state) => state.auth);
-      //   if (token) {
-      //     headers.set("authorization", `Bearer ${token}`);
-      //   }
-      //   return headers;
+      const token = selectToken(getState());
+      console.log("token", token);
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+      return headers;
     },
   }),
   tagTypes: ["payment"],

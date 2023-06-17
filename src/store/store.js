@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 // import { setupListeners } from '@reduxjs/toolkit/query'
-import { userApi } from "./services/userApi.js";
 import { authApi } from "./services/authApi.js";
 import authSlice from "./authSlice.js";
 import { questionApi } from "./services/questionApi.js";
@@ -14,7 +13,6 @@ import { accountApi } from "./services/accountApi.js";
 export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
-    [userApi.reducerPath]: userApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [questionApi.reducerPath]: questionApi.reducer,
     [customerAnswerApi.reducerPath]: customerAnswerApi.reducer,
@@ -27,7 +25,6 @@ export const store = configureStore({
 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
-      userApi.middleware,
       authApi.middleware,
       questionApi.middleware,
       customerAnswerApi.middleware,
