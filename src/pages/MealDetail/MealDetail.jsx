@@ -18,7 +18,6 @@ const MealDetail = () => {
   const { data, isLoading } = useGetMealDetailQuery(id);
   const [portion, setPortion] = useState(1);
   const [mealSelections, { isSuccess }] = useMealSelectionsMutation();
-  console.log(data);
   useEffect(() => {
     if (isSuccess) {
       toast.success("Đã thêm món vào thực đơn hôm nay");

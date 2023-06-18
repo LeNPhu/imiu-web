@@ -60,9 +60,12 @@ const authSlice = createSlice({
       });
       state.subscription = action.payload.subscription;
     },
+    setToken: (state, action) => {
+      state.accessToken = action.payload;
+    }
   },
 });
 
-export const { setAuth, logout, setSubscription } = authSlice.actions;
+export const { setAuth, logout, setSubscription, setToken } = authSlice.actions;
 export const selectToken = (state) => state.auth.accessToken;
 export default authSlice;
