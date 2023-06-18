@@ -3,9 +3,10 @@
 .meal {
   display: flex;
   flex-direction: column;
+  background-color: rgba(94, 255, 0, 0.1);
 
   .meal__img {
-    height: 300px;
+    height: 400px;
     width: 100%;
 
     img {
@@ -18,14 +19,11 @@
   }
 
   .content {
-
     width: 100%;
     @include flex(null, center, center);
     padding: 0 10rem;
 
-
     .meal__content {
-
       translate: 0 -10%;
       width: 1000px;
       height: 100%;
@@ -58,6 +56,10 @@
               margin-bottom: 2rem;
             }
           }
+        }
+        .tags_container {
+          display: flex;
+          justify-content: space-between;
         }
 
         &__tags {
@@ -93,24 +95,24 @@
               @include flex(row, null, center);
               gap: 1.5rem;
             }
-
           }
-
-
-
 
           &__item {
             padding: 3rem;
 
             &__row {
               padding: 1.5rem;
+              .recipe-amount {
+                font-weight: normal;
+                font-size: 15px;
+              }
+              .recipe-name {
+                font-size: 16px;
+                text-transform: capitalize;
+              }
             }
           }
-
-
         }
-
-
 
         &__nutrition {
           width: 33.33%;
@@ -158,17 +160,13 @@
           &__title {
             font-size: 1.8rem;
             font-weight: 600;
-
           }
 
           &__detail {
-            margin-left: 3rem;
+            padding: 0 3rem;
+            font-size: 16px;
           }
-
-
         }
-
-
       }
     }
   }
