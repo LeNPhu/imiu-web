@@ -8,6 +8,8 @@ import {
   useGetTransactionsQuery,
   useUpdateTransactionsMutation,
 } from "../../store/services/transactionApi";
+import { toast } from "react-hot-toast";
+import { useEffect } from "react";
 const options = [
   {
     value: 0,
@@ -29,6 +31,11 @@ const TransactionDrawer = (props) => {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState(data.status);
   const { refetch } = useGetTransactionsQuery();
+  useEffect(() => {
+    if (dataTrans) {
+      toast.success("Cập nhật thành công");
+    }
+  }, [dataTrans]);
   const showDrawer = () => {
     setOpen(true);
   };
@@ -83,6 +90,7 @@ const TransactionDrawer = (props) => {
           </Col>
           <Col span={12}>
             <Select
+              style={{ width: "100%" }}
               options={options}
               defaultValue={status}
               onChange={handleChange}
