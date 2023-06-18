@@ -8,6 +8,13 @@ export const authApi = createApi({
     headers: {
       "Content-Type": "application/json",
     },
+    prepareHeaders: (headers, { getState }) => {
+      const token = selectToken(getState());
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
   tagTypes: ["Auth"],
   endpoints: (builder) => ({
@@ -43,13 +50,6 @@ export const authApi = createApi({
         method: "POST",
         body: data,
       }),
-      prepareHeaders: (headers, { getState }) => {
-        const token = selectToken(getState());
-        if (token) {
-          headers.set("authorization", `Bearer ${token}`);
-        }
-        return headers;
-      },
     }),
   })
 });

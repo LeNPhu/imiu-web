@@ -15,7 +15,7 @@ import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import settingLogo from "../../../assets/images/setting-logo.svg";
-import { setAuth } from "../../../store/authSlice";
+import { setAuth, setToken } from "../../../store/authSlice";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
@@ -42,6 +42,7 @@ const Login = () => {
       } else {
         //Login thanh cong nhung chua xac thuc tai khoan
         //mo form xac thuc tai khoan
+        dispatch(setToken(data?.data.accessToken));
         setIsVerifyAccount(true);
       }
     }

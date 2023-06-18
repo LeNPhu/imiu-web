@@ -140,7 +140,7 @@ const Menu = () => {
                   currentPage={pageNumber}
                   totalPage={data?.metaData.totalPage}
                 />
-                {data?.data.length == 0 ? <p>Không có dữ liệu.</p> : ""}
+                {data?.data.length == 0 ? <p style={{textAlign: "center"}}>Không có dữ liệu.</p> : ""}
                 {data?.data.map((item, index) => {
                   return (
                     <div key={index} className="menu-content__item">

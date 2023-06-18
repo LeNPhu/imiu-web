@@ -10,7 +10,7 @@ export const menuApi = createApi({
   }),
   endpoints: (builder) => ({
     getMenu: builder.query({
-      query: (data) => ({
+      query: (data) => (console.log("dâta", data),{
         url: "meals",
         method: "POST",
         body: data,
