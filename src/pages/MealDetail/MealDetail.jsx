@@ -6,14 +6,36 @@ import { Link } from "react-router-dom";
 import { useGetMealDetailQuery } from "../../store/services/menuApi";
 import Loading from "../../components/Loading/Loading";
 import { FaRegStar, FaStar } from "react-icons/fa";
+import { useMealSelectionsMutation } from "../../store/services/accountApi";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
 
 const MealDetail = () => {
   const { id } = useParams();
+  const { accountId } = useSelector((state) => state.auth);
+
   const { data, isLoading } = useGetMealDetailQuery(id);
   const [portion, setPortion] = useState(1);
+  const [mealSelections, { isSuccess }] = useMealSelectionsMutation();
   console.log(data);
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Đã thêm món vào thực đơn hôm nay");
+    }
+  }, [isSuccess]);
   const handleChange = (e) => {
     setPortion(e.target.value);
+  };
+  const handleMealSelection = async (e) => {
+    if (accountId) {
+      await mealSelections({
+        id: accountId,
+        mealId: id,
+      });
+    } else {
+      toast.error("Bạn phải đăng nhập để thực hiện chức năng này");
+    }
   };
   if (isLoading) {
     return <Loading />;
@@ -55,15 +77,26 @@ const MealDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="meal__content__description__tags">
-              <b>Tag:</b>
-              {data?.data?.mealTags?.map((item, index) => {
-                return (
-                  <Tag color="#0CBF1E" key={index}>
-                    {item.name}
-                  </Tag>
-                );
-              })}
+            <div className="tags_container">
+              <div className="meal__content__description__tags">
+                <b>Tag:</b>
+                {data?.data?.mealTags?.map((item, index) => {
+                  return (
+                    <Tag color="#0CBF1E" key={index}>
+                      {item.name}
+                    </Tag>
+                  );
+                })}
+              </div>
+              <div className="select-button">
+                <Button
+                  type="primary"
+                  style={{ fontWeight: "bold" }}
+                  onClick={handleMealSelection}
+                >
+                  Chọn món này vào thực đơn của bạn
+                </Button>
+              </div>
             </div>
           </div>
           <div className="meal__content__detail">
@@ -96,9 +129,10 @@ const MealDetail = () => {
                   {data?.data?.mealIngredients.map((item, index) => {
                     return (
                       <Col key={index} span={12}>
-                        <p>
-                          {item.name}: {item.quantity * portion} {item.unit}
-                        </p>
+                        <Row className="recipe-amount">
+                          {item.quantity * portion} {item.unit}
+                        </Row>
+                        <p className="recipe-name">{item.name}</p>
                       </Col>
                     );
                   })}
