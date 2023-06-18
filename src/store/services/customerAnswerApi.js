@@ -20,7 +20,7 @@ export const customerAnswerApi = createApi({
   endpoints: (builder) => ({
     createAnswer: builder.mutation({
       query: (data) => ({
-        method: "POST",
+        method: "PUT",
         body: data.answer,
         url: `?accountId=${data.id}`,
       }),

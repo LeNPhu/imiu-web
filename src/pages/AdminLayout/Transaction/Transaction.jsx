@@ -3,26 +3,20 @@ import { useEffect } from "react";
 import { useState } from "react";
 import "./style.scss";
 import { useGetTransactionsQuery } from "../../../store/services/transactionApi";
-import { Button, Select, Table } from "antd";
-const options = [
-  {
-    value: "PAID",
-    label: "PAID",
-  },
-  {
-    value: "PENDING",
-    label: "PENDING",
-  },
-  {
-    value: "UNPAID",
-    label: "UNPAID",
-  },
-];
+import { Button, Input, Select, Table, Tag } from "antd";
+import Loading from "../../../components/Loading/Loading";
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  SyncOutlined,
+} from "@ant-design/icons";
+import TransactionDrawer from "../../../components/TransactionDrawer/TransactionDrawer";
+
 const columns = [
   {
-    title: "Account ID",
-    dataIndex: "accountId",
-    key: "accountId",
+    title: "Account Name",
+    dataIndex: "accountName",
+    key: "accountName",
     sorter: (a, b) => a.accountId.localeCompare(b.accountId),
   },
   {
@@ -52,31 +46,59 @@ const columns = [
     key: "status",
 
     render: (status) => {
-      return (
-        <>
-          <p>{status}</p>
-          <Select
-            style={{ width: "100%" }}
-            bordered={false}
-            options={options}
-            defaultValue={status}
-          />
-        </>
-      );
+      switch (status) {
+        case 0:
+          return (
+            <Tag className="tag" icon={<CheckCircleOutlined />} color="green">
+              PAID
+            </Tag>
+          );
+        case 1:
+          return (
+            <Tag className="tag" icon={<SyncOutlined spin />} color="blue">
+              PENDING
+            </Tag>
+          );
+        case 2:
+          return (
+            <Tag className="tag" icon={<CloseCircleOutlined />} color="red">
+              UNPAID
+            </Tag>
+          );
+      }
     },
-    sorter: (a, b) => a.status.localeCompare(b.status),
+    sorter: (a, b) => a.status - b.status,
+  },
+  {
+    title: "Action",
+    dataIndex: "action",
+    key: "action",
+    render: (_, record) => <TransactionDrawer data={record} />,
   },
 ];
 
 const Transaction = () => {
-  const data = useGetTransactionsQuery()?.data?.data;
+  const { data, isLoading } = useGetTransactionsQuery();
+  const [update, setUpdate] = useState([]);
+  useEffect(() => {
+    setUpdate(
+      data?.data.map((obj, index) => ({
+        ...obj, // copy existing properties
+        key: index, // add index as a property
+      }))
+    );
+  }, [data, data?.data]);
+  console.log(data?.data);
 
-  console.log(data);
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <div className="transaction-container">
       <h1 className="raleway title">Transaction</h1>
       <div className="table-container">
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={update} />
       </div>
     </div>
   );
