@@ -1,0 +1,14 @@
+@use "../../../../assets/scss/" as *;
+
+
+
+
+.pagination {
+    margin: auto;
+}
+
+.favourite-content {
+    @include flex(row, flex-start, flex-start);
+    flex-wrap: wrap;
+    gap: 3rem
+}

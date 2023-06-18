@@ -3,9 +3,35 @@
 .howto-container {
     padding: 70px 20%;
 
+    .title {
+        text-align: center;
+        font-size: 4rem;
+        margin-bottom: 70px;
+    }
 
-    .ant-steps-item-description {
-        width: 250px;
+    .content {
+        @include flex(row, center, center);
+        gap: 50px;
+
+
+        .illustration {
+
+            width: 800px;
+            aspect-ratio: 16/9;
+
+            img {
+                width: 100%;
+                height: 100%;
+
+                object-fit: cover;
+
+            }
+        }
+
+        .ant-steps {
+            width: 300px;
+
+        }
 
     }
 }

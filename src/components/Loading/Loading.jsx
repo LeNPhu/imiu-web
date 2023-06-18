@@ -1,8 +1,13 @@
+import { Spin } from "antd";
 import React from "react";
-import { Skeleton } from "antd";
+import "./style.scss";
 
 const Loading = () => {
-  return <Skeleton active />;
+  return (
+    <div className="loading">
+      <Spin />
+    </div>
+  );
 };
 
 export default Loading;

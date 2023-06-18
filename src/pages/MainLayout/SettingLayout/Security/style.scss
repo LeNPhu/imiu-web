@@ -1,0 +1,17 @@
+@use "../../../../assets/scss/" as *;
+
+.form-antd {
+    width: 100%;
+
+    .form-antd-item {
+        border-bottom: solid #AEB9BF 1px;
+
+        .ant-form-item-label {
+            text-align: start;
+        }
+    }
+
+    .last {
+        border-bottom: none;
+    }
+}

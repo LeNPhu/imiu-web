@@ -1,0 +1,21 @@
+@use "../../../assets/scss/" as *;
+
+.transaction-container {
+    @include flex(column, flex-start, flex-start);
+    gap: 30px;
+
+    .title {
+
+        font-size: 4rem;
+    }
+
+    .table-container {
+        width: 100%;
+        padding: 5rem;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: rgba(149, 157, 165, 0.074) 0px 8px 24px;
+
+        .tag {}
+    }
+}

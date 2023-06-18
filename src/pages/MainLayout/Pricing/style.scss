@@ -1,46 +1,61 @@
 @use "../../../assets/scss/" as *;
 
 .pricing-container {
-    .banner {
-        width: 100%;
-        // height: auto;
+  .banner {
+    width: 100%;
+    // height: auto;
+  }
+
+  .content {
+    @include flex(null, center, center);
+    padding: 100px 15rem;
+    gap: 2.5rem;
+
+    @include tablet {
+      flex-direction: column;
     }
 
-    .content {
-        padding: 100px 20%;
-        @include flex(row, center, center);
-        gap: 2.5rem;
+    .card {
+      @include flex(column, null, null);
+      border: solid 1px rgba(128, 128, 128, 0.174);
+      border-radius: 10px;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      padding: 3rem;
+      min-height: 500px;
+      height: auto;
+      min-width: 350px;
+      gap: 15px;
+      position: relative;
 
-        .card {
-            border: solid 1px rgba(128, 128, 128, 0.174);
-            border-radius: 10px;
-            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-            padding: 3rem;
-            height: 500px;
+      .card-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+      }
 
-            min-width: 300px;
-            @include flex(column, null, null);
-            gap: 15px;
+      .card-price {
+        font-size: 3.5rem;
+        font-weight: 800;
 
-            .card-title {
-                font-size: 2.5rem;
-                font-weight: 700;
-            }
-
-            .card-price {
-                font-size: 3.5rem;
-                font-weight: 800;
-            }
-
-            .card-info {
-                font-size: 1.5rem;
-                margin-bottom: 2rem;
-                font-weight: 400;
-            }
-
-            .ant-btn {
-                margin-top: auto;
-            }
+        .duration {
+          font-size: 20px;
         }
+      }
+
+      .card-info {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        font-weight: 400;
+      }
+
+      .button {
+        @include flex(null, center, center);
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        translate: 0 -50%;
+        padding: 0 2rem;
+      }
     }
+  }
 }

@@ -1,83 +1,97 @@
-import React, { useState } from "react";
+import React from "react";
 import pricingBanner from "../../../assets/images/pricing-banner.svg";
 import { FcCheckmark } from "react-icons/fc";
 import { FcCancel } from "react-icons/fc";
 import "./style.scss";
 import { Button } from "antd";
 import { useNavigate } from "react-router";
-import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
+import { useSubscriptionsQuery } from "../../../store/services/subscriptionApi";
+import Loading from "../../../components/Loading/Loading";
 
 const Pricing = () => {
   const navigate = useNavigate();
-  const [account, setAccount] = useState(
-    Cookies.get("account") ? JSON.parse(Cookies.get("account")) : null
-  );
-
-  console.log("account type", account);
-  const checkUser = (type) => {
-    console.log(type);
-    if (account?.isLogin && type == "free") {
-      navigate("/menu");
-    } else if (account?.isLogin && type == "premium") {
-      navigate("/question");
+  const { isVerified, subscription } = useSelector((state) => state.auth);
+  const { data, isLoading } = useSubscriptionsQuery();
+  const checkUser = (type, subId, item) => {
+    var state = { state: { from: "pricing", subId: subId, item: item } };
+    if (isVerified && type == "Free") {
+      navigate("/menu", state);
+    } else if (isVerified) {
+      navigate("/payment", state);
     } else {
       navigate("/login");
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="pricing-container">
       <img className="banner" src={pricingBanner} />
       <div className="content">
-        <div className="card">
-          <p className="card-title">Free</p>
-          <p className="card-price">$0</p>
-          <p className="card-info">dịch vụ miễn phí</p>
-          <p>
-            <FcCheckmark /> Số lượng công thức: 10 món, cập nhật hàng tuần
-          </p>
-          <p>
-            <FcCheckmark /> Giá trị dinh dưỡng chi tiết của nguyên liệu trong
-            thực đơn
-          </p>
-          <p>
-            <FcCheckmark /> Tùy chỉnh chế độ ăn uống
-          </p>
-          <p>
-            <FcCancel /> Không hướng dẫn cách thực hiện
-          </p>
-          <Button onClick={() => checkUser("free")} block type="primary">
-            <b>Bắt đầu</b>
-          </Button>
-        </div>
+        {data?.data.map((item, index) => {
+          return (
+            <div key={index} className="card">
+              <p className="card-title">
+                {item.name == "Premium" ? "Premium 🎉" : item.name}
+              </p>
+              <p className="card-price">
+                {item.value == 0
+                  ? "Free"
+                  : `${new Intl.NumberFormat("en-US")
+                      .format(item.value)
+                      .replace(",", ".")} ₫`}
+                <span
+                  className={`duration ${
+                    item.duration === "vĩnh viễn" && item.value != 0
+                      ? "green"
+                      : ""
+                  }`}
+                >
+                  {item.value != 0 ? ` / ${item.duration}` : ""}
+                </span>
+              </p>
+              <p className="card-info">
+                {item.value == 0
+                  ? "dịch vụ miễn phí"
+                  : "cho người dùng trả phí"}
+              </p>
+              {item.subscriptionDetails?.map((item) => {
+                return (
+                  <>
+                    {item.status == true ? (
+                      <p className="">
+                        <FcCheckmark /> {item.detail}
+                      </p>
+                    ) : (
+                      <p className="grey">
+                        <FcCancel /> {item.detail}
+                      </p>
+                    )}
+                  </>
+                );
+              })}
 
-        <div className="card">
-          <p className="card-title">Premium</p>
-          <p className="card-price">$100</p>
-          <p className="card-info">cho người dùng trả tiền</p>
-          <p>
-            <FcCheckmark /> Số lượng công thức đến 20 món cập nhật hàng tuần
-          </p>
-          <p>
-            <FcCheckmark /> Giá trị dinh dưỡng chi tiết của nguyên liệu trong
-            thực đơn
-          </p>
-          <p>
-            <FcCheckmark /> Tùy chỉnh chế độ ăn uống
-          </p>
-          <p>
-            <FcCheckmark /> Hướng dẫn chi tiết các chuẩn bị và thực hiện từng
-            công thức
-          </p>
-          {account?.accountType === "premium" ? (
-            <Button disabled>
-              <b>Current Plan</b>
-            </Button>
-          ) : (
-            <Button onClick={() => checkUser("premium")} block type="primary">
-              <b>Bắt đầu</b>
-            </Button>
-          )}
-        </div>
+              <div className="button">
+                {item.name == subscription ? (
+                  <Button disabled block type="primary">
+                    <b>Bạn đang dùng gói này</b>
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => checkUser(item.name, item.id, item)}
+                    block
+                    type="primary"
+                  >
+                    <b>Bắt đầu</b>
+                  </Button>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

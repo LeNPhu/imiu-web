@@ -1,23 +1,21 @@
-import { Button } from "antd";
+import { Button, Dropdown, Modal, Space } from "antd";
 import "./style.scss";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import userAvatar from "../../assets/images/user-avatar.svg";
 import imiuLogo from "../../assets/images/logo-imiu.svg";
 import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { DownOutlined } from "@ant-design/icons";
+import { logout } from "../../store/authSlice";
 
 const Header = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { role, isVerified } = useSelector((state) => state.auth);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [position, setPosition] = useState(window.pageYOffset);
   const [visible, setVisible] = useState(true);
-  const [account, setAccount] = useState(
-    Cookies.get("account") ? JSON.parse(Cookies.get("account")) : null
-  );
-  useEffect(() => {
-    setAccount(
-      Cookies.get("account") ? JSON.parse(Cookies.get("account")) : null
-    );
-  }, [Cookies.get("account")]);
+
   useEffect(() => {
     const handleScroll = () => {
       let moving = window.pageYOffset;
@@ -32,7 +30,26 @@ const Header = () => {
   });
 
   const cls = visible ? "visible" : "hidden";
-
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+    dispatch(logout());
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const items = [
+    {
+      label: <Link to="/setting">Account setting</Link>,
+      key: "0",
+    },
+    {
+      label: <div onClick={showModal}>Logout</div>,
+      key: "1",
+    },
+  ];
   return (
     <header className={`header-container ${cls}`}>
       <Link to="/">
@@ -47,11 +64,23 @@ const Header = () => {
       <Link to="/how-to-use" className="header-item">
         Hướng dẫn sử dụng
       </Link>
+      <Link to="/menu" className="header-item">
+        Menu
+      </Link>
       <div className="header-item last">
-
-        {account?.accountType === "premium" ? (
+        {role === "CUSTOMER" && isVerified ? (
           <>
             <img className="user-avatar" src={userAvatar} />
+            <Dropdown
+              menu={{
+                items,
+              }}
+              trigger={["click"]}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <DownOutlined />
+              </a>
+            </Dropdown>
           </>
         ) : (
           <>
@@ -65,8 +94,15 @@ const Header = () => {
             </Link>
           </>
         )}
-
       </div>
+      <Modal
+        title="Logout?"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <p>Do you want to sign out of Imiu?</p>
+      </Modal>
     </header>
   );
 };

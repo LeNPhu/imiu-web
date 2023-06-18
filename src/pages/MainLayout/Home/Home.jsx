@@ -13,14 +13,16 @@ import { Button, Col, Row } from "antd";
 import "animate.css/animate.min.css";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const auth = useSelector((state) => state.auth);
+
   const navigate = useNavigate();
 
   const handleClickScroll = () => {
     const element = document.getElementById("second");
     if (element) {
-      // 👇 Will scroll smoothly to the top of the next section
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
