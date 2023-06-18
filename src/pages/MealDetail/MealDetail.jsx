@@ -194,9 +194,9 @@ const MealDetail = () => {
                         Bước {item.stepNumber}:
                       </p>
 
-                      <li className="meal__content__recipe__content__detail">
+                      <p className="meal__content__recipe__content__detail">
                         {item.instruction}
-                      </li>
+                      </p>
                     </Col>
                     <Divider />
                   </>

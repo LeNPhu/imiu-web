@@ -57,6 +57,7 @@
             }
           }
         }
+
         .tags_container {
           display: flex;
           justify-content: space-between;
@@ -102,10 +103,12 @@
 
             &__row {
               padding: 1.5rem;
+
               .recipe-amount {
                 font-weight: normal;
-                font-size: 15px;
+                font-size: 16px;
               }
+
               .recipe-name {
                 font-size: 16px;
                 text-transform: capitalize;

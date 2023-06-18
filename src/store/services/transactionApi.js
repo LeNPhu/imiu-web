@@ -20,6 +20,13 @@ export const transactionApi = createApi({
     getTransactions: builder.query({
       query: () => ({}),
     }),
+    updateTransactions: builder.mutation({
+      query: (data) => ({
+        url: `?transactionId=${data.id}&status=${data.status}`,
+        method: "PUT",
+      }),
+    }),
   }),
 });
-export const { useGetTransactionsQuery } = transactionApi;
+export const { useGetTransactionsQuery, useUpdateTransactionsMutation } =
+  transactionApi;
