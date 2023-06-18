@@ -22,11 +22,11 @@ const SettingNavbar = () => {
       name: "Thay đổi mật khẩu",
       icon: <AiFillLock />,
     },
-    {
-      path: "/payment-info",
-      name: "Thẻ thanh toán đã lưu",
-      icon: <AiFillCreditCard />,
-    },
+    // {
+    //   path: "/payment-info",
+    //   name: "Thẻ thanh toán đã lưu",
+    //   icon: <AiFillCreditCard />,
+    // },
     {
       path: "/favourite",
       name: "Món ăn yêu thích",

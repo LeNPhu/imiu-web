@@ -10,22 +10,24 @@ import {
 import { useSelector } from "react-redux";
 import Loading from "../../../components/Loading/Loading";
 import { toast } from "react-hot-toast";
+import { Navigate, useNavigate } from "react-router";
 
 const Question = () => {
   const uId = useSelector((store) => store.auth.accountId);
-
+  const navigate = useNavigate();
   const { data: questions, isLoading: isLoadingQuestion } =
     useGetQuestionQuery();
   const [answer, setAnswer] = useState([]);
   const userAns = useGetAnswerQuery(uId)?.data?.data;
   const [createAnswer, { data, isLoading, error }] = useCreateAnswerMutation();
-
+  console.log(userAns);
   useEffect(() => {
     userAns ? setAnswer(userAns) : null;
-  }, [questions]);
+  }, [userAns]);
   useEffect(() => {
     if (data) {
       toast.success("Cập nhật thành công");
+      navigate("/menu");
     }
   });
   const confirm = (e) => {
