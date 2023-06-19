@@ -31,23 +31,25 @@ const Home = () => {
       <section className="container first">
         <img className="background" src={catBackground} />
         <div className="content">
-          <div className="info">
-            <span className="title raleway">
-              <span className="green">i.Miu</span>, Đồng hành cùng bạn trong mỗi
-              bữa ăn
-            </span>
-            <p>Lên thực đơn cho bữa ăn "Healthy" của bạn ngay bây giờ</p>
-            <div className="button">
-              <Link to="/menu">
-                <Button type="primary" value="large">
-                  Lên thực đơn ngay
+          <Row className="info">
+            <Col className="info-col" span={12}>
+              <span className="title raleway">
+                <span className="green">i.Miu</span>, Đồng hành cùng bạn trong
+                mỗi bữa ăn
+              </span>
+              <p>Lên thực đơn cho bữa ăn "Healthy" của bạn ngay bây giờ</p>
+              <div className="button">
+                <Link to="/menu">
+                  <Button type="primary" size="large">
+                    Lên thực đơn ngay
+                  </Button>
+                </Link>
+                <Button onClick={handleClickScroll} size="large">
+                  Khám phá
                 </Button>
-              </Link>
-              <Button onClick={handleClickScroll} value="large">
-                Khám phá
-              </Button>
-            </div>
-          </div>
+              </div>
+            </Col>
+          </Row>
         </div>
       </section>
 

@@ -3,6 +3,7 @@
 .landing-container {
   .container {
     position: relative;
+    overflow: HIDDEN;
   }
 
   .first {
@@ -17,28 +18,50 @@
       height: 100%;
       top: 0;
       left: 0;
-      @include flex(row, flex-end, center);
-      padding-right: 55%;
-      padding-left: 10%;
+      @include flex(row, center, center);
+
 
       .info {
-        @include flex(column, null, null);
-        gap: 30px;
 
-        .title {
-          font-size: 4.5rem;
-          font-weight: 900;
-        }
+        width: 100%;
+        padding: 5rem;
 
-        p {
-          font-weight: 700;
-          font-size: 1.7rem;
-        }
+        .info-col {
+          @include flex(column, null, null);
+          gap: 1rem;
 
-        .button {
-          .ant-btn {
-            height: 4rem;
-            margin-right: 1rem;
+          .title {
+            font-size: 4.5rem;
+            font-weight: 900;
+
+            @include tablet {
+              font-size: 3rem;
+            }
+
+            @include tablet {
+              font-size: 1.5rem;
+            }
+
+          }
+
+
+          p {
+            font-weight: 700;
+            font-size: 1.7rem;
+
+            @include tablet {
+              font-size: 1.2rem;
+            }
+
+            @include mobile {
+              font-size: 1rem
+            }
+          }
+
+          .button {
+            .ant-btn {
+              margin: 3%;
+            }
           }
         }
       }
@@ -118,6 +141,7 @@
     background-color: #fffdfa;
     padding: 140px;
 
+
     .title {
       font-size: 4.5rem;
       font-weight: 900;
@@ -126,7 +150,12 @@
     .card-container {
       margin-top: 70px;
       @include flex(row, center, center);
-      gap: 25px;
+      gap: 3rem;
+
+      @include tablet {
+        @include flex(column, center, center);
+        gap: 15rem;
+      }
 
       .card {
         position: relative;
