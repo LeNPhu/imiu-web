@@ -42,11 +42,11 @@ const Header = () => {
   };
   const items = [
     {
-      label: <Link to="/setting">Account setting</Link>,
+      label: <Link to="/setting">Cài đặt tài khoản</Link>,
       key: "0",
     },
     {
-      label: <div onClick={showModal}>Logout</div>,
+      label: <div onClick={showModal}>Đăng xuất</div>,
       key: "1",
     },
   ];
@@ -96,12 +96,12 @@ const Header = () => {
         )}
       </div>
       <Modal
-        title="Logout?"
+        title="Đăng xuất"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>Do you want to sign out of Imiu?</p>
+        <p>Bạn có chắc chắc muốn đăng xuất khỏi Imiu không?</p>
       </Modal>
     </header>
   );
