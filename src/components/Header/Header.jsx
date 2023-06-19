@@ -8,6 +8,8 @@ import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { DownOutlined } from "@ant-design/icons";
 import { logout } from "../../store/authSlice";
+import { useMediaQuery } from "react-responsive";
+import HeaderDrawer from "../HeaderDrawer/HeaderDrawer";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -40,6 +42,8 @@ const Header = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  const isWeb = useMediaQuery({ query: "(min-width: 1024px)" });
+
   const items = [
     {
       label: <Link to="/setting">Cài đặt tài khoản</Link>,
@@ -50,59 +54,71 @@ const Header = () => {
       key: "1",
     },
   ];
+  if (isWeb)
+    return (
+      <header className={`header-container ${cls}`}>
+        <Link to="/">
+          <img className="header-item" src={imiuLogo} />
+        </Link>
+        <Link to="/" className="header-item">
+          Trang chủ
+        </Link>
+        <Link to="/pricing" className="header-item">
+          Các gói dịch vụ
+        </Link>
+        <Link to="/how-to-use" className="header-item">
+          Hướng dẫn sử dụng
+        </Link>
+        <Link to="/menu" className="header-item">
+          Menu
+        </Link>
+        <div className="header-item last">
+          {(role === "CUSTOMER" && isVerified) ||
+          (role === "ADMIN" && isVerified) ? (
+            <>
+              <img className="user-avatar" src={userAvatar} />
+              <Dropdown
+                menu={{
+                  items,
+                }}
+                trigger={["click"]}
+              >
+                <a onClick={(e) => e.preventDefault()}>
+                  <DownOutlined />
+                </a>
+              </Dropdown>
+            </>
+          ) : (
+            <>
+              <Link to="/register">
+                <Button type="primary">
+                  <b>Bắt đầu</b>
+                </Button>
+              </Link>
+              <Link to="/login">
+                <Button>Đăng nhập</Button>
+              </Link>
+            </>
+          )}
+        </div>
+        <Modal
+          title="Đăng xuất"
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <p>Bạn có chắc chắc muốn đăng xuất khỏi Imiu không?</p>
+        </Modal>
+      </header>
+    );
+
   return (
     <header className={`header-container ${cls}`}>
+      <HeaderDrawer />
       <Link to="/">
         <img className="header-item" src={imiuLogo} />
       </Link>
-      <Link to="/" className="header-item">
-        Trang chủ
-      </Link>
-      <Link to="/pricing" className="header-item">
-        Các gói dịch vụ
-      </Link>
-      <Link to="/how-to-use" className="header-item">
-        Hướng dẫn sử dụng
-      </Link>
-      <Link to="/menu" className="header-item">
-        Menu
-      </Link>
-      <div className="header-item last">
-        {role === "CUSTOMER" && isVerified ? (
-          <>
-            <img className="user-avatar" src={userAvatar} />
-            <Dropdown
-              menu={{
-                items,
-              }}
-              trigger={["click"]}
-            >
-              <a onClick={(e) => e.preventDefault()}>
-                <DownOutlined />
-              </a>
-            </Dropdown>
-          </>
-        ) : (
-          <>
-            <Link to="/register">
-              <Button type="primary">
-                <b>Bắt đầu</b>
-              </Button>
-            </Link>
-            <Link to="/login">
-              <Button>Đăng nhập</Button>
-            </Link>
-          </>
-        )}
-      </div>
-      <Modal
-        title="Đăng xuất"
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <p>Bạn có chắc chắc muốn đăng xuất khỏi Imiu không?</p>
-      </Modal>
+      <div></div>
     </header>
   );
 };
