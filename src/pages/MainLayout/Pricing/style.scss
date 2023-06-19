@@ -13,6 +13,11 @@
 
     @include tablet {
       flex-direction: column;
+      padding: 5rem;
+    }
+    @include mobile {
+      flex-direction: column;
+      padding: 2rem;
     }
 
     .card {
@@ -26,6 +31,9 @@
       min-width: 350px;
       gap: 15px;
       position: relative;
+      @include tablet {
+        min-height: 440px;
+      }
 
       .card-title {
         font-size: 2.5rem;
