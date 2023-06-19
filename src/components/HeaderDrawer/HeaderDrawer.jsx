@@ -1,4 +1,5 @@
-import { Button, Drawer, Menu, Modal } from "antd";
+import "./style.scss";
+import { Button, ConfigProvider, Drawer, Menu, Modal } from "antd";
 import React from "react";
 import { useState } from "react";
 import { SettingFilled } from "@ant-design/icons";
@@ -83,7 +84,10 @@ const HeaderDrawer = () => {
   ];
   return (
     <>
-      <HiMenuAlt2 style={{ fontSize: "3rem" }} onClick={showDrawer} />
+      <Button type="text" onClick={showDrawer}>
+        <HiMenuAlt2 className="header-drawer-btn" />
+      </Button>
+
       <Drawer placement="left" closable={false} onClose={onClose} open={open}>
         <Menu
           items={
