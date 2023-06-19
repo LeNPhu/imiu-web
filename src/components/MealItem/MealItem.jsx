@@ -45,7 +45,11 @@ const MealItem = ({ item }) => {
   useEffect(() => {
     if (isSuccessF) {
       setIsFavourite(!isFavourite);
-      toast.success("Đã thêm vào món yêu thích");
+      if (!isFavourite) {
+        toast.success("Đã thêm vào món yêu thích");
+      } else {
+        toast.success("Đã xóa khỏi danh sách yêu thích")
+      }
     }
   }, [isSuccessF]);
   const handleMealSelection = async (e) => {
