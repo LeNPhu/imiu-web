@@ -5,6 +5,10 @@
     @include flex(row, null, null);
     background-color: #FFF7E7;
 
+    @include tablet {
+        padding-left: 0;
+    }
+
     .content {
         width: 100%;
         padding: 10rem;
@@ -12,6 +16,10 @@
 
         @include flex(column, null, null);
         gap: 50px;
+
+        @include tablet {
+            padding: 3rem;
+        }
 
         .title {
             font-size: 4rem;

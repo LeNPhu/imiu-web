@@ -71,6 +71,10 @@
               font-size: 1.2rem;
             }
 
+            @include mobile {
+              text-align: center;
+            }
+
 
           }
 
