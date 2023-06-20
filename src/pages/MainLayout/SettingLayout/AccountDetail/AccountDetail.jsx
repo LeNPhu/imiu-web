@@ -13,9 +13,10 @@ import {
 import { toast } from "react-hot-toast";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../../store/authSlice";
 const AccountDetail = () => {
+  const email = useSelector((state) => state.auth.email);
   const dispatch = useDispatch();
   const dateFormat = "DD/MM/YYYY";
   const options = [
@@ -35,23 +36,23 @@ const AccountDetail = () => {
   const [data, setData] = useState([
     {
       name: ["username"],
-      value: "BuaAnLanhManhCuaGiaDinh",
+      value: "",
     },
     {
       name: ["email"],
-      value: "email@email.com",
+      value: email,
     },
     {
       name: ["date-of-birth"],
-      value: dayjs("11/03/2002", dateFormat),
+      value: "",
     },
     {
       name: ["gender"],
-      value: "Nam",
+      value: "",
     },
     {
       name: ["country"],
-      value: "VietNam",
+      value: "",
     },
   ]);
 
