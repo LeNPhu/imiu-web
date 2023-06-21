@@ -90,6 +90,7 @@ const HeaderDrawer = () => {
 
       <Drawer placement="left" closable={false} onClose={onClose} open={open}>
         <Menu
+          style={{ borderInlineEnd: "none" }}
           items={
             (role === "CUSTOMER" && isVerified) ||
             (role === "ADMIN" && isVerified)
