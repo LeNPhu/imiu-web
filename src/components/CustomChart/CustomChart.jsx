@@ -1,9 +1,9 @@
-import React from "react";
-import Chart from "chart.js/auto";
+import React, { useState } from "react";
+import Chart, { elements } from "chart.js/auto";
 import { Line, Bar, Doughnut } from "react-chartjs-2";
 import "./style.scss";
 
-const CustomChart = ({ type }) => {
+const CustomChart = ({ type, paidData, user }) => {
   var data = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May"],
     datasets: [
@@ -21,11 +21,30 @@ const CustomChart = ({ type }) => {
   };
 
   var dataPie = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+    labels: ["Active", "Inactive"],
     datasets: [
       {
-        data: [130, 170, 50, 266, 204],
-        backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
+        data: [user?.active, user?.inactive],
+        backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+        hoverOffset: 4,
+      },
+    ],
+  };
+  var dataColumn = {
+    labels: paidData
+      ? paidData.map((item) => {
+          return item.month;
+        })
+      : null,
+    datasets: [
+      {
+        data: paidData
+          ? paidData.map((item) => {
+              return item.transaction;
+            })
+          : null,
+
+        backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
         hoverOffset: 4,
       },
     ],
@@ -70,7 +89,7 @@ const CustomChart = ({ type }) => {
           case "line":
             return <Line data={data} options={option} />;
           case "bar":
-            return <Bar data={dataPie} options={optionPie} />;
+            return <Bar data={dataColumn} options={optionPie} />;
           case "doughnut":
             return <Doughnut data={dataPie} options={optionPie} />;
           default:

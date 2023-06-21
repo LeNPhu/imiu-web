@@ -118,7 +118,7 @@ const Header = () => {
       <Link to="/">
         <img className="header-item" src={imiuLogo} />
       </Link>
-      <div></div>
+      <div style={{ width: "61.6px" }}></div>
     </header>
   );
 };
