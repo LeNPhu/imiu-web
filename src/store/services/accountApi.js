@@ -54,6 +54,13 @@ export const accountApi = createApi({
       },
       providesTags: ["Account"],
     }),
+    getUserChart: builder.query({
+      query: ({ id }) => {
+        const url = `/${id}/nutritions`;
+        return url;
+      },
+      providesTags: ["Account"],
+    }),
   }),
 });
 
@@ -62,4 +69,5 @@ export const {
   useAddFavouriteMutation,
   useGetFavouriteQuery,
   useGetSelectedQuery,
+  useGetUserChartQuery
 } = accountApi;
