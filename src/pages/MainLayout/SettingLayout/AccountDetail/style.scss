@@ -5,7 +5,14 @@
 
 .profile {
 
-
+    .chart-container {
+        background-color: white;
+        border-radius: 15px;
+        padding: 1rem;
+        height: 500px;
+        width: 100%;
+        @include flex(null, center, center);
+    }
 
     .form-antd {
         width: 100%;
