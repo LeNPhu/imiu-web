@@ -17,7 +17,10 @@ import { logout } from "../../../../store/authSlice";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import { useGetUserChartQuery } from "../../../../store/services/accountApi";
+import {
+  useGetUserChartQuery,
+  useUpdateProfileMutation,
+} from "../../../../store/services/accountApi";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -29,6 +32,10 @@ const AccountDetail = () => {
   const { data, isLoading } = useGetUserChartQuery({
     id: accountId,
   });
+  const [
+    updateProfile,
+    { data: dataUpdate, isLoading: loadingUppdate, error: errorUpdate },
+  ] = useUpdateProfileMutation();
   console.log(data);
   const nameArray = data?.data.map((item) => item.name + ` (${item.unit})`);
   const quantityArray = data?.data.map((item) => item.quantity);
@@ -73,7 +80,7 @@ const AccountDetail = () => {
       value: email,
     },
     {
-      name: ["date-of-birth"],
+      name: ["dateofbirth"],
       value: "",
     },
     {
@@ -89,6 +96,11 @@ const AccountDetail = () => {
   const onFinish = (values) => {
     toast.success("success");
     console.log("Success:", values);
+    updateProfile({
+      id: accountId,
+      name: values.username,
+      dob: values.dateofbirth?.$d,
+    });
   };
   const onFinishFailed = () => {
     toast.error("error");
@@ -100,7 +112,7 @@ const AccountDetail = () => {
         <p className="item-title">Thống kê</p>
 
         <div className="chart-container">
-          <Doughnut data={data1}/>
+          <Doughnut data={data1} />
         </div>
         <p className="item-title">Hồ sơ</p>
         <Form
@@ -110,9 +122,7 @@ const AccountDetail = () => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           fields={data2}
-          onChange={(newDatas) => {
-            setData2(newDatas);
-          }}
+          onChange={(newDatas) => {}}
         >
           <Form.Item
             className="form-antd-item"
@@ -143,7 +153,7 @@ const AccountDetail = () => {
           <Form.Item
             className="form-antd-item"
             label="Ngày sinh (dd/mm/yyyy)"
-            name="date-of-birth"
+            name="dateofbirth"
           >
             <DatePicker
               format={dateFormat}
