@@ -6,9 +6,22 @@
     gap: 10px;
     width: 300px;
 
+    @include mobile {
+        @include flex(row, null, null);
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        justify-content: space-evenly;
+        z-index: 1;
+        gap: 0px;
+    }
 
     .logo {
         padding: 50px 60px 30px 60px;
+
+        @include mobile {
+            display: none
+        }
     }
 
 
@@ -22,7 +35,26 @@
         height: 100px;
         color: white;
 
+        @include mobile {
+            padding-left: 0px;
+            width: 100%;
+            justify-content: center;
+            height: 6rem;
+        }
 
+        .item-icon {
+            @include flex(row, center, center);
+
+            @include mobile {
+                font-size: 2rem;
+            }
+        }
+
+        .item-name {
+            @include mobile {
+                display: none;
+            }
+        }
 
 
     }

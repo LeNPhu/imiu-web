@@ -6,22 +6,44 @@ import { Space, Table, Tag } from "antd";
 import { useSelector } from "react-redux";
 import CustomCard from "../../../components/CustomCard/CustomCard";
 import CustomChart from "../../../components/CustomChart/CustomChart";
+import {
+  useGetCustomerQuery,
+  useGetMonthRevenueQuery,
+  useGetYearRevenueQuery,
+} from "../../../store/services/dashboardApi";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const AdminDashboard = () => {
   const users = useSelector((state) => state.auth.email);
+  const { data: monthRev, isLoading: monthLoad } = useGetMonthRevenueQuery({
+    month: 1 + new Date().getMonth(),
+    year: new Date().getFullYear(),
+  });
+  const { data: user, isLoading } = useGetCustomerQuery();
+  const { data: yearRev, isLoading: yearLoad } = useGetYearRevenueQuery(
+    new Date().getFullYear()
+  );
+  const [paidData, setPaidData] = useState();
 
+  useEffect(() => {
+    yearRev
+      ? setPaidData(yearRev.data.find((elements) => elements.type == "Paid"))
+      : null;
+  }, [yearRev]);
+  console.log(monthRev);
   const data = [
     {
-      title: "Total revenue",
-      amount: "$5610",
+      title: "Paid Transactions",
+      amount: monthRev?.data?.paid,
       change: {
         value: "16%",
         status: "up",
       },
     },
     {
-      title: "Total users",
-      amount: "310",
+      title: "Unpaid Transactions",
+      amount: monthRev?.data?.unpaid,
       change: {
         value: "10%",
         status: "down",
@@ -53,7 +75,7 @@ const AdminDashboard = () => {
         <>
           {tags.map((tag) => {
             let color = tag.length > 5 ? "geekblue" : "green";
-            if (tag === "loser") {
+            if (tag === "UNPAID") {
               color = "volcano";
             }
             return (
@@ -81,21 +103,21 @@ const AdminDashboard = () => {
       name: "John Brown",
       age: 32,
       address: "New York No. 1 Lake Park",
-      tags: ["nice", "developer"],
+      tags: ["PAID"],
     },
     {
       key: "2",
       name: "Jim Green",
       age: 42,
       address: "London No. 1 Lake Park",
-      tags: ["loser"],
+      tags: ["UNPAID"],
     },
     {
       key: "3",
       name: "Joe Black",
       age: 32,
       address: "Sydney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
+      tags: ["PENDING"],
     },
   ];
 
@@ -135,7 +157,7 @@ const AdminDashboard = () => {
         <div className="chart-revenue-element">
           <CustomCard width="100%">
             <h3 className="card-title">User</h3>
-            <CustomChart type="doughnut" />
+            <CustomChart type="doughnut" user={user?.data} />
           </CustomCard>
         </div>
       </div>
@@ -148,7 +170,7 @@ const AdminDashboard = () => {
         <CustomCard width="50%" height="300px">
           <h3 className="card-title">Revenue</h3>
 
-          <CustomChart type="bar" />
+          <CustomChart type="bar" paidData={paidData?.data} />
         </CustomCard>
       </div>
       <div className="table-wrapper">

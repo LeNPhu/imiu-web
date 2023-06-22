@@ -11,13 +11,44 @@ import {
   Select,
 } from "antd";
 import { toast } from "react-hot-toast";
-import dayjs from "dayjs";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../../store/authSlice";
+
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+import { useGetUserChartQuery } from "../../../../store/services/accountApi";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
 const AccountDetail = () => {
+  const email = useSelector((state) => state.auth.email);
   const dispatch = useDispatch();
   const dateFormat = "DD/MM/YYYY";
+  const { accessToken, accountId } = useSelector((state) => state.auth);
+  const { data, isLoading } = useGetUserChartQuery({
+    id: accountId,
+  });
+  console.log(data);
+  const nameArray = data?.data.map((item) => item.name + ` (${item.unit})`);
+  const quantityArray = data?.data.map((item) => item.quantity);
+  const data1 = {
+    labels: nameArray,
+    datasets: [
+      {
+        data: quantityArray,
+        backgroundColor: [
+          "rgba(255, 99, 132)",
+          "rgba(54, 162, 235)",
+          "rgba(255, 206, 86)",
+          "rgba(75, 192, 192)",
+          "rgba(153, 102, 255)",
+          "rgba(255, 159, 64)",
+        ],
+        borderWidth: 2,
+      },
+    ],
+  };
   const options = [
     {
       value: "M",
@@ -32,26 +63,26 @@ const AccountDetail = () => {
       label: "Khác",
     },
   ];
-  const [data, setData] = useState([
+  const [data2, setData2] = useState([
     {
       name: ["username"],
-      value: "BuaAnLanhManhCuaGiaDinh",
+      value: "",
     },
     {
       name: ["email"],
-      value: "email@email.com",
+      value: email,
     },
     {
       name: ["date-of-birth"],
-      value: dayjs("11/03/2002", dateFormat),
+      value: "",
     },
     {
       name: ["gender"],
-      value: "Nam",
+      value: "",
     },
     {
       name: ["country"],
-      value: "VietNam",
+      value: "",
     },
   ]);
 
@@ -66,6 +97,11 @@ const AccountDetail = () => {
     <>
       <span className="title raleway">Tổng quan về tài khoản</span>
       <div className="profile content-item">
+        <p className="item-title">Thống kê</p>
+
+        <div className="chart-container">
+          <Doughnut data={data1}/>
+        </div>
         <p className="item-title">Hồ sơ</p>
         <Form
           className="form-antd"
@@ -73,9 +109,9 @@ const AccountDetail = () => {
           wrapperCol={{ span: 12 }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          fields={data}
+          fields={data2}
           onChange={(newDatas) => {
-            setData(newDatas);
+            setData2(newDatas);
           }}
         >
           <Form.Item

@@ -3,12 +3,26 @@
 .landing-container {
   .container {
     position: relative;
+    overflow: HIDDEN;
+
+    .web-img {
+      @include tablet {
+        display: none;
+      }
+    }
   }
 
   .first {
     .background {
       width: 100%;
       display: block;
+      background-color: #FFFBF3;
+      min-height: calc(100vh - 62px);
+      @include flex(null, center, flex-end);
+
+      img {
+        width: 100%;
+      }
     }
 
     .content {
@@ -17,28 +31,64 @@
       height: 100%;
       top: 0;
       left: 0;
-      @include flex(row, flex-end, center);
-      padding-right: 55%;
-      padding-left: 10%;
+      @include flex(row, center, center);
+
 
       .info {
-        @include flex(column, null, null);
-        gap: 30px;
 
-        .title {
-          font-size: 4.5rem;
-          font-weight: 900;
-        }
+        width: 100%;
+        padding: 5rem;
 
-        p {
-          font-weight: 700;
-          font-size: 1.7rem;
-        }
+        .info-col {
+          @include flex(column, null, null);
+          gap: 1rem;
 
-        .button {
-          .ant-btn {
-            height: 4rem;
-            margin-right: 1rem;
+          @include mobile {
+            align-items: center;
+          }
+
+          .title {
+            font-size: 4.5rem;
+            font-weight: 900;
+
+            @include mobile {
+              text-align: center;
+            }
+
+            @include tablet {
+              font-size: 3rem;
+            }
+
+
+          }
+
+
+          p {
+            font-weight: 700;
+            font-size: 1.7rem;
+
+            @include tablet {
+              font-size: 1.2rem;
+            }
+
+            @include mobile {
+              text-align: center;
+            }
+
+
+          }
+
+          .button {
+
+            @include mobile {
+              @include flex(column, center, center);
+              flex: 1;
+            }
+
+            .ant-btn {
+              margin: 3%;
+
+            }
           }
         }
       }
@@ -78,6 +128,11 @@
         box-shadow: rgba(100, 100, 111, 0.489) 0px 7px 29px -7px;
         padding: 20px;
         border-radius: 12px;
+        flex: 1;
+
+        @include tablet {
+          width: 100%;
+        }
 
         .card-title {
           font-weight: 600;
@@ -118,6 +173,7 @@
     background-color: #fffdfa;
     padding: 140px;
 
+
     .title {
       font-size: 4.5rem;
       font-weight: 900;
@@ -126,7 +182,12 @@
     .card-container {
       margin-top: 70px;
       @include flex(row, center, center);
-      gap: 25px;
+      gap: 3rem;
+
+      @include tablet {
+        @include flex(column, center, center);
+        gap: 15rem;
+      }
 
       .card {
         position: relative;
@@ -151,7 +212,7 @@
         }
 
         .card-content {
-          margin: 20px;
+          margin: 5%;
           @include flex(column, center, center);
           gap: 20px;
 
@@ -160,7 +221,7 @@
           }
 
           p {
-            font-size: 1.3rem;
+
             font-weight: 400;
             text-align: center;
           }

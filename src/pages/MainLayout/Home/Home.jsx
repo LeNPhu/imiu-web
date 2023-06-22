@@ -14,12 +14,16 @@ import "animate.css/animate.min.css";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 
 const Home = () => {
   const auth = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
-
+  const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });
+  console.log(isTablet);
+  const isPhone = useMediaQuery({ query: "(max-width: 600px)" });
+  console.log(isTablet);
   const handleClickScroll = () => {
     const element = document.getElementById("second");
     if (element) {
@@ -29,37 +33,42 @@ const Home = () => {
   return (
     <div className="landing-container">
       <section className="container first">
-        <img className="background" src={catBackground} />
+        <div className="background">
+          <img src={catBackground} />
+        </div>
         <div className="content">
-          <div className="info">
-            <span className="title raleway">
-              <span className="green">i.Miu</span>, Đồng hành cùng bạn trong mỗi
-              bữa ăn
-            </span>
-            <p>Lên thực đơn cho bữa ăn "Healthy" của bạn ngay bây giờ</p>
-            <div className="button">
-              <Link to="/menu">
-                <Button type="primary" value="large">
-                  Lên thực đơn ngay
+          <Row className="info">
+            <Col className="info-col" span={isPhone ? 24 : 12}>
+              <span className="title raleway">
+                <span className="green">i.Miu</span>, Đồng hành cùng bạn trong
+                mỗi bữa ăn
+              </span>
+              <p>Lên thực đơn cho bữa ăn "Healthy" của bạn ngay bây giờ</p>
+              <div className="button">
+                <Link to="/menu">
+                  <Button type="primary" size="large">
+                    Lên thực đơn ngay
+                  </Button>
+                </Link>
+                <Button onClick={handleClickScroll} size="large">
+                  Khám phá
                 </Button>
-              </Link>
-              <Button onClick={handleClickScroll} value="large">
-                Khám phá
-              </Button>
-            </div>
-          </div>
+              </div>
+            </Col>
+          </Row>
         </div>
       </section>
 
       <AnimationOnScroll animateIn="animate__fadeInLeftBig" animateOnce="true">
         <section id="second" className="container second">
           <Row>
-            <Col span={12}>
+            <Col className="web-img" span={12}>
               <div className="center">
                 <img className="big-img" src={catBread} />
               </div>
             </Col>
-            <Col span={12}>
+
+            <Col span={isTablet ? 24 : 12}>
               <div className="content">
                 <p className="content-title">
                   CHÚNG TÔI MANG ĐẾN CHO BẠN NHỮNG{" "}
@@ -109,7 +118,7 @@ const Home = () => {
       <AnimationOnScroll animateIn="animate__zoomIn" animateOnce="true">
         <section className="container third">
           <Row>
-            <Col span={12}>
+            <Col span={isTablet ? 24 : 12}>
               <div className="content">
                 <p className="title raleway">
                   Thực đơn của <span className="green">người Việt</span>, cho{" "}
@@ -128,7 +137,7 @@ const Home = () => {
                 </div>
               </div>
             </Col>
-            <Col span={12}>
+            <Col className="web-img" span={12}>
               <img src={fourFood} />
             </Col>
           </Row>

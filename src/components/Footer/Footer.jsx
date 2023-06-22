@@ -139,7 +139,7 @@ const Footer = () => {
   else
     return (
       <footer className="footer-container tablet">
-        <Menu className="menu" mode="inline">
+        <Menu className="footer-menu" mode="inline">
           <Menu.SubMenu title="iMiu" key={1}>
             {imiu.map((items, index) => {
               return (

@@ -13,10 +13,14 @@
         @include flex(row, center, center);
         gap: 50px;
 
+        @include tablet {
+            @include flex(column, center, center);
+            gap: 7rem;
+        }
 
         .illustration {
 
-            width: 800px;
+            max-width: 800px;
             aspect-ratio: 16/9;
 
             img {
@@ -34,4 +38,6 @@
         }
 
     }
+
+
 }
