@@ -61,6 +61,12 @@ export const accountApi = createApi({
       },
       providesTags: ["Account"],
     }),
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        method: "PUT",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -69,5 +75,6 @@ export const {
   useAddFavouriteMutation,
   useGetFavouriteQuery,
   useGetSelectedQuery,
-  useGetUserChartQuery
+  useGetUserChartQuery,
+  useUpdateProfileMutation,
 } = accountApi;

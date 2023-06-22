@@ -86,8 +86,11 @@
             }
 
             .ant-btn {
-              margin: 3%;
+              margin-right: 5%;
 
+              @include mobile {
+                margin: 3%;
+              }
             }
           }
         }

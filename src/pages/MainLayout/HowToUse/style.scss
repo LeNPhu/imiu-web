@@ -1,7 +1,7 @@
 @use "../../../assets/scss/" as *;
 
 .howto-container {
-    padding: 70px 20%;
+    padding: 70px 12%;
 
     .title {
         text-align: center;
@@ -20,7 +20,7 @@
 
         .illustration {
 
-            max-width: 800px;
+            max-width: 500px;
             aspect-ratio: 16/9;
 
             img {
